@@ -1,0 +1,254 @@
+{
+  "cv2_version": "5.0.0",
+  "numpy_version": "2.5.4",
+  "python_version": "3.13.16",
+  "machine": "x86_64",
+  "build_info_excerpt": [
+    "General configuration for OpenCV 5.0.0 =====================================",
+    "  Version control:               5.0.0",
+    "  Extra modules:",
+    "    Version control (extra):     5.0.0",
+    "  Platform:",
+    "    Host:                        Linux 6.8.0-1059-azure x86_64",
+    "  CPU/HW features:",
+    "    Baseline:                    SSE SSE2 SSE3",
+    "    Dispatched code generation:  SSE4_1 SSE4_2 AVX FP16 AVX2 AVX512_SKX",
+    "    To be built:                 bgsegm bioinspired calib ccalib core datasets dnn dnn_objdetect dnn_superres dpm face features flann fuzzy gapi geometry hfs highgui img_hash imgcodecs imgproc intensity_transform line_descriptor ml objdetect optflow phase_unwrapping photo plot ptcloud python3 quality rapid reg rgbd saliency shape signal stereo stitching structured_light superres surface_matching text tracking video videoio videostab wechat_qrcode xfeatures2d ximgproc xobjdetect xphoto xstereo",
+    "  Parallel framework:            pthreads",
+    "    Lapack:                      YES (OpenBLAS /usr/lib64/libopenblasp.so)",
+    "    Eigen:                       NO",
+    "  OpenCL:                        YES (no extra features)",
+    "  Python 3:",
+    "    Interpreter:                 /opt/python/cp39-cp39/bin/python3.9 (ver 3.9.25)"
+  ],
+  "checks": [
+    {
+      "name": "version_is_opencv5",
+      "passed": true,
+      "seconds": 5.178999970212317e-06,
+      "details": {
+        "cv2.__version__": "5.0.0",
+        "major": 5,
+        "module_path": "/home/user/Loopcheck/.venv/lib/python3.13/site-packages/cv2/__init__.py"
+      },
+      "error": null
+    },
+    {
+      "name": "aruco_detection_and_homography",
+      "passed": true,
+      "seconds": 0.004517925000016021,
+      "details": {
+        "detected_ids": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "rejected_candidates": 14,
+        "corners_shape": [
+          1,
+          4,
+          2
+        ],
+        "homography_corner_error_px": 0.6666,
+        "inliers": 16
+      },
+      "error": null
+    },
+    {
+      "name": "sift_detect_and_match",
+      "passed": true,
+      "seconds": 0.11977707500000179,
+      "details": {
+        "keypoints_ref": 328,
+        "keypoints_insp": 596,
+        "descriptor_shape": [
+          328,
+          128
+        ],
+        "ratio_test_matches": 184,
+        "fraction_correct_matches": 0.8804
+      },
+      "error": null
+    },
+    {
+      "name": "usac_magsac_homography",
+      "passed": true,
+      "seconds": 0.09074642799998855,
+      "details": {
+        "USAC_MAGSAC": {
+          "corner_error_px": 0.1477,
+          "inliers": 162,
+          "total": 257
+        },
+        "USAC_DEFAULT": {
+          "corner_error_px": 0.1372,
+          "inliers": 162,
+          "total": 257
+        },
+        "RANSAC": {
+          "corner_error_px": 0.1304,
+          "inliers": 162,
+          "total": 257
+        },
+        "UsacParams_MAGSAC_score": {
+          "corner_error_px": 0.1477,
+          "inliers": 162
+        },
+        "injected_outliers": 73
+      },
+      "error": null
+    },
+    {
+      "name": "ecc_alignment",
+      "passed": true,
+      "seconds": 0.1466664269999569,
+      "details": {
+        "homography": {
+          "ecc_cc": 0.99975,
+          "corner_error_px": 0.303
+        },
+        "affine": {
+          "ecc_cc": 0.99981,
+          "max_shift_error_px": 0.0667
+        },
+        "computeECC_after_alignment": 0.99578
+      },
+      "error": null
+    },
+    {
+      "name": "template_matching",
+      "passed": true,
+      "seconds": 0.027804300000013882,
+      "details": {
+        "TM_CCOEFF_NORMED": {
+          "location": [
+            300,
+            200
+          ],
+          "score": 1.0
+        },
+        "TM_SQDIFF_NORMED": {
+          "location": [
+            300,
+            200
+          ],
+          "score": 0.0
+        },
+        "displaced_with_brightness_offset": {
+          "location": [
+            337,
+            175
+          ],
+          "score": 0.99999
+        },
+        "masked_TM_CCORR_NORMED": [
+          300,
+          200
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "filtering_gradients_threshold_morphology",
+      "passed": true,
+      "seconds": 0.10249664299999495,
+      "details": {
+        "gaussian_center_edge_outside": [
+          200,
+          120,
+          80
+        ],
+        "sobel_gx_left_right": [
+          800.0,
+          -800.0
+        ],
+        "sobel_mag_max": 848.5281372070312,
+        "otsu_threshold": 96.0,
+        "otsu_foreground_px": 9989,
+        "adaptive_unique_values": [
+          0,
+          255
+        ],
+        "morph_open_close": "specks removed, hole filled",
+        "clahe_std_before_after": [
+          82.98,
+          84.65
+        ]
+      },
+      "error": null
+    },
+    {
+      "name": "contours_and_connected_components",
+      "passed": true,
+      "seconds": 0.0006238890000531683,
+      "details": {
+        "contour_count": 4,
+        "hierarchy_shape": [
+          1,
+          4,
+          4
+        ],
+        "bounding_rects": [
+          [
+            20,
+            30,
+            61,
+            61
+          ],
+          [
+            70,
+            190,
+            61,
+            61
+          ],
+          [
+            150,
+            40,
+            81,
+            101
+          ],
+          [
+            300,
+            200,
+            81,
+            81
+          ]
+        ],
+        "contour_areas": [
+          2736,
+          3600,
+          6400,
+          8000
+        ],
+        "cc_labels_incl_background": 5,
+        "cc_areas": [
+          2821,
+          3721,
+          6561,
+          8181
+        ],
+        "labels_dtype": "int32"
+      },
+      "error": null
+    },
+    {
+      "name": "warp_and_end_to_end_diff",
+      "passed": true,
+      "seconds": 0.047152049000033,
+      "details": {
+        "regions_over_200px": 1,
+        "largest_box_xywh": [
+          400,
+          300,
+          60,
+          60
+        ],
+        "iou_vs_ground_truth": 1.0
+      },
+      "error": null
+    }
+  ],
+  "passed": 9,
+  "total": 9
+}
