@@ -1,0 +1,2657 @@
+[
+ {
+  "id": "identical_00",
+  "case_type": "identical",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.486,
+  "corner_error_px": 0.0,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "identical_01",
+  "case_type": "identical",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.306,
+  "corner_error_px": 0.0,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "identical_02",
+  "case_type": "identical",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.303,
+  "corner_error_px": 0.0,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "identical_03",
+  "case_type": "identical",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.388,
+  "corner_error_px": 0.0,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "identical_04",
+  "case_type": "identical",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.383,
+  "corner_error_px": 0.0,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "identical_05",
+  "case_type": "identical",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.374,
+  "corner_error_px": 0.0,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "identical_06",
+  "case_type": "identical",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.293,
+  "corner_error_px": 0.0,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "identical_07",
+  "case_type": "identical",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.382,
+  "corner_error_px": 0.0,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "identical_08",
+  "case_type": "identical",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.372,
+  "corner_error_px": 0.0,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "identical_09",
+  "case_type": "identical",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.289,
+  "corner_error_px": 0.0,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "lighting_00",
+  "case_type": "lighting",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.298,
+  "corner_error_px": 0.0027,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "lighting_01",
+  "case_type": "lighting",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.381,
+  "corner_error_px": 0.0266,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "lighting_02",
+  "case_type": "lighting",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.357,
+  "corner_error_px": 0.0029,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "lighting_03",
+  "case_type": "lighting",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 4,
+  "predicted_defect": true,
+  "expected_defect": false,
+  "seconds": 0.302,
+  "corner_error_px": 0.0035,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [
+   false,
+   false,
+   false,
+   false
+  ],
+  "outcome": "fp"
+ },
+ {
+  "id": "lighting_04",
+  "case_type": "lighting",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.397,
+  "corner_error_px": 0.0289,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "lighting_05",
+  "case_type": "lighting",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.395,
+  "corner_error_px": 0.0652,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "lighting_06",
+  "case_type": "lighting",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.382,
+  "corner_error_px": 0.0158,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "lighting_07",
+  "case_type": "lighting",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.389,
+  "corner_error_px": 0.0311,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "lighting_08",
+  "case_type": "lighting",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 4,
+  "predicted_defect": true,
+  "expected_defect": false,
+  "seconds": 0.306,
+  "corner_error_px": 0.0025,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [
+   false,
+   false,
+   false,
+   false
+  ],
+  "outcome": "fp"
+ },
+ {
+  "id": "lighting_09",
+  "case_type": "lighting",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 4,
+  "predicted_defect": true,
+  "expected_defect": false,
+  "seconds": 0.299,
+  "corner_error_px": 0.0045,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [
+   false,
+   false,
+   false,
+   false
+  ],
+  "outcome": "fp"
+ },
+ {
+  "id": "geometric_00",
+  "case_type": "geometric",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.308,
+  "corner_error_px": 0.0334,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "geometric_01",
+  "case_type": "geometric",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.293,
+  "corner_error_px": 0.0876,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "geometric_02",
+  "case_type": "geometric",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.398,
+  "corner_error_px": 0.0577,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "geometric_03",
+  "case_type": "geometric",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.309,
+  "corner_error_px": 0.108,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "geometric_04",
+  "case_type": "geometric",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.38,
+  "corner_error_px": 0.0909,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "geometric_05",
+  "case_type": "geometric",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.299,
+  "corner_error_px": 0.0489,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "geometric_06",
+  "case_type": "geometric",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.296,
+  "corner_error_px": 0.0896,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "geometric_07",
+  "case_type": "geometric",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.409,
+  "corner_error_px": 0.0611,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "geometric_08",
+  "case_type": "geometric",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.385,
+  "corner_error_px": 0.0865,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "geometric_09",
+  "case_type": "geometric",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.311,
+  "corner_error_px": 0.115,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "blur_noise_00",
+  "case_type": "blur_noise",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.446,
+  "corner_error_px": 0.1347,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "blur_noise_01",
+  "case_type": "blur_noise",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.321,
+  "corner_error_px": 0.0958,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "blur_noise_02",
+  "case_type": "blur_noise",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.408,
+  "corner_error_px": 0.0632,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "blur_noise_03",
+  "case_type": "blur_noise",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.316,
+  "corner_error_px": 0.1211,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "blur_noise_04",
+  "case_type": "blur_noise",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.41,
+  "corner_error_px": 0.1025,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "blur_noise_05",
+  "case_type": "blur_noise",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.397,
+  "corner_error_px": 0.0854,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "blur_noise_06",
+  "case_type": "blur_noise",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.308,
+  "corner_error_px": 0.1171,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "blur_noise_07",
+  "case_type": "blur_noise",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.308,
+  "corner_error_px": 0.1605,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "blur_noise_08",
+  "case_type": "blur_noise",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.302,
+  "corner_error_px": 0.1743,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "blur_noise_09",
+  "case_type": "blur_noise",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.309,
+  "corner_error_px": 0.0777,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "combined_nominal_00",
+  "case_type": "combined_nominal",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.385,
+  "corner_error_px": 0.0668,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "combined_nominal_01",
+  "case_type": "combined_nominal",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.299,
+  "corner_error_px": 0.1055,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "combined_nominal_02",
+  "case_type": "combined_nominal",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.418,
+  "corner_error_px": 0.0827,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "combined_nominal_03",
+  "case_type": "combined_nominal",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.318,
+  "corner_error_px": 0.0399,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "combined_nominal_04",
+  "case_type": "combined_nominal",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.411,
+  "corner_error_px": 0.135,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "combined_nominal_05",
+  "case_type": "combined_nominal",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.317,
+  "corner_error_px": 0.0656,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "combined_nominal_06",
+  "case_type": "combined_nominal",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.325,
+  "corner_error_px": 0.0569,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "combined_nominal_07",
+  "case_type": "combined_nominal",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.321,
+  "corner_error_px": 0.084,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "combined_nominal_08",
+  "case_type": "combined_nominal",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.412,
+  "corner_error_px": 0.1384,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "combined_nominal_09",
+  "case_type": "combined_nominal",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.405,
+  "corner_error_px": 0.108,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "tn"
+ },
+ {
+  "id": "missing_00",
+  "case_type": "missing",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.414,
+  "corner_error_px": 0.0496,
+  "gt_ious": [
+   0.8502
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_01",
+  "case_type": "missing",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.325,
+  "corner_error_px": 0.034,
+  "gt_ious": [
+   0.8539
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_02",
+  "case_type": "missing",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.432,
+  "corner_error_px": 0.0911,
+  "gt_ious": [
+   0.799
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_03",
+  "case_type": "missing",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.318,
+  "corner_error_px": 0.0867,
+  "gt_ious": [
+   0.8993
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_04",
+  "case_type": "missing",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.435,
+  "corner_error_px": 0.0818,
+  "gt_ious": [
+   0.8874
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_05",
+  "case_type": "missing",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.336,
+  "corner_error_px": 0.0399,
+  "gt_ious": [
+   0.9082
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_06",
+  "case_type": "missing",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.417,
+  "corner_error_px": 0.0857,
+  "gt_ious": [
+   0.8539
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_07",
+  "case_type": "missing",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.328,
+  "corner_error_px": 0.0378,
+  "gt_ious": [
+   0.9167
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_08",
+  "case_type": "missing",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.323,
+  "corner_error_px": 0.0617,
+  "gt_ious": [
+   0.8264
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_09",
+  "case_type": "missing",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.314,
+  "corner_error_px": 0.0575,
+  "gt_ious": [
+   0.8448
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "shifted_00",
+  "case_type": "shifted",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.414,
+  "corner_error_px": 0.0422,
+  "gt_ious": [
+   0.5138,
+   0.5138
+  ],
+  "gt_matched": [
+   true,
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "shifted_01",
+  "case_type": "shifted",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.413,
+  "corner_error_px": 0.0957,
+  "gt_ious": [
+   0.3895,
+   0.3895
+  ],
+  "gt_matched": [
+   true,
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "shifted_02",
+  "case_type": "shifted",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.324,
+  "corner_error_px": 0.0547,
+  "gt_ious": [
+   0.472,
+   0.454
+  ],
+  "gt_matched": [
+   true,
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "shifted_03",
+  "case_type": "shifted",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.328,
+  "corner_error_px": 0.0673,
+  "gt_ious": [
+   0.494,
+   0.494
+  ],
+  "gt_matched": [
+   true,
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "shifted_04",
+  "case_type": "shifted",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.393,
+  "corner_error_px": 0.072,
+  "gt_ious": [
+   0.2916,
+   0.2916
+  ],
+  "gt_matched": [
+   false,
+   false
+  ],
+  "pred_matched": [
+   false
+  ],
+  "outcome": "tp_poorly_localized"
+ },
+ {
+  "id": "shifted_05",
+  "case_type": "shifted",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.314,
+  "corner_error_px": 0.0517,
+  "gt_ious": [
+   0.5651,
+   0.5651
+  ],
+  "gt_matched": [
+   true,
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "shifted_06",
+  "case_type": "shifted",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.314,
+  "corner_error_px": 0.0644,
+  "gt_ious": [
+   0.4978,
+   0.4978
+  ],
+  "gt_matched": [
+   true,
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "shifted_07",
+  "case_type": "shifted",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.404,
+  "corner_error_px": 0.0501,
+  "gt_ious": [
+   0.5148,
+   0.5148
+  ],
+  "gt_matched": [
+   true,
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "shifted_08",
+  "case_type": "shifted",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.384,
+  "corner_error_px": 0.0421,
+  "gt_ious": [
+   0.3728,
+   0.3728
+  ],
+  "gt_matched": [
+   true,
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "shifted_09",
+  "case_type": "shifted",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.316,
+  "corner_error_px": 0.0568,
+  "gt_ious": [
+   0.4147,
+   0.4147
+  ],
+  "gt_matched": [
+   true,
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "foreign_object_00",
+  "case_type": "foreign_object",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.32,
+  "corner_error_px": 0.0847,
+  "gt_ious": [
+   0.7283
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "foreign_object_01",
+  "case_type": "foreign_object",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.414,
+  "corner_error_px": 0.0604,
+  "gt_ious": [
+   0.9091
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "foreign_object_02",
+  "case_type": "foreign_object",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.322,
+  "corner_error_px": 0.0634,
+  "gt_ious": [
+   0.8069
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "foreign_object_03",
+  "case_type": "foreign_object",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.317,
+  "corner_error_px": 0.065,
+  "gt_ious": [
+   0.7066
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "foreign_object_04",
+  "case_type": "foreign_object",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.326,
+  "corner_error_px": 0.0506,
+  "gt_ious": [
+   0.8462
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "foreign_object_05",
+  "case_type": "foreign_object",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.403,
+  "corner_error_px": 0.0821,
+  "gt_ious": [
+   0.6907
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "foreign_object_06",
+  "case_type": "foreign_object",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.405,
+  "corner_error_px": 0.0899,
+  "gt_ious": [
+   0.7172
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "foreign_object_07",
+  "case_type": "foreign_object",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.319,
+  "corner_error_px": 0.0437,
+  "gt_ious": [
+   0.7754
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "foreign_object_08",
+  "case_type": "foreign_object",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.41,
+  "corner_error_px": 0.0662,
+  "gt_ious": [
+   0.7961
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "foreign_object_09",
+  "case_type": "foreign_object",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.353,
+  "corner_error_px": 0.049,
+  "gt_ious": [
+   0.8482
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_hard_00",
+  "case_type": "missing_hard",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.443,
+  "corner_error_px": 0.1212,
+  "gt_ious": [
+   0.9412
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_hard_01",
+  "case_type": "missing_hard",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 2,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.389,
+  "corner_error_px": 0.0752,
+  "gt_ious": [
+   0.8606
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true,
+   false
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_hard_02",
+  "case_type": "missing_hard",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.354,
+  "corner_error_px": 0.057,
+  "gt_ious": [
+   0.8386
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_hard_03",
+  "case_type": "missing_hard",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.321,
+  "corner_error_px": 0.0826,
+  "gt_ious": [
+   0.8336
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_hard_04",
+  "case_type": "missing_hard",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 8,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.324,
+  "corner_error_px": 0.0894,
+  "gt_ious": [
+   0.81
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_hard_05",
+  "case_type": "missing_hard",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 2,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.314,
+  "corner_error_px": 0.096,
+  "gt_ious": [
+   0.8376
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true,
+   false
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_hard_06",
+  "case_type": "missing_hard",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 5,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.321,
+  "corner_error_px": 0.1068,
+  "gt_ious": [
+   0.9608
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true,
+   false,
+   false,
+   false,
+   false
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_hard_07",
+  "case_type": "missing_hard",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.319,
+  "corner_error_px": 0.081,
+  "gt_ious": [
+   0.8049
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_hard_08",
+  "case_type": "missing_hard",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.433,
+  "corner_error_px": 0.1322,
+  "gt_ious": [
+   0.9394
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_hard_09",
+  "case_type": "missing_hard",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 2,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.422,
+  "corner_error_px": 0.1242,
+  "gt_ious": [
+   0.8144
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true,
+   false
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "subtle_foreign_00",
+  "case_type": "subtle_foreign",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": true,
+  "seconds": 0.418,
+  "corner_error_px": 0.0701,
+  "gt_ious": [
+   0.0
+  ],
+  "gt_matched": [
+   false
+  ],
+  "pred_matched": [],
+  "outcome": "fn_no_regions"
+ },
+ {
+  "id": "subtle_foreign_01",
+  "case_type": "subtle_foreign",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.32,
+  "corner_error_px": 0.0637,
+  "gt_ious": [
+   0.6476
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "subtle_foreign_02",
+  "case_type": "subtle_foreign",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": true,
+  "seconds": 0.328,
+  "corner_error_px": 0.0522,
+  "gt_ious": [
+   0.0
+  ],
+  "gt_matched": [
+   false
+  ],
+  "pred_matched": [],
+  "outcome": "fn_no_regions"
+ },
+ {
+  "id": "subtle_foreign_03",
+  "case_type": "subtle_foreign",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.334,
+  "corner_error_px": 0.089,
+  "gt_ious": [
+   0.8947
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "subtle_foreign_04",
+  "case_type": "subtle_foreign",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.325,
+  "corner_error_px": 0.0868,
+  "gt_ious": [
+   0.7407
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "subtle_foreign_05",
+  "case_type": "subtle_foreign",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.414,
+  "corner_error_px": 0.0796,
+  "gt_ious": [
+   0.7843
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "subtle_foreign_06",
+  "case_type": "subtle_foreign",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.323,
+  "corner_error_px": 0.0631,
+  "gt_ious": [
+   0.6213
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "subtle_foreign_07",
+  "case_type": "subtle_foreign",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.324,
+  "corner_error_px": 0.0604,
+  "gt_ious": [
+   0.6476
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "subtle_foreign_08",
+  "case_type": "subtle_foreign",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.323,
+  "corner_error_px": 0.0525,
+  "gt_ious": [
+   0.8856
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "subtle_foreign_09",
+  "case_type": "subtle_foreign",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.409,
+  "corner_error_px": 0.0278,
+  "gt_ious": [
+   0.761
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "unrelated_scene_00",
+  "case_type": "unrelated_scene",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.1,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "unrelated_scene_01",
+  "case_type": "unrelated_scene",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.098,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "unrelated_scene_02",
+  "case_type": "unrelated_scene",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.097,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "unrelated_scene_03",
+  "case_type": "unrelated_scene",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.099,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "unrelated_scene_04",
+  "case_type": "unrelated_scene",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.098,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "unrelated_scene_05",
+  "case_type": "unrelated_scene",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.096,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "unrelated_scene_06",
+  "case_type": "unrelated_scene",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.097,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "unrelated_scene_07",
+  "case_type": "unrelated_scene",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.101,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "unrelated_scene_08",
+  "case_type": "unrelated_scene",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.098,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "unrelated_scene_09",
+  "case_type": "unrelated_scene",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.096,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "low_overlap_00",
+  "case_type": "low_overlap",
+  "category": "registration_fail",
+  "markers": true,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "insufficient_overlap",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.093,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "low_overlap_01",
+  "case_type": "low_overlap",
+  "category": "registration_fail",
+  "markers": true,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "insufficient_overlap",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.093,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "low_overlap_02",
+  "case_type": "low_overlap",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "insufficient_overlap",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.09,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "low_overlap_03",
+  "case_type": "low_overlap",
+  "category": "registration_fail",
+  "markers": true,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "insufficient_overlap",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.093,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "low_overlap_04",
+  "case_type": "low_overlap",
+  "category": "registration_fail",
+  "markers": true,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "insufficient_overlap",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.094,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "low_overlap_05",
+  "case_type": "low_overlap",
+  "category": "registration_fail",
+  "markers": true,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "insufficient_overlap",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.095,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "low_overlap_06",
+  "case_type": "low_overlap",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "insufficient_overlap",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.092,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "low_overlap_07",
+  "case_type": "low_overlap",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "insufficient_overlap",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.089,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "low_overlap_08",
+  "case_type": "low_overlap",
+  "category": "registration_fail",
+  "markers": true,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "insufficient_overlap",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.103,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "low_overlap_09",
+  "case_type": "low_overlap",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "insufficient_overlap",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.092,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "heavy_blur_00",
+  "case_type": "heavy_blur",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.08,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "heavy_blur_01",
+  "case_type": "heavy_blur",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.081,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "heavy_blur_02",
+  "case_type": "heavy_blur",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.078,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "heavy_blur_03",
+  "case_type": "heavy_blur",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_matches",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.085,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "heavy_blur_04",
+  "case_type": "heavy_blur",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.085,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "heavy_blur_05",
+  "case_type": "heavy_blur",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.078,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "heavy_blur_06",
+  "case_type": "heavy_blur",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.077,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "heavy_blur_07",
+  "case_type": "heavy_blur",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_matches",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.081,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "heavy_blur_08",
+  "case_type": "heavy_blur",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_matches",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.072,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "heavy_blur_09",
+  "case_type": "heavy_blur",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_matches",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.072,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "outcome": "correct_rejection"
+ }
+]
