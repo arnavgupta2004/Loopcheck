@@ -1,0 +1,236 @@
+{
+  "n_cases": 104,
+  "image_level": {
+    "confusion": {
+      "tp": 37,
+      "fp": 1,
+      "fn": 3,
+      "tn": 39
+    },
+    "precision": 0.9736842105263158,
+    "recall": 0.925,
+    "f1": 0.9487179487179489,
+    "abstained_registration_failed": 0
+  },
+  "false_positive_rate_nominal": 0.025,
+  "false_regions_per_nominal_image": 0.275,
+  "region_recall_iou30": 0.8958333333333334,
+  "region_precision_iou30_defect_cases": 0.9487179487179487,
+  "registration": {
+    "success_rate": 1.0,
+    "corner_error_px": {
+      "n": 80,
+      "median": 0.0578,
+      "p90": 0.1181,
+      "max": 0.17
+    },
+    "method_counts": {
+      "aruco": 29,
+      "sift": 51
+    },
+    "correct_rejection_rate": 1.0
+  },
+  "seconds_per_case": {
+    "median": 0.346,
+    "max": 0.473
+  },
+  "per_case_type": {
+    "identical": {
+      "n": 8,
+      "category": "nominal",
+      "analyzed": 8,
+      "registration_failed": 0,
+      "flagged": 0,
+      "region_recall_iou30": null,
+      "mean_regions": 0.0,
+      "median_corner_error_px": 0.0
+    },
+    "lighting": {
+      "n": 8,
+      "category": "nominal",
+      "analyzed": 8,
+      "registration_failed": 0,
+      "flagged": 1,
+      "region_recall_iou30": null,
+      "mean_regions": 1.375,
+      "median_corner_error_px": 0.0293
+    },
+    "geometric": {
+      "n": 8,
+      "category": "nominal",
+      "analyzed": 8,
+      "registration_failed": 0,
+      "flagged": 0,
+      "region_recall_iou30": null,
+      "mean_regions": 0.0,
+      "median_corner_error_px": 0.0636
+    },
+    "blur_noise": {
+      "n": 8,
+      "category": "nominal",
+      "analyzed": 8,
+      "registration_failed": 0,
+      "flagged": 0,
+      "region_recall_iou30": null,
+      "mean_regions": 0.0,
+      "median_corner_error_px": 0.1274
+    },
+    "combined_nominal": {
+      "n": 8,
+      "category": "nominal",
+      "analyzed": 8,
+      "registration_failed": 0,
+      "flagged": 0,
+      "region_recall_iou30": null,
+      "mean_regions": 0.0,
+      "median_corner_error_px": 0.0771
+    },
+    "missing": {
+      "n": 8,
+      "category": "defect",
+      "analyzed": 8,
+      "registration_failed": 0,
+      "flagged": 8,
+      "region_recall_iou30": 1.0,
+      "mean_regions": 1.0,
+      "median_corner_error_px": 0.0584
+    },
+    "shifted": {
+      "n": 8,
+      "category": "defect",
+      "analyzed": 8,
+      "registration_failed": 0,
+      "flagged": 8,
+      "region_recall_iou30": 0.875,
+      "mean_regions": 1.125,
+      "median_corner_error_px": 0.0499
+    },
+    "foreign_object": {
+      "n": 8,
+      "category": "defect",
+      "analyzed": 8,
+      "registration_failed": 0,
+      "flagged": 8,
+      "region_recall_iou30": 1.0,
+      "mean_regions": 1.0,
+      "median_corner_error_px": 0.0531
+    },
+    "missing_hard": {
+      "n": 8,
+      "category": "defect",
+      "analyzed": 8,
+      "registration_failed": 0,
+      "flagged": 8,
+      "region_recall_iou30": 1.0,
+      "mean_regions": 1.125,
+      "median_corner_error_px": 0.0754
+    },
+    "subtle_foreign": {
+      "n": 8,
+      "category": "defect",
+      "analyzed": 8,
+      "registration_failed": 0,
+      "flagged": 5,
+      "region_recall_iou30": 0.625,
+      "mean_regions": 0.625,
+      "median_corner_error_px": 0.0756
+    },
+    "unrelated_scene": {
+      "n": 8,
+      "category": "registration_fail",
+      "analyzed": 0,
+      "registration_failed": 8,
+      "flagged": 0,
+      "region_recall_iou30": null,
+      "mean_regions": 0.0,
+      "median_corner_error_px": null
+    },
+    "low_overlap": {
+      "n": 8,
+      "category": "registration_fail",
+      "analyzed": 0,
+      "registration_failed": 8,
+      "flagged": 0,
+      "region_recall_iou30": null,
+      "mean_regions": 0.0,
+      "median_corner_error_px": null
+    },
+    "heavy_blur": {
+      "n": 8,
+      "category": "registration_fail",
+      "analyzed": 0,
+      "registration_failed": 8,
+      "flagged": 0,
+      "region_recall_iou30": null,
+      "mean_regions": 0.0,
+      "median_corner_error_px": null
+    }
+  },
+  "opencv_version": "5.0.0",
+  "data": "data/synthetic/dev",
+  "data_seed": 1000,
+  "config": {
+    "work_max_dim": 1024,
+    "registration": {
+      "aruco_dictionary": "DICT_4X4_50",
+      "aruco_min_markers": 3,
+      "aruco_max_reproj_px": 2.0,
+      "sift_nfeatures": 4000,
+      "sift_ratio": 0.75,
+      "usac_threshold_px": 3.0,
+      "min_inliers": 30,
+      "min_inlier_ratio": 0.3,
+      "max_reproj_px": 1.5,
+      "max_scale_change": 2.0,
+      "min_overlap": 0.6,
+      "ecc_enabled": false,
+      "ecc_max_dim": 640,
+      "ecc_iterations": 100,
+      "ecc_eps": 1e-05,
+      "ecc_gauss_size": 5,
+      "ecc_max_corner_shift_px": 4.0,
+      "border_erode_px": 4
+    },
+    "compare": {
+      "blur_sigma": 1.0,
+      "align_tolerance_px": 1,
+      "global_mode": "linear",
+      "histogram_quantile_range": [
+        1.0,
+        99.0
+      ],
+      "histogram_lut_smooth": 6.0,
+      "max_gain": 2.0,
+      "max_ab_offset": 25.0,
+      "normalize_local": true,
+      "local_sigma_frac": 0.08,
+      "local_exclude_diff": 25.0,
+      "local_gain_range": [
+        0.7,
+        1.4
+      ],
+      "equalize_sharpness": true,
+      "sharpness_ratio_trigger": 1.5,
+      "max_equalize_sigma": 3.0,
+      "intensity_scale": 45.0,
+      "gradient_scale": 90.0,
+      "color_scale": 22.0,
+      "chroma_blur_sigma": 2.0,
+      "ssim_sigma": 2.0,
+      "ssim_scale": 0.6,
+      "weights": {
+        "intensity": 0.3,
+        "ssim": 0.2,
+        "gradient": 0.2,
+        "color": 0.3
+      },
+      "map_smooth_sigma": 1.5,
+      "threshold": 0.3,
+      "open_px": 3,
+      "close_px": 9,
+      "min_region_area_frac": 0.0003,
+      "min_region_peak": 0.45,
+      "max_regions": 25
+    }
+  }
+}
