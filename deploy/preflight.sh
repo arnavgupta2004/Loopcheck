@@ -92,28 +92,46 @@ fi
 
 echo "7. Local build artifact (template.yaml CodeUri)"
 ZIP="$ROOT/deploy/.build/loopcheck-lambda-x86_64.zip"
-if [ -f "$ZIP" ]; then
-  if res=$(python3 -B - "$ZIP" "$ROOT/loopcheck" <<'EOF'
-import sys, zipfile, re, pathlib
-z = zipfile.ZipFile(sys.argv[1]); names = set(z.namelist())
-unzipped = sum(i.file_size for i in z.infolist()) // 1048576
-ok_native = "cv2/cv2.abi3.so" in names and any(re.match(r"numpy/_core/_multiarray_umath.*\.so$", n) for n in names)
-src = {p.name: p.read_bytes() for p in pathlib.Path(sys.argv[2]).glob("*.py")}
-stale = [n for n, b in src.items() if f"loopcheck/{n}" not in names or z.read(f"loopcheck/{n}") != b]
-print(f"{unzipped} {int(ok_native)} {','.join(stale) or '-'}")
-EOF
-  ); then
-    read -r MB NATIVE STALE <<<"$res"
-    if [ "$MB" -lt 250 ]; then ok "zip present, ${MB} MiB unzipped (< 250), sha256 $(sha256sum "$ZIP" | cut -c1-16)…"; else fail "zip unpacks to ${MB} MiB (> 250 MiB Lambda limit)"; fi
-    if [ "$NATIVE" = "1" ]; then ok "native OpenCV/numpy binaries are inside the zip"; else fail "cv2.abi3.so or numpy C extensions missing from the zip — rebuild"; fi
-    if [ "$STALE" = "-" ]; then ok "packaged loopcheck/*.py identical to the source tree"; else warn "packaged code differs from source ($STALE) — rerun: bash deploy/build_lambda_zip.sh"; fi
-  else fail "could not read $ZIP"; fi
-else fail "no deployment zip — run: bash deploy/build_lambda_zip.sh"; fi
+PY="${PYTHON:-python3}"
+if [ ! -f "$ZIP" ]; then
+  fail "no deployment zip — run: bash deploy/build_lambda_zip.sh (it removes the zip whenever a build fails)"
+elif ! command -v "$PY" >/dev/null 2>&1; then
+  fail "$PY not found — needed to verify the zip (set PYTHON=/path/to/python3)"
+else
+  # Portable structural verification (no GNU du/stat/sha256sum): required OpenCV 5 / NumPy compiled
+  # files, Linux ELF x86-64 (not macOS) binaries, pinned versions, size, packaged code vs source.
+  vout=$("$PY" -B "$ROOT/deploy/lambda_package.py" verify "$ZIP" --requirements "$ROOT/deploy/requirements-lambda.txt" \
+         --arch x86_64 --source "$ROOT/loopcheck" 2>&1); vrc=$?
+  while IFS= read -r line; do
+    case "$line" in
+      "INFO "*) ok "${line#INFO }" ;;
+      "WARN "*) warn "${line#WARN } (rerun: bash deploy/build_lambda_zip.sh)" ;;
+      "ERROR "*) fail "${line#ERROR }" ;;
+    esac
+  done <<<"$vout"
+  if [ "$vrc" -eq 0 ]; then ok "zip verification: PASS"
+  else fail "zip verification failed (exit $vrc) — rebuild with: bash deploy/build_lambda_zip.sh"; fi
+fi
 
 echo "8. Template validation"
 if command -v sam >/dev/null; then
-  if out=$(cd "$ROOT" && sam validate --lint --template template.yaml --region "$REGION" --profile "$PROFILE" 2>&1); then ok "sam validate --lint: $(printf '%s' "$out" | tail -1)"
-  else fail "sam validate --lint failed:"; printf '%s\n' "$out" | tail -15 | sed 's/^/      /'; fi
+  # stdout and stderr are captured separately: SAM prints an unrelated "SAM CLI update available /
+  # To download: ..." notice on stderr after the command, which must never be shown as the result.
+  # Success requires exit code 0 AND the explicit "is a valid SAM Template" line on stdout.
+  s_out=$(mktemp); s_err=$(mktemp)
+  (cd "$ROOT" && sam validate --lint --template template.yaml --region "$REGION" --profile "$PROFILE") >"$s_out" 2>"$s_err"; s_rc=$?
+  valid_line=$(grep -m1 "is a valid SAM Template" "$s_out" || true)
+  if [ "$s_rc" -eq 0 ] && [ -n "$valid_line" ]; then
+    ok "sam validate --lint (exit 0): $valid_line"
+  else
+    if [ "$s_rc" -eq 0 ]; then fail "sam validate --lint: exit 0 but no 'is a valid SAM Template' line — treating as FAILED"
+    else fail "sam validate --lint FAILED (exit $s_rc)"; fi
+    cat "$s_out" "$s_err" | grep -v -e "SAM CLI update available" -e "^To download:" -e '^[[:space:]]*$' | tail -15 | sed 's/^/      /'
+  fi
+  if grep -q "SAM CLI update available" "$s_err"; then
+    ok "(info) $(grep -m1 "SAM CLI update available" "$s_err" | sed 's/^[[:space:]]*//') — informational only, not a validation result"
+  fi
+  rm -f "$s_out" "$s_err"
 fi
 
 echo

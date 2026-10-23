@@ -20,6 +20,35 @@ from loopcheck.agent import HUMAN_REVIEW, InspectionAgent
 ROOT = Path(__file__).resolve().parents[1]
 SECRET = "DUMMY-SECRET-VALUE-0123456789"
 
+ELF_X86_64 = b"\x7fELF\x02\x01\x01" + b"\0" * 11 + (0x3E).to_bytes(2, "little") + b"\0" * 44
+ELF_AARCH64 = b"\x7fELF\x02\x01\x01" + b"\0" * 11 + (0xB7).to_bytes(2, "little") + b"\0" * 44
+MACHO_ARM64 = b"\xcf\xfa\xed\xfe" + b"\0" * 60
+NUMPY_PIN = re.search(r"numpy==([\d.]+)", (ROOT / "deploy" / "requirements-lambda.txt").read_text()).group(1)
+WHEEL_LINUX = "Wheel-Version: 1.0\nRoot-Is-Purelib: false\nTag: cp313-cp313-manylinux_2_28_x86_64\n"
+
+
+def fake_lambda_zip(path, *, cv2_bytes=ELF_X86_64, numpy_bytes=ELF_X86_64,
+                    numpy_name="numpy/_core/_multiarray_umath.cpython-313-x86_64-linux-gnu.so",
+                    cv_version="5.0.0.93", numpy_version=NUMPY_PIN, wheel=WHEEL_LINUX, omit=(), extra=None, source=None):
+    """A small zip with the structure of the real Lambda package (headers only, not loadable)."""
+    entries = {
+        "cv2/cv2.abi3.so": cv2_bytes,
+        "cv2/__init__.py": b"",
+        numpy_name: numpy_bytes,
+        f"opencv_contrib_python_headless-{cv_version}.dist-info/METADATA": f"Name: opencv-contrib-python-headless\nVersion: {cv_version}\n".encode(),
+        f"opencv_contrib_python_headless-{cv_version}.dist-info/WHEEL": wheel.encode(),
+        f"numpy-{numpy_version}.dist-info/METADATA": f"Name: numpy\nVersion: {numpy_version}\n".encode(),
+        f"numpy-{numpy_version}.dist-info/WHEEL": wheel.encode(),
+    }
+    for p in Path(source or ROOT / "loopcheck").glob("*.py"):
+        entries[f"loopcheck/{p.name}"] = p.read_bytes()
+    entries.update(extra or {})
+    with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as z:
+        for name, data in entries.items():
+            if not any(name.startswith(o) for o in omit):
+                z.writestr(name, data)
+    return path
+
 
 # --------------------------------------------------------------------------- template
 class _CfnLoader(yaml.SafeLoader):
@@ -307,7 +336,19 @@ FAKE_SAM = r"""#!/usr/bin/env bash
 echo "sam $*" >> "$CALL_LOG"
 case "$1" in
   --version) echo "SAM CLI, version 1.170.0" ;;
-  validate) echo "template.yaml is a valid SAM Template" ;;
+  validate)
+    case "${FAKE_SAM_MODE:-valid}" in
+      valid) echo "template.yaml is a valid SAM Template" ;;
+      valid_with_update_notice)   # what real SAM prints when a newer version exists (notice on stderr)
+        echo "template.yaml is a valid SAM Template"
+        printf '\nSAM CLI update available (1.999.0); (1.170.0 installed)\nTo download: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html\n' >&2 ;;
+      lint_failure)
+        echo "[[E3030: Check if properties have a valid value] ('python9' is not one of ...)]"
+        echo "Error: Linting failed. At least one linting rule was matched to the provided template." >&2
+        printf '\nSAM CLI update available (1.999.0); (1.170.0 installed)\nTo download: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html\n' >&2
+        exit 1 ;;
+      exit0_without_valid_line) echo "something unexpected" ;;
+    esac ;;
   *) echo "unexpected sam call: $*" >&2; exit 99 ;;
 esac
 """
@@ -320,15 +361,12 @@ READ_ONLY = re.compile(r"^(aws (--version|configure list-profiles|configure get 
 def sandbox(tmp_path):
     """Temp copy of the repo layout with a small fake zip and fake aws/sam on PATH."""
     (tmp_path / "deploy").mkdir()
-    shutil.copy(ROOT / "deploy" / "preflight.sh", tmp_path / "deploy" / "preflight.sh")
+    for f in ("preflight.sh", "lambda_package.py", "requirements-lambda.txt"):
+        shutil.copy(ROOT / "deploy" / f, tmp_path / "deploy" / f)
     shutil.copy(ROOT / "template.yaml", tmp_path / "template.yaml")
     shutil.copytree(ROOT / "loopcheck", tmp_path / "loopcheck", ignore=shutil.ignore_patterns("__pycache__"))
     (tmp_path / "deploy" / ".build").mkdir()
-    with zipfile.ZipFile(tmp_path / "deploy" / ".build" / "loopcheck-lambda-x86_64.zip", "w") as z:
-        z.writestr("cv2/cv2.abi3.so", b"\0")
-        z.writestr("numpy/_core/_multiarray_umath.cpython-313-x86_64-linux-gnu.so", b"\0")
-        for p in (ROOT / "loopcheck").glob("*.py"):
-            z.writestr(f"loopcheck/{p.name}", p.read_bytes())
+    fake_lambda_zip(tmp_path / "deploy" / ".build" / "loopcheck-lambda-x86_64.zip")
     bin_dir = tmp_path / "bin"
     bin_dir.mkdir()
     for name, src in (("aws", FAKE_AWS), ("sam", FAKE_SAM)):
@@ -398,3 +436,51 @@ def test_preflight_fails_cleanly_without_aws_cli(tmp_path):
     if shutil.which("aws", path=env["PATH"]):
         pytest.skip("a real aws CLI is installed in /usr/bin")
     assert p.returncode == 1 and "Cannot continue without the AWS CLI" in p.stdout
+
+
+# --------------------------------------------------------------------------- preflight: SAM output + zip verification
+def _line(out: str, prefix: str) -> list[str]:
+    return [ln for ln in out.splitlines() if prefix in ln]
+
+
+def test_preflight_shows_validation_result_not_sam_update_notice(sandbox):
+    p, _ = _preflight(sandbox, FAKE_SAM_MODE="valid_with_update_notice")
+    ok_lines = _line(p.stdout, "[ OK ] sam validate --lint")
+    assert p.returncode == 0 and len(ok_lines) == 1 and "is a valid SAM Template" in ok_lines[0]
+    assert "To download" not in ok_lines[0]
+    assert any("update available" in ln and "informational only" in ln for ln in p.stdout.splitlines())
+
+
+def test_preflight_reports_sam_lint_failure_as_failure(sandbox):
+    p, _ = _preflight(sandbox, FAKE_SAM_MODE="lint_failure")
+    assert p.returncode == 1 and "RESULT: FAIL" in p.stdout
+    assert "sam validate --lint FAILED (exit 1)" in p.stdout and "Linting failed" in p.stdout
+    assert not _line(p.stdout, "[ OK ] sam validate")
+    assert "To download" not in p.stdout.split("FAILED (exit 1)")[1].split("[ OK ]")[0]  # notice filtered from the error dump
+
+
+def test_preflight_requires_explicit_valid_line_even_on_exit_zero(sandbox):
+    p, _ = _preflight(sandbox, FAKE_SAM_MODE="exit0_without_valid_line")
+    assert p.returncode == 1 and "exit 0 but no 'is a valid SAM Template' line" in p.stdout
+
+
+def test_preflight_verifies_zip_structure_portably(sandbox):
+    p, _ = _preflight(sandbox)
+    assert "zip verification: PASS" in p.stdout and "opencv_contrib_python_headless==5.0.0.93" in p.stdout
+
+
+@pytest.mark.parametrize("kwargs, message", [
+    ({"cv2_bytes": MACHO_ARM64}, "macOS (Mach-O) binary"),
+    ({"omit": ("cv2/cv2.abi3.so",)}, "missing OpenCV binary"),
+    ({"cv_version": "4.10.0.84"}, "not 5.x"),
+])
+def test_preflight_fails_on_invalid_zip(sandbox, kwargs, message):
+    fake_lambda_zip(sandbox / "deploy" / ".build" / "loopcheck-lambda-x86_64.zip", **kwargs)
+    p, _ = _preflight(sandbox)
+    assert p.returncode == 1 and message in p.stdout and "zip verification failed" in p.stdout
+
+
+def test_preflight_reports_missing_zip(sandbox):
+    (sandbox / "deploy" / ".build" / "loopcheck-lambda-x86_64.zip").unlink()
+    p, _ = _preflight(sandbox)
+    assert p.returncode == 1 and "no deployment zip" in p.stdout

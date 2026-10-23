@@ -118,11 +118,22 @@ instead.
 `bash deploy/build_lambda_zip.sh` installs the exact cp313 manylinux_2_28 x86_64 wheels
 (`opencv-contrib-python-headless==5.0.0.93`, `numpy==2.5.4`, as in `uv.lock`), adds
 `loopcheck/`, and writes **`deploy/.build/loopcheck-lambda-x86_64.zip`** (80 MiB; 215 MiB
-unzipped against Lambda's 250 MiB limit). Then it:
-- checks that `cv2/cv2.abi3.so` and numpy's C extensions are **inside** the zip;
-- extracts the zip into a temp directory;
-- imports it with an isolated interpreter (OpenCV must be 5.x);
-- calls `GET /health`.
+unzipped against Lambda's 250 MiB limit). It runs on Linux and macOS; see runbook step 4a.
+
+Before the zip is moved into place, `deploy/lambda_package.py verify` checks:
+- archive integrity (CRC);
+- that `cv2/cv2.abi3.so` and numpy's `_multiarray_umath…cpython-313-x86_64-linux-gnu.so`
+  are inside;
+- that both are **64-bit Linux ELF for x86-64** (Mach-O, aarch64 or non-ELF are rejected);
+- the distribution versions against `deploy/requirements-lambda.txt`, with OpenCV 5.x and
+  no other OpenCV distribution;
+- manylinux x86_64 wheel tags;
+- no `__pycache__` or macOS junk;
+- the 250 MiB limit.
+
+On Linux x86_64 with Python 3.13, it also extracts the zip, imports it with an isolated
+interpreter (OpenCV must be 5.x) and calls `GET /health`. Any failure removes the
+archive.
 
 `template.yaml` uses that **zip** as `CodeUri`. Do not change it to the unpacked folder.
 With SAM CLI 1.170.0, `sam build` on a folder `CodeUri` ran the Python builder, which
@@ -181,17 +192,61 @@ If `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` or `AWS_SESSION_TOKEN` are set i
 shell, unset them so it is unambiguous which identity is used:
 `unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN`.
 
-### 3. Verify identity, region and prerequisites 🟢 (read-only)
+### 3. Verify identity and region 🟢 (read-only)
 
 ```bash
 aws sts get-caller-identity --profile "$AWS_PROFILE_NAME" --region "$REGION" --query '[Account,Arn]' --output text
-bash deploy/build_lambda_zip.sh     # local build + verification (step 4)
-bash deploy/preflight.sh            # read-only checks; prints account + principal + region; must end with RESULT: PASS
 ```
 
-`deploy/preflight.sh` makes read-only calls only:
-- `sts get-caller-identity`, `lambda get-account-settings`, `cloudformation describe-stacks`
-  and `describe-stack-resource`;
+**Confirm that the printed account ID is the one you intend to use before continuing.**
+
+### 4. Build, validate and preflight 🟢 (local; the preflight's AWS calls are read-only)
+
+Run these in order, and **stop at the first failure**:
+
+```bash
+bash deploy/build_lambda_zip.sh        # 4a: must end with "== done: .../loopcheck-lambda-x86_64.zip" and a sha256
+sam validate --lint --template template.yaml --region "$REGION" --profile "$AWS_PROFILE_NAME"   # 4b: must print "... is a valid SAM Template"
+sam build --template template.yaml     # 4c: "Build Succeeded"; passes the verified zip through unchanged
+bash deploy/preflight.sh               # 4d: read-only; must end with "RESULT: PASS"
+```
+
+**4a: the build works on Linux and macOS** (bash 3.2+). All size, hash and zip work is
+done by `deploy/lambda_package.py` (Python standard library), so GNU `du -b`, `stat -c`
+and `sha256sum` are no longer needed.
+- **Helper interpreter:** any `python3` ≥ 3.8 runs it, macOS's system Python included.
+  Set `PYTHON=/path/to/python3` to choose another.
+- **What gets packaged:** uv always installs the **Linux** wheels for Lambda (cp313,
+  `manylinux_2_28_x86_64`), never macOS wheels.
+- **Checks before the zip exists:** the archive is written under a temporary name and
+  verified first. Verification covers:
+  - CRCs and the required OpenCV 5 and NumPy compiled files;
+  - that those files are **Linux ELF x86-64** (a macOS Mach-O binary fails the build);
+  - pinned versions, no conflicting OpenCV, and the 250 MiB limit.
+- **On failure:** the script prints `BUILD FAILED` and leaves **no** zip, so a later
+  preflight can't mistake an old or partial archive for a good one.
+- **Import smoke test:** it extracts the zip, imports it in isolation and calls
+  `GET /health`. It needs Linux x86_64 with Python 3.13; on macOS it prints
+  `SKIPPED import smoke test`, which is expected. The structural checks above still run,
+  and step 7 proves the import on AWS itself.
+
+**4b/4d: SAM output.** Validation passes only if `sam validate` exits 0 **and** prints
+`… is a valid SAM Template` on stdout. If a newer SAM CLI exists, SAM also prints
+`SAM CLI update available … / To download: https://docs.aws.amazon.com/serverless-application-model/…`
+on **stderr**. That notice is informational and is not the validation result. The
+preflight shows the validation line itself and lists the notice separately as `(info)`.
+A real failure exits 1 with lint errors (for example `Error: Linting failed …`), and the
+preflight reports it as `FAIL`.
+
+**4c:** `sam build` writes `.aws-sam/build/template.yaml` (git-ignored). On some SAM
+versions it requires `python3.13` on PATH: run `uv python install 3.13`, then confirm with
+`python3.13 --version`. As a fallback you can skip `sam build` and pass
+`--template-file template.yaml` to `sam deploy`; that deploys the same zip.
+
+**4d: `deploy/preflight.sh`** makes read-only AWS calls only:
+- `sts get-caller-identity`, `lambda get-account-settings`;
+- `lambda get-function-concurrency` (only if the stack exists);
+- `cloudformation describe-stacks` and `describe-stack-resource`;
 - `sam validate --lint`.
 
 It never prints credentials, only the *names* of any credential variables set in your
@@ -201,22 +256,8 @@ shell. It checks:
 - which concurrency mode your account supports, printed as
   `RECOMMENDED: ... ConcurrencyMode=reserved` or `ConcurrencyMode=unreserved`;
 - whether the stack or SAM's managed bucket already exist;
-- the zip: size, native files, and that the packaged code matches the source.
-
-**Confirm that the printed account ID is the one you intend to use before continuing.**
-
-### 4. Validate and build 🟢
-
-```bash
-bash deploy/build_lambda_zip.sh                                     # builds + verifies deploy/.build/loopcheck-lambda-x86_64.zip
-sam validate --lint --template template.yaml --region "$REGION" --profile "$AWS_PROFILE_NAME"
-sam build --template template.yaml                                  # passes the verified zip through unchanged
-```
-
-`sam build` writes `.aws-sam/build/template.yaml` (git-ignored). On some SAM versions it
-requires `python3.13` on PATH; `uv python install 3.13` provides one. As a fallback you can
-skip `sam build` and pass `--template-file template.yaml` to `sam deploy`; that deploys the
-same zip.
+- the zip, using the same portable verifier as the build, plus a check that the packaged
+  code matches the source.
 
 **`sam deploy` prefers `.aws-sam/build/template.yaml` whenever it exists.** After pulling
 any change to `template.yaml`, re-run `sam build`, or delete `.aws-sam/`. Otherwise a stale
@@ -370,10 +411,11 @@ These are estimates, not measurements; use the AWS Pricing Calculator for ap-sou
 |---|---|
 | Test suite | All pass (`uv run --frozen --group demo pytest -q`), including `tests/test_deploy.py`: template configuration, logging protections, public-response sanitisation, offline preflight with fake `aws`/`sam` recording every call |
 | D1 OpenCV 5 verification | 9/9 pass (OpenCV 5.0.0) |
-| Lambda zip | Built without Docker: 215 MiB unzipped, 80 MiB zip, 483 entries including `cv2.abi3.so` and numpy C extensions, no `__pycache__`. Extracted and imported in isolation: OpenCV 5.0.0, numpy 2.5.4, `/health` 200. `/inspect` from the extracted zip: DEFECT T1 (missing part), APPROVE T5 (clean), HUMAN_REVIEW T2 (ambiguous tiny), HUMAN_REVIEW A2 (registration failure) |
+| Lambda zip | Built without Docker by the portable script: 215 MiB unzipped, 80 MiB zip, 325 file entries. `verify`: PASS (Linux ELF x86-64 `cv2.abi3.so` and numpy `…cpython-313-x86_64-linux-gnu.so`, opencv-contrib-python-headless 5.0.0.93, numpy 2.5.4). Extracted and imported in isolation: OpenCV 5.0.0, `/health` 200. `/inspect` from the extracted zip: DEFECT T1 (missing part), APPROVE T5 (clean), HUMAN_REVIEW T2 (ambiguous tiny), HUMAN_REVIEW A2 (registration failure) |
+| macOS portability | Not run on a Mac. Simulated with BSD-behaving `du` (rejects `-b`) and `stat` (rejects `-c`) and no `sha256sum` on PATH: the **old** script reproduced the reported `du: invalid option -- b` and left no zip; the **new** script builds and verifies successfully (also an automated test). A wrong-platform install (Mach-O binaries) and a failed `uv` install both end with `BUILD FAILED` and no zip, and a stale zip from an earlier build is removed |
 | Logs from the packaged handler | Metadata-only JSON lines; no base64 found |
-| SAM CLI 1.170.0 (run locally with AWS credential variables removed) | `sam validate --lint`: valid. `sam build`: succeeded and passes the zip through (same sha256). The folder-`CodeUri` pitfall was found here and fixed |
-| Preflight script | Syntax OK. Without an AWS CLI it stops with `RESULT: FAIL` and creates nothing. With fake CLIs it passes, prints account and region, warns on incompatible concurrency, stops on invalid identity, and only ever issues the read-only calls listed above |
+| SAM CLI 1.170.0 (run locally with AWS credential variables removed) | `sam validate --lint`: valid. `sam build`: succeeded and passes the zip through (same sha256). The folder-`CodeUri` pitfall was found here and fixed. Exit codes observed: valid template → 0 plus `… is a valid SAM Template` on stdout; unknown `!Ref` or broken YAML → 1. The `To download: …` text is SAM's update notice on stderr (`samcli/lib/utils/version_checker.py`), not a validation result |
+| Preflight script | Syntax OK. Without an AWS CLI it stops with `RESULT: FAIL` and creates nothing. With fake CLIs (tests) it passes; prints account and region; recommends the concurrency mode; stops on invalid identity; shows the `is a valid SAM Template` line (never the update notice) as the result; reports SAM lint failures and "exit 0 without a valid line" as FAIL; fails on a missing zip or a zip with macOS, OpenCV 4 or missing binaries; and only ever issues the read-only calls listed above |
 | Local API stand-in | `python -m loopcheck.client --url http://127.0.0.1:8011 --expect DEFECT` → `SMOKE TEST: PASS` |
 | AWS | **Nothing executed on AWS.** The sandbox credentials are invalid (STS `InvalidClientTokenId`, D4) and were not used or repaired |
 
