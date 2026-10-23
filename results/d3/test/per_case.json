@@ -1,0 +1,7193 @@
+[
+ {
+  "id": "identical_00",
+  "case_type": "identical",
+  "category": "nominal",
+  "markers": false,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.6677
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5553,
+   "rule": "T5",
+   "branches": [
+    "G"
+   ],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "identical_01",
+  "case_type": "identical",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.2781
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5898,
+   "rule": "T5",
+   "branches": [
+    "E",
+    "F",
+    "G"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "identical_02",
+  "case_type": "identical",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5441
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.6643,
+   "rule": "T5",
+   "branches": [
+    "E",
+    "F",
+    "G"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "identical_03",
+  "case_type": "identical",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.294
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5621,
+   "rule": "T5",
+   "branches": [
+    "E",
+    "F",
+    "G"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "identical_04",
+  "case_type": "identical",
+  "category": "nominal",
+  "markers": false,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.6061
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5597,
+   "rule": "T5",
+   "branches": [
+    "G"
+   ],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "identical_05",
+  "case_type": "identical",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.2871
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5214,
+   "rule": "T5",
+   "branches": [
+    "E",
+    "F",
+    "G"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "identical_06",
+  "case_type": "identical",
+  "category": "nominal",
+  "markers": false,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.6728
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.6732,
+   "rule": "T5",
+   "branches": [
+    "G"
+   ],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "identical_07",
+  "case_type": "identical",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.2817
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.6111,
+   "rule": "T5",
+   "branches": [
+    "E",
+    "F",
+    "G"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "identical_08",
+  "case_type": "identical",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4403
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5977,
+   "rule": "T5",
+   "branches": [
+    "E",
+    "F",
+    "G"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "identical_09",
+  "case_type": "identical",
+  "category": "nominal",
+  "markers": false,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4692
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.54,
+   "rule": "T5",
+   "branches": [
+    "G"
+   ],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "lighting_00",
+  "case_type": "lighting",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.2937
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "safe_escalation",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 1.3758,
+   "rule": "T2",
+   "branches": [
+    "D",
+    "E",
+    "F"
+   ],
+   "tool_calls": 11,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 1,
+    "ambiguous": 5,
+    "unresolved": 11
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "lighting_01",
+  "case_type": "lighting",
+  "category": "nominal",
+  "markers": false,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5085
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.8256,
+   "rule": "T5",
+   "branches": [
+    "B",
+    "G"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "lighting_02",
+  "case_type": "lighting",
+  "category": "nominal",
+  "markers": false,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.476
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "safe_escalation",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 1.2165,
+   "rule": "T2",
+   "branches": [
+    "B",
+    "D"
+   ],
+   "tool_calls": 10,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 6,
+    "unresolved": 12
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "lighting_03",
+  "case_type": "lighting",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "ERROR_false_alarm",
+   "gt_matched": [],
+   "n_boxes": 9,
+   "automatic": true,
+   "automatic_correct": false,
+   "seconds": 0.3254
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "safe_escalation",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 1.2102,
+   "rule": "T2",
+   "branches": [
+    "B",
+    "D",
+    "E",
+    "F"
+   ],
+   "tool_calls": 11,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 6,
+    "unresolved": 3
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "lighting_04",
+  "case_type": "lighting",
+  "category": "nominal",
+  "markers": false,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4708
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.8305,
+   "rule": "T5",
+   "branches": [
+    "B",
+    "G"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "lighting_05",
+  "case_type": "lighting",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "ERROR_false_alarm",
+   "gt_matched": [],
+   "n_boxes": 2,
+   "automatic": true,
+   "automatic_correct": false,
+   "seconds": 0.2872
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "safe_escalation",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.5312,
+   "rule": "T2",
+   "branches": [
+    "D",
+    "E",
+    "F"
+   ],
+   "tool_calls": 6,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 2,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "lighting_06",
+  "case_type": "lighting",
+  "category": "nominal",
+  "markers": false,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "ERROR_false_alarm",
+   "gt_matched": [],
+   "n_boxes": 6,
+   "automatic": true,
+   "automatic_correct": false,
+   "seconds": 0.5128
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "safe_escalation",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 1.7946,
+   "rule": "T2",
+   "branches": [
+    "B",
+    "C",
+    "D",
+    "F"
+   ],
+   "tool_calls": 11,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 6,
+    "ambiguous": 0,
+    "unresolved": 1
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "lighting_07",
+  "case_type": "lighting",
+  "category": "nominal",
+  "markers": false,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5385
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "safe_escalation",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 1.011,
+   "rule": "T2",
+   "branches": [
+    "D"
+   ],
+   "tool_calls": 9,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 6,
+    "unresolved": 19
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "lighting_08",
+  "case_type": "lighting",
+  "category": "nominal",
+  "markers": false,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4831
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5265,
+   "rule": "T5",
+   "branches": [
+    "G"
+   ],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "lighting_09",
+  "case_type": "lighting",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3302
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "safe_escalation",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.8231,
+   "rule": "T2",
+   "branches": [
+    "D",
+    "E",
+    "F"
+   ],
+   "tool_calls": 7,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 2,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "geometric_00",
+  "case_type": "geometric",
+  "category": "nominal",
+  "markers": false,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4718
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4738,
+   "rule": "T5",
+   "branches": [
+    "G"
+   ],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "geometric_01",
+  "case_type": "geometric",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.2867
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5281,
+   "rule": "T5",
+   "branches": [
+    "E",
+    "F",
+    "G"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "geometric_02",
+  "case_type": "geometric",
+  "category": "nominal",
+  "markers": false,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5329
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5491,
+   "rule": "T5",
+   "branches": [
+    "G"
+   ],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "geometric_03",
+  "case_type": "geometric",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3324
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4766,
+   "rule": "T5",
+   "branches": [
+    "E",
+    "F",
+    "G"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "geometric_04",
+  "case_type": "geometric",
+  "category": "nominal",
+  "markers": false,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5058
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4689,
+   "rule": "T5",
+   "branches": [
+    "G"
+   ],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "geometric_05",
+  "case_type": "geometric",
+  "category": "nominal",
+  "markers": false,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.545
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5228,
+   "rule": "T5",
+   "branches": [
+    "G"
+   ],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "geometric_06",
+  "case_type": "geometric",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3945
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4836,
+   "rule": "T5",
+   "branches": [
+    "E",
+    "F",
+    "G"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "geometric_07",
+  "case_type": "geometric",
+  "category": "nominal",
+  "markers": false,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4882
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5347,
+   "rule": "T5",
+   "branches": [
+    "G"
+   ],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "geometric_08",
+  "case_type": "geometric",
+  "category": "nominal",
+  "markers": false,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.504
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5416,
+   "rule": "T5",
+   "branches": [
+    "G"
+   ],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "geometric_09",
+  "case_type": "geometric",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.2981
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4854,
+   "rule": "T5",
+   "branches": [
+    "E",
+    "F",
+    "G"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "blur_noise_00",
+  "case_type": "blur_noise",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3661
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.8803,
+   "rule": "T5",
+   "branches": [
+    "D",
+    "E",
+    "F",
+    "G"
+   ],
+   "tool_calls": 6,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 1,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "blur_noise_01",
+  "case_type": "blur_noise",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3845
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.8798,
+   "rule": "T5",
+   "branches": [
+    "D",
+    "E",
+    "F",
+    "G"
+   ],
+   "tool_calls": 6,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 1,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "blur_noise_02",
+  "case_type": "blur_noise",
+  "category": "nominal",
+  "markers": false,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5225
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.6233,
+   "rule": "T5",
+   "branches": [
+    "G"
+   ],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "blur_noise_03",
+  "case_type": "blur_noise",
+  "category": "nominal",
+  "markers": false,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.604
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5853,
+   "rule": "T5",
+   "branches": [
+    "G"
+   ],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "blur_noise_04",
+  "case_type": "blur_noise",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3161
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5021,
+   "rule": "T5",
+   "branches": [
+    "E",
+    "F",
+    "G"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "blur_noise_05",
+  "case_type": "blur_noise",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3324
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4884,
+   "rule": "T5",
+   "branches": [
+    "E",
+    "F",
+    "G"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "blur_noise_06",
+  "case_type": "blur_noise",
+  "category": "nominal",
+  "markers": false,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5055
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5058,
+   "rule": "T5",
+   "branches": [
+    "G"
+   ],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "blur_noise_07",
+  "case_type": "blur_noise",
+  "category": "nominal",
+  "markers": false,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.6179
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.564,
+   "rule": "T5",
+   "branches": [
+    "G"
+   ],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "blur_noise_08",
+  "case_type": "blur_noise",
+  "category": "nominal",
+  "markers": false,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5348
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5121,
+   "rule": "T5",
+   "branches": [
+    "G"
+   ],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "blur_noise_09",
+  "case_type": "blur_noise",
+  "category": "nominal",
+  "markers": false,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5574
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5528,
+   "rule": "T5",
+   "branches": [
+    "G"
+   ],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "combined_nominal_00",
+  "case_type": "combined_nominal",
+  "category": "nominal",
+  "markers": false,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5785
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.7998,
+   "rule": "T5",
+   "branches": [
+    "D",
+    "G"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "combined_nominal_01",
+  "case_type": "combined_nominal",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3541
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.7612,
+   "rule": "T5",
+   "branches": [
+    "D",
+    "E",
+    "F",
+    "G"
+   ],
+   "tool_calls": 5,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "combined_nominal_02",
+  "case_type": "combined_nominal",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3525
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4676,
+   "rule": "T5",
+   "branches": [
+    "E",
+    "F",
+    "G"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "combined_nominal_03",
+  "case_type": "combined_nominal",
+  "category": "nominal",
+  "markers": false,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4831
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.8199,
+   "rule": "T5",
+   "branches": [
+    "B",
+    "G"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "combined_nominal_04",
+  "case_type": "combined_nominal",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3328
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.59,
+   "rule": "T5",
+   "branches": [
+    "E",
+    "F",
+    "G"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "combined_nominal_05",
+  "case_type": "combined_nominal",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "ERROR_false_alarm",
+   "gt_matched": [],
+   "n_boxes": 3,
+   "automatic": true,
+   "automatic_correct": false,
+   "seconds": 0.3418
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "safe_escalation",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 1.1956,
+   "rule": "T2",
+   "branches": [
+    "B",
+    "D",
+    "E",
+    "F"
+   ],
+   "tool_calls": 9,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 3,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "combined_nominal_06",
+  "case_type": "combined_nominal",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3003
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5435,
+   "rule": "T5",
+   "branches": [
+    "E",
+    "F",
+    "G"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "combined_nominal_07",
+  "case_type": "combined_nominal",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3518
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.8321,
+   "rule": "T5",
+   "branches": [
+    "B",
+    "E",
+    "F",
+    "G"
+   ],
+   "tool_calls": 5,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "combined_nominal_08",
+  "case_type": "combined_nominal",
+  "category": "nominal",
+  "markers": false,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5037
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4907,
+   "rule": "T5",
+   "branches": [
+    "G"
+   ],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "combined_nominal_09",
+  "case_type": "combined_nominal",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.2988
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5046,
+   "rule": "T5",
+   "branches": [
+    "E",
+    "F",
+    "G"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "missing_00",
+  "case_type": "missing",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4988
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5083,
+   "rule": "T1",
+   "branches": [],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "missing_01",
+  "case_type": "missing",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.629
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5296,
+   "rule": "T1",
+   "branches": [],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "missing_02",
+  "case_type": "missing",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.2875
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4719,
+   "rule": "T1",
+   "branches": [
+    "E",
+    "F"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "missing_03",
+  "case_type": "missing",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5309
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5505,
+   "rule": "T1",
+   "branches": [],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "missing_04",
+  "case_type": "missing",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5419
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5633,
+   "rule": "T1",
+   "branches": [
+    "C"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "missing_05",
+  "case_type": "missing",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3256
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4707,
+   "rule": "T1",
+   "branches": [
+    "E",
+    "F"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "missing_06",
+  "case_type": "missing",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5494
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5209,
+   "rule": "T1",
+   "branches": [],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "missing_07",
+  "case_type": "missing",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.368
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4626,
+   "rule": "T1",
+   "branches": [
+    "E",
+    "F"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "missing_08",
+  "case_type": "missing",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.327
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4623,
+   "rule": "T1",
+   "branches": [
+    "E",
+    "F"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "missing_09",
+  "case_type": "missing",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.346
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4925,
+   "rule": "T1",
+   "branches": [
+    "E",
+    "F"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "shifted_00",
+  "case_type": "shifted",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true,
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4598
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true,
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.8796,
+   "rule": "T1",
+   "branches": [
+    "D"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "shifted_01",
+  "case_type": "shifted",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true,
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5464
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true,
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5551,
+   "rule": "T1",
+   "branches": [],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "shifted_02",
+  "case_type": "shifted",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true,
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.567
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true,
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5908,
+   "rule": "T1",
+   "branches": [],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "shifted_03",
+  "case_type": "shifted",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true,
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.281
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true,
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4582,
+   "rule": "T1",
+   "branches": [
+    "E",
+    "F"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "shifted_04",
+  "case_type": "shifted",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true,
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3861
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true,
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5555,
+   "rule": "T1",
+   "branches": [
+    "E",
+    "F"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "shifted_05",
+  "case_type": "shifted",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true,
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4945
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true,
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5273,
+   "rule": "T1",
+   "branches": [],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "shifted_06",
+  "case_type": "shifted",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true,
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4889
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true,
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.989,
+   "rule": "T1",
+   "branches": [
+    "B",
+    "C"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "shifted_07",
+  "case_type": "shifted",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true,
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.456
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true,
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.9195,
+   "rule": "T1",
+   "branches": [
+    "B",
+    "C"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "shifted_08",
+  "case_type": "shifted",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true,
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.356
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true,
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5164,
+   "rule": "T1",
+   "branches": [
+    "E",
+    "F"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "shifted_09",
+  "case_type": "shifted",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true,
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5451
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true,
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5286,
+   "rule": "T1",
+   "branches": [],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "foreign_object_00",
+  "case_type": "foreign_object",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3029
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5458,
+   "rule": "T1",
+   "branches": [
+    "E",
+    "F"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "foreign_object_01",
+  "case_type": "foreign_object",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5191
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4863,
+   "rule": "T1",
+   "branches": [],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "foreign_object_02",
+  "case_type": "foreign_object",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3889
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4941,
+   "rule": "T1",
+   "branches": [
+    "E",
+    "F"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "foreign_object_03",
+  "case_type": "foreign_object",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.336
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4564,
+   "rule": "T1",
+   "branches": [
+    "E",
+    "F"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "foreign_object_04",
+  "case_type": "foreign_object",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3456
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5196,
+   "rule": "T1",
+   "branches": [
+    "C",
+    "E",
+    "F"
+   ],
+   "tool_calls": 5,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "foreign_object_05",
+  "case_type": "foreign_object",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3506
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5234,
+   "rule": "T1",
+   "branches": [
+    "C",
+    "E",
+    "F"
+   ],
+   "tool_calls": 5,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "foreign_object_06",
+  "case_type": "foreign_object",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3281
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5885,
+   "rule": "T1",
+   "branches": [
+    "E",
+    "F"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "foreign_object_07",
+  "case_type": "foreign_object",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3149
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5439,
+   "rule": "T1",
+   "branches": [
+    "E",
+    "F"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "foreign_object_08",
+  "case_type": "foreign_object",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "ERROR_approved",
+   "gt_matched": [
+    false
+   ],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": false,
+   "seconds": 0.5664
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "safe_escalation",
+   "gt_matched": [
+    false
+   ],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.887,
+   "rule": "T2",
+   "branches": [
+    "D"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 1,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "foreign_object_09",
+  "case_type": "foreign_object",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5603
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5868,
+   "rule": "T1",
+   "branches": [],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "missing_hard_00",
+  "case_type": "missing_hard",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4867
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 1.119,
+   "rule": "T1",
+   "branches": [
+    "B",
+    "C",
+    "D",
+    "F"
+   ],
+   "tool_calls": 6,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 1,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "missing_hard_01",
+  "case_type": "missing_hard",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4959
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 1.1793,
+   "rule": "T1",
+   "branches": [
+    "B",
+    "C",
+    "D"
+   ],
+   "tool_calls": 7,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 2,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "missing_hard_02",
+  "case_type": "missing_hard",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 18,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.57
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.8128,
+   "rule": "T1",
+   "branches": [
+    "C",
+    "D",
+    "F"
+   ],
+   "tool_calls": 9,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 2,
+    "ambiguous": 4,
+    "unresolved": 11
+   },
+   "errors": 0,
+   "notes": 2
+  }
+ },
+ {
+  "id": "missing_hard_03",
+  "case_type": "missing_hard",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 5,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3021
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.9664,
+   "rule": "T1",
+   "branches": [
+    "B",
+    "C",
+    "D",
+    "E",
+    "F"
+   ],
+   "tool_calls": 10,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 4,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "missing_hard_04",
+  "case_type": "missing_hard",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5309
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.8744,
+   "rule": "T1",
+   "branches": [
+    "B",
+    "C"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "missing_hard_05",
+  "case_type": "missing_hard",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3053
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.8994,
+   "rule": "T1",
+   "branches": [
+    "B",
+    "C",
+    "E",
+    "F"
+   ],
+   "tool_calls": 6,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "missing_hard_06",
+  "case_type": "missing_hard",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3072
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4766,
+   "rule": "T1",
+   "branches": [
+    "E",
+    "F"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 2
+  }
+ },
+ {
+  "id": "missing_hard_07",
+  "case_type": "missing_hard",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.301
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.9816,
+   "rule": "T1",
+   "branches": [
+    "B",
+    "C",
+    "E",
+    "F"
+   ],
+   "tool_calls": 6,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "missing_hard_08",
+  "case_type": "missing_hard",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3216
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4636,
+   "rule": "T1",
+   "branches": [
+    "E",
+    "F"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 2
+  }
+ },
+ {
+  "id": "missing_hard_09",
+  "case_type": "missing_hard",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4835
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.8797,
+   "rule": "T1",
+   "branches": [
+    "B",
+    "C"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "subtle_foreign_00",
+  "case_type": "subtle_foreign",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4877
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5787,
+   "rule": "T1",
+   "branches": [
+    "D"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "subtle_foreign_01",
+  "case_type": "subtle_foreign",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "ERROR_approved",
+   "gt_matched": [
+    false
+   ],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": false,
+   "seconds": 0.3116
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [
+    false
+   ],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.5159,
+   "rule": "T3",
+   "branches": [
+    "E",
+    "F"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "subtle_foreign_02",
+  "case_type": "subtle_foreign",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3267
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [
+    false
+   ],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.5769,
+   "rule": "T2",
+   "branches": [
+    "D",
+    "E",
+    "F"
+   ],
+   "tool_calls": 5,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 1,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "subtle_foreign_03",
+  "case_type": "subtle_foreign",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3329
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5008,
+   "rule": "T1",
+   "branches": [
+    "C",
+    "E",
+    "F"
+   ],
+   "tool_calls": 5,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "subtle_foreign_04",
+  "case_type": "subtle_foreign",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5049
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [
+    false
+   ],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.5505,
+   "rule": "T2",
+   "branches": [
+    "D"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 1,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "subtle_foreign_05",
+  "case_type": "subtle_foreign",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3047
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4954,
+   "rule": "T1",
+   "branches": [
+    "D",
+    "E",
+    "F"
+   ],
+   "tool_calls": 5,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "subtle_foreign_06",
+  "case_type": "subtle_foreign",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3015
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5378,
+   "rule": "T1",
+   "branches": [
+    "D",
+    "E",
+    "F"
+   ],
+   "tool_calls": 5,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "subtle_foreign_07",
+  "case_type": "subtle_foreign",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3038
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [
+    false
+   ],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.5638,
+   "rule": "T2",
+   "branches": [
+    "D",
+    "E",
+    "F"
+   ],
+   "tool_calls": 5,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 1,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "subtle_foreign_08",
+  "case_type": "subtle_foreign",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4128
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.6112,
+   "rule": "T1",
+   "branches": [
+    "D",
+    "E",
+    "F"
+   ],
+   "tool_calls": 5,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "subtle_foreign_09",
+  "case_type": "subtle_foreign",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "ERROR_approved",
+   "gt_matched": [
+    false
+   ],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": false,
+   "seconds": 0.6092
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [
+    false
+   ],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 1.0528,
+   "rule": "T2",
+   "branches": [
+    "D"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 1,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "unrelated_scene_00",
+  "case_type": "unrelated_scene",
+  "category": "registration_fail",
+  "markers": false,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.1853
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.5293,
+   "rule": "A2",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "unrelated_scene_01",
+  "case_type": "unrelated_scene",
+  "category": "registration_fail",
+  "markers": false,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.2671
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.5554,
+   "rule": "A2",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "unrelated_scene_02",
+  "case_type": "unrelated_scene",
+  "category": "registration_fail",
+  "markers": false,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.2212
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.6295,
+   "rule": "A2",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "unrelated_scene_03",
+  "case_type": "unrelated_scene",
+  "category": "registration_fail",
+  "markers": false,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.3005
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.5771,
+   "rule": "A2",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "unrelated_scene_04",
+  "case_type": "unrelated_scene",
+  "category": "registration_fail",
+  "markers": false,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.1987
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.5991,
+   "rule": "A2",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "unrelated_scene_05",
+  "case_type": "unrelated_scene",
+  "category": "registration_fail",
+  "markers": false,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.2488
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.6297,
+   "rule": "A2",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "unrelated_scene_06",
+  "case_type": "unrelated_scene",
+  "category": "registration_fail",
+  "markers": false,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.2287
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.6218,
+   "rule": "A2",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "unrelated_scene_07",
+  "case_type": "unrelated_scene",
+  "category": "registration_fail",
+  "markers": false,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.2224
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.7135,
+   "rule": "A2",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "unrelated_scene_08",
+  "case_type": "unrelated_scene",
+  "category": "registration_fail",
+  "markers": false,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.2458
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.6244,
+   "rule": "A2",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "unrelated_scene_09",
+  "case_type": "unrelated_scene",
+  "category": "registration_fail",
+  "markers": false,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.2641
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.5792,
+   "rule": "A2",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "low_overlap_00",
+  "case_type": "low_overlap",
+  "category": "registration_fail",
+  "markers": false,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.1733
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.5971,
+   "rule": "A2",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "low_overlap_01",
+  "case_type": "low_overlap",
+  "category": "registration_fail",
+  "markers": true,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.2373
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.5967,
+   "rule": "A2",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "low_overlap_02",
+  "case_type": "low_overlap",
+  "category": "registration_fail",
+  "markers": false,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.2871
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.5773,
+   "rule": "A2",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "low_overlap_03",
+  "case_type": "low_overlap",
+  "category": "registration_fail",
+  "markers": true,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.2426
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.5571,
+   "rule": "A2",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "low_overlap_04",
+  "case_type": "low_overlap",
+  "category": "registration_fail",
+  "markers": false,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.2553
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.6065,
+   "rule": "A2",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "low_overlap_05",
+  "case_type": "low_overlap",
+  "category": "registration_fail",
+  "markers": false,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.2118
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.621,
+   "rule": "A2",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "low_overlap_06",
+  "case_type": "low_overlap",
+  "category": "registration_fail",
+  "markers": false,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.2194
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.6105,
+   "rule": "A2",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "low_overlap_07",
+  "case_type": "low_overlap",
+  "category": "registration_fail",
+  "markers": true,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.2133
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.5176,
+   "rule": "A2",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "low_overlap_08",
+  "case_type": "low_overlap",
+  "category": "registration_fail",
+  "markers": true,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.2499
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.5947,
+   "rule": "A2",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "low_overlap_09",
+  "case_type": "low_overlap",
+  "category": "registration_fail",
+  "markers": false,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.217
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.4424,
+   "rule": "A2",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "heavy_blur_00",
+  "case_type": "heavy_blur",
+  "category": "registration_fail",
+  "markers": false,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.1962
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.8266,
+   "rule": "Q1",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 12
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "heavy_blur_01",
+  "case_type": "heavy_blur",
+  "category": "registration_fail",
+  "markers": false,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.1935
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.7942,
+   "rule": "Q1",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 14
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "heavy_blur_02",
+  "case_type": "heavy_blur",
+  "category": "registration_fail",
+  "markers": false,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.1922
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.6414,
+   "rule": "Q1",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 12
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "heavy_blur_03",
+  "case_type": "heavy_blur",
+  "category": "registration_fail",
+  "markers": false,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.2256
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.376,
+   "rule": "A2",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "heavy_blur_04",
+  "case_type": "heavy_blur",
+  "category": "registration_fail",
+  "markers": false,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.1548
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.3964,
+   "rule": "A2",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "heavy_blur_05",
+  "case_type": "heavy_blur",
+  "category": "registration_fail",
+  "markers": false,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.1678
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.5834,
+   "rule": "Q1",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 15
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "heavy_blur_06",
+  "case_type": "heavy_blur",
+  "category": "registration_fail",
+  "markers": false,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.2023
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.4493,
+   "rule": "A2",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "heavy_blur_07",
+  "case_type": "heavy_blur",
+  "category": "registration_fail",
+  "markers": false,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.1977
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.6725,
+   "rule": "Q1",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 13
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "heavy_blur_08",
+  "case_type": "heavy_blur",
+  "category": "registration_fail",
+  "markers": false,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.1479
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.3538,
+   "rule": "A2",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "heavy_blur_09",
+  "case_type": "heavy_blur",
+  "category": "registration_fail",
+  "markers": false,
+  "one_shot": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.1401
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.5304,
+   "rule": "Q1",
+   "branches": [
+    "A"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 16
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "gamma_lighting_00",
+  "case_type": "gamma_lighting",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "ERROR_false_alarm",
+   "gt_matched": [],
+   "n_boxes": 3,
+   "automatic": true,
+   "automatic_correct": false,
+   "seconds": 0.3142
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "safe_escalation",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.8548,
+   "rule": "T2",
+   "branches": [
+    "C",
+    "D",
+    "E",
+    "F"
+   ],
+   "tool_calls": 9,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 4,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "gamma_lighting_01",
+  "case_type": "gamma_lighting",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "ERROR_false_alarm",
+   "gt_matched": [],
+   "n_boxes": 12,
+   "automatic": true,
+   "automatic_correct": false,
+   "seconds": 0.2945
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "safe_escalation",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.9204,
+   "rule": "T2",
+   "branches": [
+    "B",
+    "C",
+    "D",
+    "E",
+    "F"
+   ],
+   "tool_calls": 11,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 6,
+    "unresolved": 6
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "gamma_lighting_02",
+  "case_type": "gamma_lighting",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "ERROR_false_alarm",
+   "gt_matched": [],
+   "n_boxes": 4,
+   "automatic": true,
+   "automatic_correct": false,
+   "seconds": 0.2984
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "safe_escalation",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 1.2367,
+   "rule": "T2",
+   "branches": [
+    "B",
+    "C",
+    "D",
+    "E",
+    "F"
+   ],
+   "tool_calls": 11,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 5,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "gamma_lighting_03",
+  "case_type": "gamma_lighting",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "ERROR_false_alarm",
+   "gt_matched": [],
+   "n_boxes": 8,
+   "automatic": true,
+   "automatic_correct": false,
+   "seconds": 0.2843
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "safe_escalation",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 1.4317,
+   "rule": "T2",
+   "branches": [
+    "B",
+    "C",
+    "D",
+    "E",
+    "F"
+   ],
+   "tool_calls": 12,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 6,
+    "ambiguous": 0,
+    "unresolved": 3
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "gamma_lighting_04",
+  "case_type": "gamma_lighting",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "ERROR_false_alarm",
+   "gt_matched": [],
+   "n_boxes": 5,
+   "automatic": true,
+   "automatic_correct": false,
+   "seconds": 0.2904
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "safe_escalation",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 1.1979,
+   "rule": "T2",
+   "branches": [
+    "B",
+    "D",
+    "E",
+    "F"
+   ],
+   "tool_calls": 12,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 6,
+    "unresolved": 4
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "gamma_lighting_05",
+  "case_type": "gamma_lighting",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.2971
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.8114,
+   "rule": "T5",
+   "branches": [
+    "B",
+    "E",
+    "F",
+    "G"
+   ],
+   "tool_calls": 5,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "gamma_lighting_06",
+  "case_type": "gamma_lighting",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "ERROR_false_alarm",
+   "gt_matched": [],
+   "n_boxes": 5,
+   "automatic": true,
+   "automatic_correct": false,
+   "seconds": 0.3289
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "safe_escalation",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 1.2898,
+   "rule": "T2",
+   "branches": [
+    "B",
+    "C",
+    "D",
+    "E",
+    "F"
+   ],
+   "tool_calls": 12,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 6,
+    "unresolved": 4
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "gamma_lighting_07",
+  "case_type": "gamma_lighting",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "ERROR_false_alarm",
+   "gt_matched": [],
+   "n_boxes": 2,
+   "automatic": true,
+   "automatic_correct": false,
+   "seconds": 0.3251
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "safe_escalation",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.5035,
+   "rule": "T2",
+   "branches": [
+    "C",
+    "D",
+    "E",
+    "F"
+   ],
+   "tool_calls": 6,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 2,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "gamma_lighting_08",
+  "case_type": "gamma_lighting",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "ERROR_false_alarm",
+   "gt_matched": [],
+   "n_boxes": 2,
+   "automatic": true,
+   "automatic_correct": false,
+   "seconds": 0.3151
+  },
+  "agent": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.7957,
+   "rule": "T5",
+   "branches": [
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G"
+   ],
+   "tool_calls": 7,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 2,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "gamma_lighting_09",
+  "case_type": "gamma_lighting",
+  "category": "nominal",
+  "markers": true,
+  "one_shot": {
+   "decision": "APPROVE",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.2884
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "safe_escalation",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.9004,
+   "rule": "T2",
+   "branches": [
+    "D",
+    "E",
+    "F"
+   ],
+   "tool_calls": 11,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 6,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "missing_near_marker_00",
+  "case_type": "missing_near_marker",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.2926
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.824,
+   "rule": "T1",
+   "branches": [
+    "B",
+    "C",
+    "E",
+    "F"
+   ],
+   "tool_calls": 6,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "missing_near_marker_01",
+  "case_type": "missing_near_marker",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.2961
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4895,
+   "rule": "T1",
+   "branches": [
+    "E",
+    "F"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "missing_near_marker_02",
+  "case_type": "missing_near_marker",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3004
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.7511,
+   "rule": "T1",
+   "branches": [
+    "D",
+    "E",
+    "F"
+   ],
+   "tool_calls": 5,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "missing_near_marker_03",
+  "case_type": "missing_near_marker",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.301
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4928,
+   "rule": "T1",
+   "branches": [
+    "E",
+    "F"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 2
+  }
+ },
+ {
+  "id": "missing_near_marker_04",
+  "case_type": "missing_near_marker",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.2964
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4798,
+   "rule": "T1",
+   "branches": [
+    "E",
+    "F"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "missing_near_marker_05",
+  "case_type": "missing_near_marker",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3052
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 1.1074,
+   "rule": "T1",
+   "branches": [
+    "B",
+    "C",
+    "D",
+    "E",
+    "F"
+   ],
+   "tool_calls": 7,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "missing_near_marker_06",
+  "case_type": "missing_near_marker",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3254
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5225,
+   "rule": "T1",
+   "branches": [
+    "E",
+    "F"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "missing_near_marker_07",
+  "case_type": "missing_near_marker",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3291
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4877,
+   "rule": "T1",
+   "branches": [
+    "E",
+    "F"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "missing_near_marker_08",
+  "case_type": "missing_near_marker",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3296
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5165,
+   "rule": "T1",
+   "branches": [
+    "C",
+    "E",
+    "F"
+   ],
+   "tool_calls": 5,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "missing_near_marker_09",
+  "case_type": "missing_near_marker",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3288
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "safe_escalation",
+   "gt_matched": [
+    false
+   ],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.5281,
+   "rule": "T2",
+   "branches": [
+    "C",
+    "E",
+    "F"
+   ],
+   "tool_calls": 5,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 1,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "foreign_near_marker_00",
+  "case_type": "foreign_near_marker",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.2923
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.7611,
+   "rule": "T1",
+   "branches": [
+    "B",
+    "C",
+    "E",
+    "F"
+   ],
+   "tool_calls": 6,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "foreign_near_marker_01",
+  "case_type": "foreign_near_marker",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3078
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.7629,
+   "rule": "T1",
+   "branches": [
+    "B",
+    "C",
+    "E",
+    "F"
+   ],
+   "tool_calls": 6,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "foreign_near_marker_02",
+  "case_type": "foreign_near_marker",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3285
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 1.1466,
+   "rule": "T1",
+   "branches": [
+    "B",
+    "C",
+    "D",
+    "E",
+    "F"
+   ],
+   "tool_calls": 9,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 2,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "foreign_near_marker_03",
+  "case_type": "foreign_near_marker",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.2946
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4951,
+   "rule": "T1",
+   "branches": [
+    "E",
+    "F"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 2
+  }
+ },
+ {
+  "id": "foreign_near_marker_04",
+  "case_type": "foreign_near_marker",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.2873
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4899,
+   "rule": "T1",
+   "branches": [
+    "E",
+    "F"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "foreign_near_marker_05",
+  "case_type": "foreign_near_marker",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.2998
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 1.069,
+   "rule": "T1",
+   "branches": [
+    "B",
+    "C",
+    "D",
+    "E",
+    "F"
+   ],
+   "tool_calls": 8,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 1,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "foreign_near_marker_06",
+  "case_type": "foreign_near_marker",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3449
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.8138,
+   "rule": "T1",
+   "branches": [
+    "B",
+    "C",
+    "E",
+    "F"
+   ],
+   "tool_calls": 6,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "foreign_near_marker_07",
+  "case_type": "foreign_near_marker",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.2852
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4453,
+   "rule": "T1",
+   "branches": [
+    "E",
+    "F"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 2
+  }
+ },
+ {
+  "id": "foreign_near_marker_08",
+  "case_type": "foreign_near_marker",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3266
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.7859,
+   "rule": "T1",
+   "branches": [
+    "B",
+    "C",
+    "E",
+    "F"
+   ],
+   "tool_calls": 6,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "foreign_near_marker_09",
+  "case_type": "foreign_near_marker",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3318
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "safe_escalation",
+   "gt_matched": [
+    false
+   ],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.7955,
+   "rule": "T2",
+   "branches": [
+    "B",
+    "C",
+    "E",
+    "F"
+   ],
+   "tool_calls": 6,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 1,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "different_tray_00",
+  "case_type": "different_tray",
+  "category": "different_tray",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "safe_wrong_reason",
+   "gt_matched": [],
+   "n_boxes": 13,
+   "automatic": true,
+   "automatic_correct": false,
+   "seconds": 0.3363
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.4707,
+   "rule": "F2",
+   "branches": [
+    "F"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 13
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "different_tray_01",
+  "case_type": "different_tray",
+  "category": "different_tray",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "safe_wrong_reason",
+   "gt_matched": [],
+   "n_boxes": 13,
+   "automatic": true,
+   "automatic_correct": false,
+   "seconds": 0.3259
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.505,
+   "rule": "F2",
+   "branches": [
+    "F"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 13
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "different_tray_02",
+  "case_type": "different_tray",
+  "category": "different_tray",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "safe_wrong_reason",
+   "gt_matched": [],
+   "n_boxes": 13,
+   "automatic": true,
+   "automatic_correct": false,
+   "seconds": 0.3353
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.45,
+   "rule": "F2",
+   "branches": [
+    "F"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 13
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "different_tray_03",
+  "case_type": "different_tray",
+  "category": "different_tray",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "safe_wrong_reason",
+   "gt_matched": [],
+   "n_boxes": 13,
+   "automatic": true,
+   "automatic_correct": false,
+   "seconds": 0.3326
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.4424,
+   "rule": "F2",
+   "branches": [
+    "F"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 13
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "different_tray_04",
+  "case_type": "different_tray",
+  "category": "different_tray",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "safe_wrong_reason",
+   "gt_matched": [],
+   "n_boxes": 13,
+   "automatic": true,
+   "automatic_correct": false,
+   "seconds": 0.3032
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.4571,
+   "rule": "F2",
+   "branches": [
+    "F"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 13
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "different_tray_05",
+  "case_type": "different_tray",
+  "category": "different_tray",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "safe_wrong_reason",
+   "gt_matched": [],
+   "n_boxes": 13,
+   "automatic": true,
+   "automatic_correct": false,
+   "seconds": 0.3259
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.4624,
+   "rule": "F2",
+   "branches": [
+    "F"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 13
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "different_tray_06",
+  "case_type": "different_tray",
+  "category": "different_tray",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "safe_wrong_reason",
+   "gt_matched": [],
+   "n_boxes": 13,
+   "automatic": true,
+   "automatic_correct": false,
+   "seconds": 0.3024
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.4361,
+   "rule": "F2",
+   "branches": [
+    "F"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 13
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "different_tray_07",
+  "case_type": "different_tray",
+  "category": "different_tray",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "safe_wrong_reason",
+   "gt_matched": [],
+   "n_boxes": 13,
+   "automatic": true,
+   "automatic_correct": false,
+   "seconds": 0.3498
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.4608,
+   "rule": "F2",
+   "branches": [
+    "F"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 13
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "different_tray_08",
+  "case_type": "different_tray",
+  "category": "different_tray",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "safe_wrong_reason",
+   "gt_matched": [],
+   "n_boxes": 13,
+   "automatic": true,
+   "automatic_correct": false,
+   "seconds": 0.3165
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.5726,
+   "rule": "F2",
+   "branches": [
+    "F"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 13
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "different_tray_09",
+  "case_type": "different_tray",
+  "category": "different_tray",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "safe_wrong_reason",
+   "gt_matched": [],
+   "n_boxes": 13,
+   "automatic": true,
+   "automatic_correct": false,
+   "seconds": 0.3428
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "success",
+   "gt_matched": [],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.4698,
+   "rule": "F2",
+   "branches": [
+    "F"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 13
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "gamma_missing_00",
+  "case_type": "gamma_missing",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 8,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3228
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 1.2673,
+   "rule": "T1",
+   "branches": [
+    "B",
+    "C",
+    "E",
+    "F"
+   ],
+   "tool_calls": 11,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 2,
+    "ambiguous": 3,
+    "unresolved": 2
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "gamma_missing_01",
+  "case_type": "gamma_missing",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 14,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.555
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 1.186,
+   "rule": "T1",
+   "branches": [
+    "B",
+    "C",
+    "F"
+   ],
+   "tool_calls": 10,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 3,
+    "ambiguous": 2,
+    "unresolved": 8
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "gamma_missing_02",
+  "case_type": "gamma_missing",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4817
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.8755,
+   "rule": "T1",
+   "branches": [
+    "B",
+    "C"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "gamma_missing_03",
+  "case_type": "gamma_missing",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5316
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.8365,
+   "rule": "T1",
+   "branches": [
+    "D"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 1,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "gamma_missing_04",
+  "case_type": "gamma_missing",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3548
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.5059,
+   "rule": "T1",
+   "branches": [
+    "E",
+    "F"
+   ],
+   "tool_calls": 4,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "gamma_missing_05",
+  "case_type": "gamma_missing",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3223
+  },
+  "agent": {
+   "decision": "HUMAN_REVIEW",
+   "outcome": "safe_escalation",
+   "gt_matched": [
+    false
+   ],
+   "n_boxes": 0,
+   "automatic": false,
+   "automatic_correct": false,
+   "seconds": 0.7966,
+   "rule": "T2",
+   "branches": [
+    "B",
+    "C",
+    "E",
+    "F"
+   ],
+   "tool_calls": 6,
+   "resolution": {
+    "confirmed": 0,
+    "dismissed": 0,
+    "ambiguous": 1,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "gamma_missing_06",
+  "case_type": "gamma_missing",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4991
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.7856,
+   "rule": "T1",
+   "branches": [
+    "D"
+   ],
+   "tool_calls": 3,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "gamma_missing_07",
+  "case_type": "gamma_missing",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.4973
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.421,
+   "rule": "T1",
+   "branches": [],
+   "tool_calls": 2,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 0,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 1
+  }
+ },
+ {
+  "id": "gamma_missing_08",
+  "case_type": "gamma_missing",
+  "category": "defect",
+  "markers": true,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.2799
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.9811,
+   "rule": "T1",
+   "branches": [
+    "B",
+    "C",
+    "D",
+    "E",
+    "F"
+   ],
+   "tool_calls": 10,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 3,
+    "ambiguous": 0,
+    "unresolved": 0
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ },
+ {
+  "id": "gamma_missing_09",
+  "case_type": "gamma_missing",
+  "category": "defect",
+  "markers": false,
+  "one_shot": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 7,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 0.3447
+  },
+  "agent": {
+   "decision": "DEFECT",
+   "outcome": "success",
+   "gt_matched": [
+    true
+   ],
+   "n_boxes": 1,
+   "automatic": true,
+   "automatic_correct": true,
+   "seconds": 1.1012,
+   "rule": "T1",
+   "branches": [
+    "B",
+    "C",
+    "D",
+    "F"
+   ],
+   "tool_calls": 10,
+   "resolution": {
+    "confirmed": 1,
+    "dismissed": 3,
+    "ambiguous": 2,
+    "unresolved": 1
+   },
+   "errors": 0,
+   "notes": 0
+  }
+ }
+]

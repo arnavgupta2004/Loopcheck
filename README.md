@@ -9,7 +9,9 @@ approve, flag a defect or request human review.
 - D1 (OpenCV 5 environment verification): complete.
 - D2 (deterministic registration and comparison pipeline, CLI, synthetic evaluation): complete.
 - D2.1 (exclude detected ArUco markers from anomaly scoring, validated on fresh synthetic splits): complete.
-- Not built yet: the agent controller, AWS deployment and a UI.
+- D3 (adaptive perception-decision-action controller with a traced APPROVE / DEFECT /
+  HUMAN_REVIEW decision): complete. See [docs/d3_agent.md](docs/d3_agent.md).
+- Not built yet: AWS deployment and a UI.
 
 ## Setup
 
@@ -61,6 +63,37 @@ Options:
 
 The demo pair's ground truth is in `data/demo/ground_truth.json`.
 
+### Adaptive agent (D3)
+
+```bash
+uv run --frozen python -m loopcheck.cli \
+  --reference data/demo/reference.png \
+  --inspection data/demo/inspection.png \
+  --output-dir outputs/demo_agent --agent
+```
+
+The agent observes OpenCV results and chooses its next tool from explicit rules. Its
+possible actions:
+- alternative registration
+- illumination-robust comparison
+- targeted high-sensitivity scan
+- multi-view crop re-inspection
+- marker-band diagnostic
+- content-identity check
+
+It prints a step-by-step trace and ends with `APPROVE` (exit 0), `DEFECT` (4) or
+`HUMAN_REVIEW` (5; input errors included). Any error, exhausted budget or unresolved
+evidence leads to HUMAN_REVIEW, never APPROVE.
+
+Output files:
+- `report.json`: decision, reasons, candidates with every re-inspection view, coverage,
+  excluded (not inspected) polygons, and the full trace.
+- `overlay.png`: candidates coloured by status, and excluded areas.
+
+Options:
+- `--agent-config file.json` overrides `AgentConfig`.
+- `--quiet` prints only the decision.
+
 ## Tests and evaluation
 
 ```bash
@@ -68,11 +101,20 @@ uv run --frozen pytest -q                                   # unit + integration
 uv run --frozen python scripts/check_opencv5.py             # D1 OpenCV 5 verification
 ```
 
-**D2.1 evaluation** (current default pipeline vs the no-mask baseline, fresh splits):
+**D3 evaluation** (one-shot D2.1 vs adaptive agent on the same cases, fresh splits):
 
 ```bash
-uv run --frozen python -m loopcheck.synth --out data/synthetic/d21_dev  --seed 3100 --per-type 8
-uv run --frozen python -m loopcheck.synth --out data/synthetic/d21_test --seed 3200 --per-type 10
+uv run --frozen python -m loopcheck.synth --out data/synthetic/d3_dev  --seed 4100 --per-type 8
+uv run --frozen python -m loopcheck.synth --out data/synthetic/d3_test --seed 4200 --per-type 10
+uv run --frozen python -m loopcheck.evaluate_agent --data data/synthetic/d3_dev  --out results/d3/dev
+uv run --frozen python -m loopcheck.evaluate_agent --data data/synthetic/d3_test --out results/d3/test
+```
+
+**D2.1 evaluation** (default pipeline vs the no-mask baseline, fresh splits):
+
+```bash
+uv run --frozen python -m loopcheck.synth --out data/synthetic/d21_dev  --seed 3100 --per-type 8  --case-set d21
+uv run --frozen python -m loopcheck.synth --out data/synthetic/d21_test --seed 3200 --per-type 10 --case-set d21
 for s in dev test; do
   uv run --frozen python -m loopcheck.evaluate --data data/synthetic/d21_$s --out results/d21/${s}_masked
   uv run --frozen python -m loopcheck.evaluate --data data/synthetic/d21_$s --out results/d21/${s}_baseline \
@@ -101,11 +143,11 @@ metrics are on **synthetic** data.
 ## Layout
 
 ```
-loopcheck/      config, imageio, registration, markers, compare, pipeline, cli, synth, evaluate
+loopcheck/      config, imageio, registration, markers, compare, pipeline, agent, cli, synth, evaluate, evaluate_agent
 tests/          pytest suite
 scripts/        check_opencv5.py (D1), compare_runs.py (D2.1 before/after)
 configs/        baseline_no_marker_mask.json
-docs/           opencv5_verification.md (D1), d2_pipeline.md (D2 + D2.1 design, results, failure cases)
-results/        opencv5_check.json, eval_dev/ + eval_test/ (D2), d21/ (D2.1)
+docs/           opencv5_verification.md (D1), d2_pipeline.md (D2 + D2.1), d3_agent.md (D3 controller, results, limitations)
+results/        opencv5_check.json, eval_dev/ + eval_test/ (D2), d21/ (D2.1), d3/ (D3, incl. agent traces)
 data/demo/      demo reference/inspection pair + ground truth
 ```
