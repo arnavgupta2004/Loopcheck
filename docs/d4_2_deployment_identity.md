@@ -62,6 +62,7 @@ for `loopcheck-deployer` either.** `aws login` makes them unnecessary.
 | Role gets logging only | `iam:AttachRolePolicy`, `DetachRolePolicy` **only for** `arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole` | Same role prefix |
 | Pass the role | `iam:PassRole` **only to `lambda.amazonaws.com`** | Same role prefix |
 | HTTP API (routes, integration, `$default` stage, throttling, CORS, tags) | `apigateway:GET`/`POST`/`PUT`/`PATCH`/`DELETE` | `/apis`, `/apis/*`, `/tags/*` in ap-south-1. **Broader**: see below |
+| Tag the `$default` stage on create | `apigateway:TagResource` | `arn:aws:apigateway:ap-south-1::/apis/*/stages` only: the Stages collection, which is where tag-on-create is authorized. No `UntagResource`. See [AccessDenied on apigateway:TagResource](#accessdenied-on-apigatewaytagresource-stage) |
 | Log group (7-day retention) and reading logs | `logs:CreateLogGroup`, `DeleteLogGroup`, `Put`/`DeleteRetentionPolicy`, tag actions, `GetDataProtectionPolicy`, `FilterLogEvents`, `GetLogEvents`, `DescribeLogStreams` | `log-group:/aws/lambda/loopcheck-demo-inspect` only |
 | Find the log group | `logs:DescribeLogGroups` | `*`, ap-south-1 only. It has **no resource-level support**: a scoped ARN such as `log-group:*` never matches. Read-only metadata |
 | Console/CLI sign-in | AWS managed policy `SignInLocalDevelopmentAccess` (`signin:AuthorizeOAuth2Access`, `signin:CreateOAuth2Token`) | Lets `aws login` turn the console session into CLI credentials |
@@ -145,8 +146,9 @@ CloudFormation rolls the stack back. Then:
 1. Note the exact action and resource from the event.
 2. As root (console), edit `LoopCheckDeployerPolicy`. Add **that action** to the statement
    for that resource, with the same scoped ARN. Never use `*` actions or `AdministratorAccess`.
-3. If the stack is in `ROLLBACK_COMPLETE`, delete it with `sam delete` (allowed by the policy)
-   and deploy again.
+3. If the stack is in `ROLLBACK_COMPLETE`, delete only the stack record and wait. Then deploy
+   again. Use `aws cloudformation delete-stack`, not `sam delete`, so that nothing in S3 is
+   touched (see [Recover from ROLLBACK_COMPLETE](#recover-from-rollback_complete)).
 
 ### AccessDenied on cloudformation:DescribeStacks
 
@@ -267,6 +269,155 @@ ap-south-1 only). **Paste the updated policy even if the account ID turns out to
 - SAM's calls come from the SAM CLI 1.170.0 source.
 - Re-check against the live reference if you can open it:
   https://docs.aws.amazon.com/service-authorization/latest/reference/list_awscloudformation.html
+
+### AccessDenied on apigateway:TagResource (Stage)
+
+**Observed CloudFormation event** (`AWS::ApiGatewayV2::Stage`, `CREATE_FAILED`):
+`user arn:aws:iam::<account>:user/loopcheck-deployer is not authorized to perform
+apigateway:TagResource on resource arn:aws:apigateway:ap-south-1::/apis/<ApiId>/stages because no
+identity-based policy allows the action`.
+
+The HTTP API (`AWS::ApiGatewayV2::Api`) had already been created. The stack rolled back to
+`ROLLBACK_COMPLETE`, which deleted everything it had created.
+
+**Why the old policy failed.** API Gateway has two separate naming schemes:
+- The **API operations** are `TagResource` (`POST /v2/tags/{resource-arn}`) and
+  `UntagResource` (`DELETE /v2/tags/{resource-arn}`).
+- Their **IAM authorization** historically used HTTP-verb actions: `apigateway:POST` and
+  `apigateway:DELETE` on `/tags/*`. The old policy granted those.
+
+The event shows that creating a stage **with tags** is now also authorized as the named IAM
+action `apigateway:TagResource`, on the stage collection ARN. No HTTP-verb action satisfies
+it. A Stage gets tags even though `template.yaml` sets none:
+- CloudFormation adds its system tags (`aws:cloudformation:stack-name` and others);
+- `--tags project=loopcheck …` propagates to it.
+
+**Evidence used** (the Service Authorization Reference page on `docs.aws.amazon.com` was
+blocked from the development environment):
+1. **The CloudFormation event above.** It is authoritative for the action name and the
+   resource ARN that IAM evaluated.
+2. **AWS's published CloudFormation resource schema for `AWS::ApiGatewayV2::Stage`**
+   (`https://schema.cloudformation.ap-south-1.amazonaws.com/CloudformationSchema.zip`,
+   `aws-apigatewayv2-stage.json`, downloaded 2026-10-23):
+   - **create:** `apigateway:POST`, `apigateway:TagResource`;
+   - **update:** `apigateway:PATCH`, `POST`, `DELETE`, `TagResource`, `UntagResource`;
+   - **delete:** `apigateway:DELETE`;
+   - **read and list:** `apigateway:GET`.
+
+   The same bundle shows `AWS::ApiGatewayV2::Api`, `Integration`, `Route` and `Deployment`
+   use only the HTTP-verb actions. That is why the API was created and the stage was not.
+3. **Older action lists lag behind.** AWS's Policy Generator data (`policies.js`) and
+   `policy_sentry` 0.15.2 don't list `apigateway:TagResource` yet. If you can open the
+   Service Authorization Reference, check "Amazon API Gateway Management V2"
+   (`list_amazonapigatewaymanagementv2.html`).
+
+**The fix (statement `HttpApiStageTagOnCreate`):**
+```json
+{
+  "Sid": "HttpApiStageTagOnCreate",
+  "Effect": "Allow",
+  "Action": "apigateway:TagResource",
+  "Resource": "arn:aws:apigateway:ap-south-1::/apis/*/stages"
+}
+```
+- **One action, no wildcard actions.** The resource is the documented `Stages` resource
+  type (`/apis/${ApiId}/stages`) in ap-south-1. `ApiId` is random and doesn't exist before
+  creation, so it can't be narrowed further in advance.
+- **It does not allow tagging:** the API itself, routes, an existing stage, REST APIs, or
+  any other region.
+- **No `apigateway:UntagResource`.** Neither create, rollback (the delete handler), nor
+  `sam delete` needs it. Redeploying with the same `--tags` doesn't change the stage's tags.
+- **What a stack update could still need:** an update that changes or removes a stage tag
+  (a different `--tags`) runs the stage update handler. That may need `TagResource` and
+  `UntagResource` on the existing stage, which by the documented `Stage` resource type is
+  `arn:aws:apigateway:ap-south-1::/apis/*/stages/*`. Add those two then, scoped to that
+  ARN, only if CloudFormation reports the denial.
+
+Throttling (2 req/s, burst 5), CORS, `ConcurrencyMode=unreserved`, the log group and
+logging are unchanged: `template.yaml` was not modified.
+
+**Other handler permissions checked at the same time.** The same schema bundle was compared
+with the policy for every resource type in this stack (`Lambda::Function`,
+`Lambda::Permission`, `IAM::Role`, `Logs::LogGroup`, the `ApiGatewayV2` types). The rest of
+the difference is optional-feature permissions that this template doesn't use:
+- VPC/ENI (`ec2:Describe*`), KMS, EFS, layers, code signing, SnapStart/scaling;
+- inline role policies (`iam:PutRolePolicy`, deliberately denied);
+- log delivery, index or resource policies.
+
+Your rollback shows the function, role and log-group create and delete paths already ran.
+If a later attempt reports another action, add only that action as described in
+[If a permission is missing](#if-a-permission-is-missing).
+
+**Apply the fix in IAM.** Editing the repository has **no effect on AWS** until the new
+version is saved as the policy's default.
+1. Render and check locally:
+   ```bash
+   python3 deploy/iam/policy_tool.py render --account-id <12-digit id> [--bucket <your --s3-bucket>]
+   python3 deploy/iam/policy_tool.py check deploy/.build/iam/deployer.json --account-id <12-digit id> [--bucket <…>]
+   ```
+   Expect `OK apigateway:TagResource on arn:aws:apigateway:ap-south-1::/apis/ta8wy1elv5/stages:
+   allowed by HttpApiStageTagOnCreate` and `CHECK: PASS`.
+2. Console, as root: open **IAM → Policies** and search for `LoopCheckDeployerPolicy`. Open
+   it, choose **Edit**, then the **JSON** tab. Select all and replace it with the full
+   contents of `deploy/.build/iam/deployer.json`.
+3. Resolve any **errors** shown by the policy validator. A warning that `TagResource` isn't
+   recognised can happen while AWS's validator data lags behind the service. It doesn't stop
+   the save, and the event above proves IAM evaluates this action.
+4. Choose **Next** → **Save changes**. This creates a new version and makes it the default.
+   If it says there are already 5 versions, delete the oldest non-default version under
+   **Policy versions** first.
+5. Confirm:
+   - **Policy versions** shows the new version as **(Default)**;
+   - **Entities attached** still lists `loopcheck-deployer` (editing never detaches it).
+6. Copy the saved JSON from **Permissions → JSON** into a file outside the repository, e.g.
+   `~/loopcheck-attached.json`, and run:
+   ```bash
+   python3 deploy/iam/policy_tool.py check ~/loopcheck-attached.json --account-id <id> [--bucket <…>]
+   ```
+   Expect `CHECK: PASS`. This checks what IAM actually holds.
+7. Preflight (read-only):
+   ```bash
+   LOOPCHECK_AWS_PROFILE=loopcheck-deployer bash deploy/preflight.sh
+   ```
+   It should end with `RESULT: PASS`. While the failed stack still exists, step 5 warns
+   that it is `ROLLBACK_COMPLETE` and prints the two recovery commands below.
+
+### Recover from ROLLBACK_COMPLETE
+
+A stack whose **first** create failed ends in `ROLLBACK_COMPLETE`. Its resources are already
+deleted, but the stack record remains, and CloudFormation can't update it. Delete only that
+record, **after** the policy fix above is saved and the checker and preflight pass:
+
+```bash
+P=loopcheck-deployer R=ap-south-1 STACK=loopcheck-demo
+aws cloudformation describe-stacks --stack-name $STACK --region $R --profile $P --query 'Stacks[0].StackStatus' --output text
+#   must print ROLLBACK_COMPLETE. If it prints anything else, STOP and review before deleting.
+aws cloudformation describe-stack-resources --stack-name $STACK --region $R --profile $P \
+  --query 'StackResources[].[LogicalResourceId,ResourceStatus]' --output text
+#   optional: every resource should show DELETE_COMPLETE (or be absent)
+aws cloudformation delete-stack --stack-name $STACK --region $R --profile $P
+aws cloudformation wait stack-delete-complete --stack-name $STACK --region $R --profile $P
+#   returns when deletion has finished (non-zero exit = check the stack events)
+aws cloudformation describe-stacks --stack-name $STACK --region $R --profile $P 2>&1 | tail -1
+#   expect: "... Stack with id loopcheck-demo does not exist"
+```
+
+- **Use `delete-stack` here, not `sam delete`.** `delete-stack` touches only CloudFormation.
+  It doesn't delete:
+  - the shared SAM artifact bucket;
+  - the uploaded artifact (`loopcheck-demo/…` objects);
+  - the `aws-sam-cli-managed-default` stack.
+
+  `sam delete` also offers to delete the stack's S3 artifacts, which you want to keep for the
+  retry.
+- **Permissions:** the deployer policy already allows `DeleteStack` and `DescribeStacks` on
+  `stack/loopcheck-demo/*`, and the waiter uses `DescribeStacks`. Deleting a
+  `ROLLBACK_COMPLETE` stack calls no resource-delete handlers, because nothing is left to
+  delete.
+- **Then retry** with the same `sam deploy` command, including `ConcurrencyMode=unreserved`
+  and `ThrottleRatePerSecond=2 ThrottleBurst=5`. SAM sees the identical artifact already in
+  the bucket and skips the upload.
+- **This fix is not verified in AWS** until that retry reaches `CREATE_COMPLETE`.
 
 ## One-time setup in the AWS Console (as root, MFA on; no access keys)
 
@@ -441,3 +592,8 @@ checks a copy of the attached one. The tests check that:
 - the checker explains the denial for the placeholder, empty, dropped-leading-zero and
   other-account cases;
 - the `--bucket` mode keeps S3 scoped to the `loopcheck-demo/` prefix.
+- `apigateway:TagResource` is allowed on exactly the Stage failure ARN
+  (`/apis/ta8wy1elv5/stages`) and nowhere else (the API itself, routes, existing stages,
+  REST APIs, other regions), and `UntagResource` is not granted;
+- the checker fails when that statement, its action, its resource pattern or its region is
+  wrong.

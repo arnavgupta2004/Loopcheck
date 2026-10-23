@@ -86,8 +86,16 @@ if [ "$FAILS" -eq 0 ]; then
   stack_lookup "$STACK"
   if [ "$LOOKUP" = exists ]; then
     st=$LOOKUP_OUT
-    warn "stack $STACK already exists ($st): 'sam deploy' would UPDATE it"
-    fn=$(aws_ro cloudformation describe-stack-resource --stack-name "$STACK" --logical-resource-id InspectFunction --query 'StackResourceDetail.PhysicalResourceId' --output text 2>/dev/null || true)
+    if [ "$st" = ROLLBACK_COMPLETE ]; then
+      # A failed first create: every resource was rolled back; CloudFormation cannot update this stack.
+      warn "stack $STACK is ROLLBACK_COMPLETE (failed first deployment; its resources were already deleted) — it cannot be updated."
+      echo "         -> after fixing the cause, delete ONLY this stack record, wait, then deploy again (S3 artifacts are not touched):"
+      echo "            aws cloudformation delete-stack --stack-name $STACK --region $REGION --profile $PROFILE"
+      echo "            aws cloudformation wait stack-delete-complete --stack-name $STACK --region $REGION --profile $PROFILE"
+    else
+      warn "stack $STACK already exists ($st): 'sam deploy' would UPDATE it"
+    fi
+    fn=""; [ "$st" = ROLLBACK_COMPLETE ] || fn=$(aws_ro cloudformation describe-stack-resource --stack-name "$STACK" --logical-resource-id InspectFunction --query 'StackResourceDetail.PhysicalResourceId' --output text 2>/dev/null || true)
     if [ -n "$fn" ] && cur=$(aws_ro lambda get-function-concurrency --function-name "$fn" --query 'ReservedConcurrentExecutions' --output text 2>/dev/null); then
       case "$cur" in ''|None|null) ok "existing function has no reserved concurrency (unreserved mode)" ;;
         *) EXISTING_RESERVED="$cur"; ok "existing function already reserves $cur (counted back in below)" ;; esac

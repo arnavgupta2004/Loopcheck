@@ -329,7 +329,7 @@ case "$*" in
   *"lambda get-account-settings"*) printf '%s\n' "${FAKE_LIMITS:-1000	1000}" ;;
   *"lambda get-function-concurrency"*) printf '%s\n' "${FAKE_FN_RESERVED:-None}" ;;
   *"cloudformation describe-stacks --stack-name loopcheck-demo"*)
-      if [ -n "${FAKE_STACK_EXISTS:-}" ]; then echo "CREATE_COMPLETE"; else echo "An error occurred (ValidationError) when calling the DescribeStacks operation: Stack with id loopcheck-demo does not exist" >&2; exit 254; fi ;;
+      if [ -n "${FAKE_STACK_EXISTS:-}" ]; then echo "${FAKE_STACK_STATUS:-CREATE_COMPLETE}"; else echo "An error occurred (ValidationError) when calling the DescribeStacks operation: Stack with id loopcheck-demo does not exist" >&2; exit 254; fi ;;
   *"cloudformation describe-stack-resource --stack-name loopcheck-demo --logical-resource-id InspectFunction"*) echo "loopcheck-demo-InspectFunction-ABC123" ;;
   *"cloudformation describe-stacks"*) echo "An error occurred (ValidationError) when calling the DescribeStacks operation: Stack with id aws-sam-cli-managed-default does not exist" >&2; exit 254 ;;
   *) echo "unexpected aws call: $*" >&2; exit 99 ;;
@@ -465,6 +465,18 @@ def test_preflight_treats_validation_error_as_new_stack(sandbox):
     p, _ = _preflight(sandbox)
     assert "stack loopcheck-demo does not exist yet (describe-stacks allowed" in p.stdout
     assert "no SAM managed stack in ap-south-1" in p.stdout
+
+
+def test_preflight_explains_rollback_complete_recovery_without_touching_s3(sandbox):
+    p, calls = _preflight(sandbox, FAKE_STACK_EXISTS="1", FAKE_STACK_STATUS="ROLLBACK_COMPLETE")
+    out = p.stdout
+    assert p.returncode == 0 and "RESULT: PASS" in out            # a warning, so the preflight can pass before the delete
+    assert "is ROLLBACK_COMPLETE" in out and "would UPDATE" not in out
+    assert "aws cloudformation delete-stack --stack-name loopcheck-demo --region ap-south-1 --profile loopcheck-deployer" in out
+    assert "aws cloudformation wait stack-delete-complete --stack-name loopcheck-demo" in out
+    assert "s3 rm" not in out and "sam delete" not in out
+    # read-only: the preflight only prints the delete command, never runs it, and skips function lookups
+    assert all(READ_ONLY.match(c) for c in calls) and not any("delete" in c or "get-function-concurrency" in c for c in calls)
 
 
 def test_preflight_fails_cleanly_without_aws_cli(tmp_path):

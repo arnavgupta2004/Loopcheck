@@ -150,6 +150,12 @@
       ]
     },
     {
+      "Sid": "HttpApiStageTagOnCreate",
+      "Effect": "Allow",
+      "Action": "apigateway:TagResource",
+      "Resource": "arn:aws:apigateway:ap-south-1::/apis/*/stages"
+    },
+    {
       "Sid": "LoopCheckLogGroup",
       "Effect": "Allow",
       "Action": [

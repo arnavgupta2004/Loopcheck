@@ -131,7 +131,8 @@ def test_docs_and_defaults_use_the_deployer_profile():
     for needle in ("aws login --profile loopcheck-deployer", "aws sts get-caller-identity", "LoopCheckDeployerPolicy",
                    "SignInLocalDevelopmentAccess", "ConcurrencyMode=unreserved", "never create access keys", "AdministratorAccess",
                    "AccessDenied on cloudformation:DescribeStacks", "policy_tool.py render --account-id", "policy_tool.py check",
-                   "no effect on AWS", "Save changes"):
+                   "no effect on AWS", "Save changes", "HttpApiStageTagOnCreate", "Recover from ROLLBACK_COMPLETE",
+                   "aws cloudformation wait stack-delete-complete", "(Default)"):
         assert needle in doc, needle
     runbook = (ROOT / "docs" / "d4_demo_and_deployment.md").read_text()
     assert "AWS_PROFILE_NAME=loopcheck-deployer" in runbook and "aws configure sso --profile loopcheck " not in runbook
@@ -217,3 +218,57 @@ def test_explicit_bucket_rendering_keeps_prefix_scope(tmp_path):
         pt.render("deployer", ACCT, "Bad_Bucket")
     assert pt.main(["render", "--account-id", ACCT, "--bucket", "my-loopcheck-artifacts", "--out-dir", str(tmp_path)]) == 0
     assert (tmp_path / "deployer.json").exists() and not (tmp_path / "bootstrap.json").exists()
+
+
+# --------------------------------------------------------------------------- API Gateway V2 stage tagging
+# Observed CloudFormation event (AWS::ApiGatewayV2::Stage, CREATE_FAILED):
+#   not authorized to perform apigateway:TagResource on resource arn:aws:apigateway:ap-south-1::/apis/ta8wy1elv5/stages
+# CloudFormation resource schema for AWS::ApiGatewayV2::Stage: create = apigateway:POST + apigateway:TagResource,
+# delete = apigateway:DELETE (rollback/sam delete need no tagging), update adds TagResource/UntagResource.
+STAGE_FAILURE_ARN = "arn:aws:apigateway:ap-south-1::/apis/ta8wy1elv5/stages"
+
+
+def _deployer_rendered():
+    return json.loads(pt.render("deployer", ACCT))
+
+
+def test_stage_tag_on_create_is_allowed_for_the_exact_failure_arn():
+    pol = _deployer_rendered()
+    assert pt.allowing_statements(pol, "apigateway:TagResource", STAGE_FAILURE_ARN) == ["HttpApiStageTagOnCreate"]
+    assert pt.allowing_statements(pol, "apigateway:POST", STAGE_FAILURE_ARN) == ["HttpApiInRegion"]
+    st = next(s for s in pol["Statement"] if s["Sid"] == "HttpApiStageTagOnCreate")
+    assert st["Action"] == "apigateway:TagResource" and st["Resource"] == "arn:aws:apigateway:ap-south-1::/apis/*/stages"
+
+
+@pytest.mark.parametrize("arn", [
+    "arn:aws:apigateway:ap-south-1::/apis/ta8wy1elv5",                     # the API itself tags via PUT/PATCH
+    "arn:aws:apigateway:ap-south-1::/apis/ta8wy1elv5/routes",
+    "arn:aws:apigateway:ap-south-1::/apis/ta8wy1elv5/stages/$default",     # existing stage: not needed for create
+    "arn:aws:apigateway:ap-south-1::/restapis/abc/stages",
+    "arn:aws:apigateway:us-east-1::/apis/ta8wy1elv5/stages",
+    "arn:aws:apigateway:ap-south-1::/tags/arn%3Aaws%3Aapigateway",
+])
+def test_stage_tagging_is_not_granted_elsewhere(arn):
+    assert not pt.allowing_statements(_deployer_rendered(), "apigateway:TagResource", arn)
+
+
+def test_untag_is_not_granted_because_create_rollback_and_delete_do_not_need_it():
+    assert "apigateway:UntagResource" not in _actions(DEPLOYER)
+    assert not pt.allowing_statements(_deployer_rendered(), "apigateway:UntagResource", STAGE_FAILURE_ARN)
+
+
+@pytest.mark.parametrize("label, mutate", [
+    ("statement missing (the policy that failed in AWS)",
+     lambda pol: pol["Statement"].remove(next(s for s in pol["Statement"] if s["Sid"] == "HttpApiStageTagOnCreate"))),
+    ("wrong action", lambda pol: next(s for s in pol["Statement"] if s["Sid"] == "HttpApiStageTagOnCreate").update(Action="apigateway:PATCH")),
+    ("wrong resource pattern", lambda pol: next(s for s in pol["Statement"] if s["Sid"] == "HttpApiStageTagOnCreate").update(
+        Resource="arn:aws:apigateway:ap-south-1::/apis/*/stages/*")),
+    ("wrong region", lambda pol: next(s for s in pol["Statement"] if s["Sid"] == "HttpApiStageTagOnCreate").update(
+        Resource="arn:aws:apigateway:us-east-1::/apis/*/stages")),
+])
+def test_checker_fails_without_the_stage_tag_permission(label, mutate):
+    pol = _deployer_rendered()
+    mutate(pol)
+    errors, _ = pt.check(pol, ACCT)
+    assert f"apigateway:TagResource on {STAGE_FAILURE_ARN}: NOT allowed" in errors, label
+    assert any(e.startswith("missing vs repository: apigateway:tagresource on arn:aws:apigateway:ap-south-1::/apis/*/stages") for e in errors), label

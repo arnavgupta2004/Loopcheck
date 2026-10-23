@@ -376,6 +376,9 @@ Platform lines (`START`, `END`, `REPORT` with duration and memory) come from Lam
 ```bash
 sam delete --stack-name "$STACK" --region "$REGION" --profile "$AWS_PROFILE_NAME"
 # confirm the prompts; this deletes the function, role, HTTP API, log group and the artifacts SAM uploaded for this stack
+# (a FAILED first deploy in ROLLBACK_COMPLETE is different: delete only the stack record with
+#  aws cloudformation delete-stack + wait stack-delete-complete, keeping the S3 artifact for the retry —
+#  see docs/d4_2_deployment_identity.md, "Recover from ROLLBACK_COMPLETE")
 aws cloudformation describe-stacks --stack-name "$STACK" --region "$REGION" --profile "$AWS_PROFILE_NAME" 2>&1 | tail -1   # expect "does not exist"
 aws logs describe-log-groups --log-group-name-prefix "/aws/lambda/$STACK" --region "$REGION" --profile "$AWS_PROFILE_NAME" --query 'logGroups[].logGroupName'   # expect []
 ```

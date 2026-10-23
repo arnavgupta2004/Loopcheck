@@ -42,6 +42,10 @@ KEY_REQUESTS = [
     ("iam:CreateRole", "arn:aws:iam::{a}:role/loopcheck-demo-InspectFunctionRole-AbC123"),
     ("iam:PassRole", "arn:aws:iam::{a}:role/loopcheck-demo-InspectFunctionRole-AbC123"),
     ("logs:CreateLogGroup", "arn:aws:logs:ap-south-1:{a}:log-group:/aws/lambda/loopcheck-demo-inspect"),
+    # AWS::ApiGatewayV2::Stage create tags the stage at the Stages collection (observed AccessDenied
+    # resource; CloudFormation schema: create = apigateway:POST + apigateway:TagResource).
+    ("apigateway:POST", "arn:aws:apigateway:ap-south-1::/apis/ta8wy1elv5/stages"),
+    ("apigateway:TagResource", "arn:aws:apigateway:ap-south-1::/apis/ta8wy1elv5/stages"),
     ("logs:DescribeLogGroups", "*"),
     ("lambda:GetAccountSettings", "*"),
 ]
