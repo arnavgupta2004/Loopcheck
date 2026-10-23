@@ -52,13 +52,15 @@ sam validate --lint --template template.yaml --region ap-south-1 --profile loopc
 bash deploy/preflight.sh                       # read-only; prints account/region; never prints credentials
 # BILLABLE: creates resources (shows a change set first)
 sam deploy --stack-name loopcheck-demo --region ap-south-1 --profile loopcheck --resolve-s3 --s3-prefix loopcheck-demo \
-  --capabilities CAPABILITY_IAM --confirm-changeset --parameter-overrides AllowedOrigin=http://localhost:8501 ReservedConcurrency=2
+  --capabilities CAPABILITY_IAM --confirm-changeset --parameter-overrides AllowedOrigin=http://localhost:8501 ConcurrencyMode=reserved
+# (if the preflight recommends it: ConcurrencyMode=unreserved, which omits the reservation; never use 0)
 # verify on AWS, then clean up
 uv run --frozen python -m loopcheck.client --url "<ApiUrl output>" --expect DEFECT
 sam delete --stack-name loopcheck-demo --region ap-south-1 --profile loopcheck
 ```
 
-Cost controls: API throttling at 2 requests/s with burst 5, reserved concurrency 2,
+Cost controls: API throttling at 2 requests/s with burst 5, reserved concurrency 2 when the
+account supports it (otherwise unreserved mode, which omits the reservation),
 logging-only IAM, logs containing metadata only, CORS limited to one origin (CORS is not
 authentication). These reduce risk but **cannot guarantee a maximum bill**.
 

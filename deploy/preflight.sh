@@ -5,15 +5,20 @@
 #   LOOPCHECK_AWS_PROFILE=loopcheck LOOPCHECK_AWS_REGION=ap-south-1 bash deploy/preflight.sh
 #
 # AWS calls made (all read-only): sts get-caller-identity, lambda get-account-settings,
-# cloudformation describe-stacks (x2), cloudformation describe-stack-resource, and
-# `sam validate --lint` (local lint). Credentials are never printed: this script never runs
-# `aws configure list`, `env`, or anything that echoes key material.
+# lambda get-function-concurrency (only if the stack exists), cloudformation describe-stacks (x2),
+# cloudformation describe-stack-resource, and `sam validate --lint` (local lint).
+# Credentials are never printed: this script never runs `aws configure list`, `env`, or
+# anything that echoes key material.
+#
+# Concurrency: recommends ConcurrencyMode=reserved (ReservedConcurrentExecutions 2) when the
+# account can keep >= 10 unreserved executions afterwards, otherwise ConcurrencyMode=unreserved
+# (the property is omitted). It never recommends 0, which Lambda treats as "throttle everything".
 set -uo pipefail
 
 PROFILE="${LOOPCHECK_AWS_PROFILE:-loopcheck}"
 REGION="${LOOPCHECK_AWS_REGION:-ap-south-1}"
 STACK="loopcheck-demo"
-RESERVED=2
+RESERVED=2   # must equal the literal in template.yaml (tests/test_deploy.py checks)
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 export AWS_PAGER="" SAM_CLI_TELEMETRY=0
 
@@ -52,16 +57,33 @@ else
 fi
 
 if [ "$FAILS" -eq 0 ]; then
-  echo "5. Lambda concurrency (ReservedConcurrency=$RESERVED needs >= 10 unreserved afterwards)"
+  echo "5. Existing CloudFormation stacks"
+  EXISTING_RESERVED=0
+  if st=$(aws_ro cloudformation describe-stacks --stack-name "$STACK" --query 'Stacks[0].StackStatus' --output text 2>/dev/null); then
+    warn "stack $STACK already exists ($st): 'sam deploy' would UPDATE it"
+    fn=$(aws_ro cloudformation describe-stack-resource --stack-name "$STACK" --logical-resource-id InspectFunction --query 'StackResourceDetail.PhysicalResourceId' --output text 2>/dev/null || true)
+    if [ -n "$fn" ] && cur=$(aws_ro lambda get-function-concurrency --function-name "$fn" --query 'ReservedConcurrentExecutions' --output text 2>/dev/null); then
+      case "$cur" in ''|None|null) ok "existing function has no reserved concurrency (unreserved mode)" ;;
+        *) EXISTING_RESERVED="$cur"; ok "existing function already reserves $cur (counted back in below)" ;; esac
+    fi
+  else ok "stack $STACK does not exist yet"; fi
+
+  echo "6. Lambda concurrency mode (reserved 2 needs >= 10 unreserved executions left in the account)"
+  RECOMMENDED_MODE=""
   if lim=$(aws_ro lambda get-account-settings --query '[AccountLimit.ConcurrentExecutions, AccountLimit.UnreservedConcurrentExecutions]' --output text 2>&1); then
     read -r TOTAL UNRES <<<"$lim"
-    if [ $((UNRES - RESERVED)) -ge 10 ]; then ok "account limit $TOTAL, unreserved $UNRES: ReservedConcurrency=$RESERVED is compatible"
-    else warn "account limit $TOTAL, unreserved $UNRES: reserving $RESERVED would leave < 10 — deploy with ReservedConcurrency=0 (API throttling still applies)"; fi
-  else warn "could not read Lambda account settings: $(printf '%s' "$lim" | head -1 | cut -c1-160)"; fi
-
-  echo "6. Existing CloudFormation stacks"
-  if st=$(aws_ro cloudformation describe-stacks --stack-name "$STACK" --query 'Stacks[0].StackStatus' --output text 2>/dev/null); then
-    warn "stack $STACK already exists ($st): 'sam deploy' would UPDATE it"; else ok "stack $STACK does not exist yet"; fi
+    AVAILABLE=$((UNRES + EXISTING_RESERVED))   # this function's current reservation would be replaced, not added
+    if [ $((AVAILABLE - RESERVED)) -ge 10 ]; then
+      RECOMMENDED_MODE=reserved
+      ok "account limit $TOTAL, unreserved $UNRES: reserving $RESERVED leaves $((AVAILABLE - RESERVED)) (>= 10) — supported"
+    else
+      RECOMMENDED_MODE=unreserved
+      warn "account limit $TOTAL, unreserved $UNRES: reserving $RESERVED would leave $((AVAILABLE - RESERVED)) (< 10) — AWS would reject it"
+      echo "         -> use unreserved mode: ReservedConcurrentExecutions is OMITTED, the function shares the account pool"
+      echo "            (no per-function cap). API Gateway throttling (2 req/s, burst 5) still applies."
+    fi
+    echo "  RECOMMENDED: --parameter-overrides ... ConcurrencyMode=$RECOMMENDED_MODE   (never set reserved concurrency to 0: it throttles every request)"
+  else warn "could not read Lambda account settings: $(printf '%s' "$lim" | head -1 | cut -c1-160) — default ConcurrencyMode=reserved may be rejected; unreserved is the fallback"; fi
   if aws_ro cloudformation describe-stacks --stack-name aws-sam-cli-managed-default >/dev/null 2>&1; then
     bucket=$(aws_ro cloudformation describe-stack-resource --stack-name aws-sam-cli-managed-default --logical-resource-id SamCliSourceBucket --query 'StackResourceDetail.PhysicalResourceId' --output text 2>/dev/null || echo "?")
     ok "SAM managed artifact bucket exists ($bucket) — shared by all SAM projects in this account/region; it will be reused"
@@ -95,6 +117,7 @@ if command -v sam >/dev/null; then
 fi
 
 echo
+if [ -n "${RECOMMENDED_MODE:-}" ]; then echo "Concurrency: use ConcurrencyMode=$RECOMMENDED_MODE (see docs/d4_demo_and_deployment.md, runbook step 5)"; fi
 if [ "$FAILS" -eq 0 ]; then echo "RESULT: PASS ($WARNS warning(s)). Nothing was created or modified. Review the account/region above before deploying."
 else echo "RESULT: FAIL ($FAILS failure(s), $WARNS warning(s)). Nothing was created or modified."; fi
 [ "$FAILS" -eq 0 ]

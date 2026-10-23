@@ -30,23 +30,26 @@ Parameters:
     Type: Number
     Default: 5
     Description: Burst requests allowed by the HTTP API (cost guard).
-  ReservedConcurrency:
-    Type: Number
-    Default: 2
-    MinValue: 0
-    MaxValue: 10
+  ConcurrencyMode:
+    Type: String
+    Default: reserved
+    AllowedValues: [reserved, unreserved]
     Description: >
-      Caps concurrent executions of the function (default 2). AWS rejects a reservation that would
-      leave the account with fewer than 10 unreserved executions; accounts whose total concurrency
-      limit is 10 (common for new accounts) must deploy with ReservedConcurrency=0 (no reservation).
-      deploy/preflight.sh checks this read-only before deployment.
+      reserved   = ReservedConcurrentExecutions 2: the function never runs more than 2 copies at once,
+                   and 2 executions are guaranteed for it (taken out of the account's shared pool).
+                   AWS rejects a reservation that would leave the account < 10 unreserved executions.
+      unreserved = the property is OMITTED: the function draws from the account's shared unreserved
+                   pool (no per-function cap, no guarantee). API Gateway throttling (2 rps / burst 5)
+                   still applies. Use when the account cannot reserve 2 (deploy/preflight.sh checks).
+      There is deliberately no numeric option: Lambda treats reserved concurrency 0 as an off switch
+      that throttles every invocation, so 0 must never be used for this serving endpoint.
   LogRetentionDays:
     Type: Number
     Default: 7
     AllowedValues: [1, 3, 5, 7, 14, 30]
 
 Conditions:
-  HasReservedConcurrency: !Not [!Equals [!Ref ReservedConcurrency, 0]]
+  UseReservedConcurrency: !Equals [!Ref ConcurrencyMode, reserved]
 
 Resources:
   InspectApi:
@@ -79,7 +82,8 @@ Resources:
       Timeout: 29                         # HTTP API integrations time out at 30 s
       EphemeralStorage:
         Size: 512
-      ReservedConcurrentExecutions: !If [HasReservedConcurrency, !Ref ReservedConcurrency, !Ref AWS::NoValue]
+      # reserved -> exactly 2; unreserved -> property omitted (AWS::NoValue). Never 0 (= throttle all).
+      ReservedConcurrentExecutions: !If [UseReservedConcurrency, 2, !Ref AWS::NoValue]
       LoggingConfig:
         LogGroup: !Ref InspectLogGroup
       Environment:

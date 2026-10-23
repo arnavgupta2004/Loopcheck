@@ -18,7 +18,7 @@ flowchart LR
     S -- "API mode<br/>HTTPS JSON (base64 images)" --> AG
     subgraph AWS["AWS ap-south-1 (template.yaml, NOT deployed)"]
         AG[API Gateway HTTP API<br/>GET /health · POST /inspect<br/>CORS: one origin · throttling 2 rps / burst 5<br/>29 s integration timeout]
-        AG --> L["Lambda python3.13 x86_64<br/>loopcheck.aws_lambda.handler<br/>2048 MB · 29 s · reserved concurrency 2<br/>zip 80 MiB / 215 MiB unzipped"]
+        AG --> L["Lambda python3.13 x86_64<br/>loopcheck.aws_lambda.handler<br/>2048 MB · 29 s · reserved concurrency 2 (or unreserved)<br/>zip 80 MiB / 215 MiB unzipped"]
         L --> CW[(CloudWatch Logs<br/>metadata only · 7-day retention)]
     end
     L --> SV
@@ -74,7 +74,7 @@ tracebacks and exception messages are stripped (`service.publicize`); errors kee
 | Control | Setting | Notes |
 |---|---|---|
 | API throttling | 2 requests/s, burst 5 (`ThrottleRatePerSecond`, `ThrottleBurst`) | Applies to all routes |
-| Lambda reserved concurrency | **2** (`ReservedConcurrency`) | At most 2 executions run in parallel. AWS rejects a reservation that would leave the account with fewer than 10 unreserved executions; many new accounts have a total limit of 10. `deploy/preflight.sh` checks this read-only and tells you to pass `ReservedConcurrency=0` if needed (throttling still applies). |
+| Lambda concurrency | `ConcurrencyMode=reserved` (default): `ReservedConcurrentExecutions: 2`. `ConcurrencyMode=unreserved`: the property is **omitted** | See [Concurrency modes](#concurrency-modes-reserved-vs-unreserved). There is deliberately no numeric option: **reserved concurrency 0 is Lambda's off switch** (every invocation is throttled) and must never be used for this endpoint. |
 | Upload limits | 2 MB per image, ≤ 4096 px per side, body ≤ about 5.3 MB | Within Lambda's 6 MB synchronous payload limit |
 | CORS | Exactly one origin (`AllowedOrigin`); the template's `AllowedPattern` rejects `*`, wildcards and paths | **CORS is not authentication.** It only restricts which web pages can call the API from a browser; `curl` or any server can still call the public endpoint. The Streamlit app calls the API from its Python server process, so CORS does not apply to it. |
 | IAM | No `Policies`, no custom `Role` | SAM attaches only `AWSLambdaBasicExecutionRole` (write its own logs). No S3, database, secrets or VPC access. |
@@ -82,6 +82,25 @@ tracebacks and exception messages are stripped (`service.publicize`); errors kee
 | Log retention | 7 days (`LogRetentionDays`) | The log group is part of the stack and is deleted with it |
 | Runtime check | `import loopcheck` raises unless OpenCV is 5.x; cold-start log `{"event": "cold_start", "opencv_version": ...}` | `/health` reports the version |
 | Services | API Gateway HTTP API, Lambda, CloudWatch Logs (plus SAM's artifact bucket during deploy) | No ECR, NAT, VPC, database or CloudFront |
+
+### Concurrency modes: reserved vs unreserved
+
+| | `ConcurrencyMode=reserved` (default, recommended when supported) | `ConcurrencyMode=unreserved` (fallback) |
+|---|---|---|
+| Template effect | `ReservedConcurrentExecutions: 2` | Property omitted (`AWS::NoValue`); no reservation exists |
+| Per-function cap | At most 2 copies run at once. Extra concurrent requests are throttled by Lambda, so API Gateway returns 5xx | None. The function can scale up to the account's shared unreserved pool |
+| Guarantee | 2 executions are set aside for this function. Other functions cannot use them | None. Other functions in the account compete for the same pool |
+| Effect on other workloads | The account's shared pool shrinks by 2 | None at rest; under load it consumes from the shared pool |
+| AWS constraint | AWS rejects the reservation if fewer than 10 unreserved executions would remain. Accounts whose total limit is 10 (many new accounts) cannot reserve 2 | Always accepted |
+| Cost guard | API Gateway throttling (2 req/s, burst 5) **plus** the 2-copy cap | API Gateway throttling (2 req/s, burst 5) **only** |
+
+In both modes, API Gateway throttling is identical and is the primary request-rate guard.
+`deploy/preflight.sh` reads the account limits (read-only) and prints the mode to use. If
+the stack already exists, it counts the function's current reservation back in.
+
+**Never set reserved concurrency to 0 to "fix" a rejected reservation.** The deployment
+would succeed, but every request would be throttled. Use `ConcurrencyMode=unreserved`
+instead.
 
 > **Throttling and reserved concurrency reduce cost risk but cannot guarantee a fixed
 > maximum bill.** The endpoint is public and unauthenticated. Requests rejected by
@@ -179,7 +198,8 @@ It never prints credentials, only the *names* of any credential variables set in
 shell. It checks:
 - the tools and the profile;
 - the identity, account and region;
-- whether `ReservedConcurrency=2` fits your account;
+- which concurrency mode your account supports, printed as
+  `RECOMMENDED: ... ConcurrencyMode=reserved` or `ConcurrencyMode=unreserved`;
 - whether the stack or SAM's managed bucket already exist;
 - the zip: size, native files, and that the packaged code matches the source.
 
@@ -198,6 +218,10 @@ requires `python3.13` on PATH; `uv python install 3.13` provides one. As a fallb
 skip `sam build` and pass `--template-file template.yaml` to `sam deploy`; that deploys the
 same zip.
 
+**`sam deploy` prefers `.aws-sam/build/template.yaml` whenever it exists.** After pulling
+any change to `template.yaml`, re-run `sam build`, or delete `.aws-sam/`. Otherwise a stale
+build of an older template will be deployed.
+
 ### 5. Deploy stack `loopcheck-demo` to ap-south-1 🔴 BILLABLE
 
 This creates:
@@ -206,7 +230,11 @@ This creates:
 - The stack `loopcheck-demo`: the Lambda function and its logging-only role, the HTTP API
   (stage, 2 routes, integration, invoke permissions) and the log group.
 
-SAM shows a change set and asks for confirmation before creating anything.
+SAM shows a change set and asks for confirmation before creating anything. Run **one** of
+the two commands, using the mode the preflight printed (`RECOMMENDED: ... ConcurrencyMode=...`).
+
+**5a. Reserved mode (default; preflight printed `ConcurrencyMode=reserved`).** The function
+gets `ReservedConcurrentExecutions: 2`.
 
 ```bash
 sam deploy \
@@ -214,11 +242,31 @@ sam deploy \
   --resolve-s3 --s3-prefix "$STACK" \
   --capabilities CAPABILITY_IAM \
   --confirm-changeset \
-  --parameter-overrides AllowedOrigin=http://localhost:8501 ReservedConcurrency=2 ThrottleRatePerSecond=2 ThrottleBurst=5 \
+  --parameter-overrides AllowedOrigin=http://localhost:8501 ConcurrencyMode=reserved ThrottleRatePerSecond=2 ThrottleBurst=5 \
   --tags project=loopcheck purpose=opencv-competition-demo
 ```
 
-- If the preflight warned about concurrency, use `ReservedConcurrency=0`.
+**5b. Unreserved mode (preflight printed `ConcurrencyMode=unreserved`, e.g. an account
+limit of 10).** `ReservedConcurrentExecutions` is omitted and API Gateway throttling still
+applies.
+
+```bash
+sam deploy \
+  --stack-name "$STACK" --region "$REGION" --profile "$AWS_PROFILE_NAME" \
+  --resolve-s3 --s3-prefix "$STACK" \
+  --capabilities CAPABILITY_IAM \
+  --confirm-changeset \
+  --parameter-overrides AllowedOrigin=http://localhost:8501 ConcurrencyMode=unreserved ThrottleRatePerSecond=2 ThrottleBurst=5 \
+  --tags project=loopcheck purpose=opencv-competition-demo
+```
+
+- **Check the change set before confirming.** For 5a it shows
+  `ReservedConcurrentExecutions: 2` on the function; for 5b the property is absent. After
+  deployment, verify read-only with:
+  `aws lambda get-function-concurrency --function-name "$(aws cloudformation describe-stack-resource --stack-name "$STACK" --logical-resource-id InspectFunction --query StackResourceDetail.PhysicalResourceId --output text --region "$REGION" --profile "$AWS_PROFILE_NAME")" --region "$REGION" --profile "$AWS_PROFILE_NAME"`.
+  It prints `{"ReservedConcurrentExecutions": 2}` in reserved mode and `{}` in unreserved mode.
+- **Never use reserved concurrency 0** (in the template, the console or
+  `put-function-concurrency`). It is Lambda's off switch and throttles every request.
 - If the UI will be hosted somewhere other than localhost, set `AllowedOrigin` to its exact
   origin, e.g. `https://my-ui.example.com`.
 
@@ -336,8 +384,9 @@ These are estimates, not measurements; use the AWS Pricing Calculator for ap-sou
    APIs, log groups, and S3 objects in SAM's bucket.
 2. **AWS CLI v2 and SAM CLI installed locally** (step 1).
 3. **Your review of the change set** that `sam deploy --confirm-changeset` shows.
-4. **If the account's Lambda concurrency limit is 10**, deploy with `ReservedConcurrency=0`
-   (the preflight tells you).
+4. **If the preflight reports that reserving 2 is not possible** (e.g. an account
+   concurrency limit of 10), deploy with `ConcurrencyMode=unreserved` (step 5b). The
+   reservation is omitted, never set to 0.
 
 ## Limitations
 
