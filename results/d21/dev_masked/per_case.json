@@ -1,0 +1,3711 @@
+[
+ {
+  "id": "identical_00",
+  "case_type": "identical",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.368,
+  "corner_error_px": 0.0,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0849,
+  "outcome": "tn"
+ },
+ {
+  "id": "identical_01",
+  "case_type": "identical",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.269,
+  "corner_error_px": 0.0,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0849,
+  "outcome": "tn"
+ },
+ {
+  "id": "identical_02",
+  "case_type": "identical",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.346,
+  "corner_error_px": 0.0,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tn"
+ },
+ {
+  "id": "identical_03",
+  "case_type": "identical",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.342,
+  "corner_error_px": 0.0,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tn"
+ },
+ {
+  "id": "identical_04",
+  "case_type": "identical",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.272,
+  "corner_error_px": 0.0,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0849,
+  "outcome": "tn"
+ },
+ {
+  "id": "identical_05",
+  "case_type": "identical",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.278,
+  "corner_error_px": 0.0,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0849,
+  "outcome": "tn"
+ },
+ {
+  "id": "identical_06",
+  "case_type": "identical",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.345,
+  "corner_error_px": 0.0,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tn"
+ },
+ {
+  "id": "identical_07",
+  "case_type": "identical",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.264,
+  "corner_error_px": 0.0,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0849,
+  "outcome": "tn"
+ },
+ {
+  "id": "lighting_00",
+  "case_type": "lighting",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.269,
+  "corner_error_px": 0.0035,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0849,
+  "outcome": "tn"
+ },
+ {
+  "id": "lighting_01",
+  "case_type": "lighting",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.359,
+  "corner_error_px": 0.0519,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tn"
+ },
+ {
+  "id": "lighting_02",
+  "case_type": "lighting",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": false,
+  "seconds": 0.364,
+  "corner_error_px": 0.0254,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [
+   false
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 1,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "fp"
+ },
+ {
+  "id": "lighting_03",
+  "case_type": "lighting",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.275,
+  "corner_error_px": 0.004,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0849,
+  "outcome": "tn"
+ },
+ {
+  "id": "lighting_04",
+  "case_type": "lighting",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.358,
+  "corner_error_px": 0.0243,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tn"
+ },
+ {
+  "id": "lighting_05",
+  "case_type": "lighting",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.361,
+  "corner_error_px": 0.0219,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tn"
+ },
+ {
+  "id": "lighting_06",
+  "case_type": "lighting",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.357,
+  "corner_error_px": 0.0474,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tn"
+ },
+ {
+  "id": "lighting_07",
+  "case_type": "lighting",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.264,
+  "corner_error_px": 0.0019,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0849,
+  "outcome": "tn"
+ },
+ {
+  "id": "geometric_00",
+  "case_type": "geometric",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.274,
+  "corner_error_px": 0.0731,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.09144,
+  "outcome": "tn"
+ },
+ {
+  "id": "geometric_01",
+  "case_type": "geometric",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.367,
+  "corner_error_px": 0.0639,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tn"
+ },
+ {
+  "id": "geometric_02",
+  "case_type": "geometric",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.267,
+  "corner_error_px": 0.0725,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0869,
+  "outcome": "tn"
+ },
+ {
+  "id": "geometric_03",
+  "case_type": "geometric",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.278,
+  "corner_error_px": 0.0551,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.09417,
+  "outcome": "tn"
+ },
+ {
+  "id": "geometric_04",
+  "case_type": "geometric",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.382,
+  "corner_error_px": 0.1225,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tn"
+ },
+ {
+  "id": "geometric_05",
+  "case_type": "geometric",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.285,
+  "corner_error_px": 0.0358,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0929,
+  "outcome": "tn"
+ },
+ {
+  "id": "geometric_06",
+  "case_type": "geometric",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.378,
+  "corner_error_px": 0.0536,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tn"
+ },
+ {
+  "id": "geometric_07",
+  "case_type": "geometric",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.283,
+  "corner_error_px": 0.0805,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0889,
+  "outcome": "tn"
+ },
+ {
+  "id": "blur_noise_00",
+  "case_type": "blur_noise",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.29,
+  "corner_error_px": 0.1494,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08556,
+  "outcome": "tn"
+ },
+ {
+  "id": "blur_noise_01",
+  "case_type": "blur_noise",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.361,
+  "corner_error_px": 0.1715,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tn"
+ },
+ {
+  "id": "blur_noise_02",
+  "case_type": "blur_noise",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.298,
+  "corner_error_px": 0.0885,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08562,
+  "outcome": "tn"
+ },
+ {
+  "id": "blur_noise_03",
+  "case_type": "blur_noise",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.304,
+  "corner_error_px": 0.0763,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0858,
+  "outcome": "tn"
+ },
+ {
+  "id": "blur_noise_04",
+  "case_type": "blur_noise",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.311,
+  "corner_error_px": 0.1693,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08551,
+  "outcome": "tn"
+ },
+ {
+  "id": "blur_noise_05",
+  "case_type": "blur_noise",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.394,
+  "corner_error_px": 0.1381,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tn"
+ },
+ {
+  "id": "blur_noise_06",
+  "case_type": "blur_noise",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.292,
+  "corner_error_px": 0.2077,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08504,
+  "outcome": "tn"
+ },
+ {
+  "id": "blur_noise_07",
+  "case_type": "blur_noise",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.323,
+  "corner_error_px": 0.1309,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08564,
+  "outcome": "tn"
+ },
+ {
+  "id": "combined_nominal_00",
+  "case_type": "combined_nominal",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.307,
+  "corner_error_px": 0.0587,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08575,
+  "outcome": "tn"
+ },
+ {
+  "id": "combined_nominal_01",
+  "case_type": "combined_nominal",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.366,
+  "corner_error_px": 0.0948,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tn"
+ },
+ {
+  "id": "combined_nominal_02",
+  "case_type": "combined_nominal",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.372,
+  "corner_error_px": 0.0742,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tn"
+ },
+ {
+  "id": "combined_nominal_03",
+  "case_type": "combined_nominal",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.378,
+  "corner_error_px": 0.0525,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tn"
+ },
+ {
+  "id": "combined_nominal_04",
+  "case_type": "combined_nominal",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.287,
+  "corner_error_px": 0.0857,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08727,
+  "outcome": "tn"
+ },
+ {
+  "id": "combined_nominal_05",
+  "case_type": "combined_nominal",
+  "category": "nominal",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.375,
+  "corner_error_px": 0.0958,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tn"
+ },
+ {
+  "id": "combined_nominal_06",
+  "case_type": "combined_nominal",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.28,
+  "corner_error_px": 0.0519,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08829,
+  "outcome": "tn"
+ },
+ {
+  "id": "combined_nominal_07",
+  "case_type": "combined_nominal",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.284,
+  "corner_error_px": 0.0447,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08717,
+  "outcome": "tn"
+ },
+ {
+  "id": "missing_00",
+  "case_type": "missing",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.286,
+  "corner_error_px": 0.1059,
+  "gt_ious": [
+   0.862
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   true
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08798,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_01",
+  "case_type": "missing",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.284,
+  "corner_error_px": 0.0504,
+  "gt_ious": [
+   0.8112
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08685,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_02",
+  "case_type": "missing",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.36,
+  "corner_error_px": 0.0646,
+  "gt_ious": [
+   0.7657
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_03",
+  "case_type": "missing",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.36,
+  "corner_error_px": 0.0619,
+  "gt_ious": [
+   0.8731
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_04",
+  "case_type": "missing",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.282,
+  "corner_error_px": 0.0607,
+  "gt_ious": [
+   0.8894
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08621,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_05",
+  "case_type": "missing",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.355,
+  "corner_error_px": 0.086,
+  "gt_ious": [
+   0.8413
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_06",
+  "case_type": "missing",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.262,
+  "corner_error_px": 0.0302,
+  "gt_ious": [
+   0.8317
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08626,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_07",
+  "case_type": "missing",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.359,
+  "corner_error_px": 0.0727,
+  "gt_ious": [
+   0.8977
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "shifted_00",
+  "case_type": "shifted",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.361,
+  "corner_error_px": 0.0477,
+  "gt_ious": [
+   0.4272,
+   0.4216
+  ],
+  "gt_matched": [
+   true,
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false,
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "shifted_01",
+  "case_type": "shifted",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.275,
+  "corner_error_px": 0.0601,
+  "gt_ious": [
+   0.4085,
+   0.4085
+  ],
+  "gt_matched": [
+   true,
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false,
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08722,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "shifted_02",
+  "case_type": "shifted",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.257,
+  "corner_error_px": 0.0539,
+  "gt_ious": [
+   0.3767,
+   0.3767
+  ],
+  "gt_matched": [
+   true,
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false,
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08664,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "shifted_03",
+  "case_type": "shifted",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.28,
+  "corner_error_px": 0.0482,
+  "gt_ious": [
+   0.4513,
+   0.4513
+  ],
+  "gt_matched": [
+   true,
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   true,
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08738,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "shifted_04",
+  "case_type": "shifted",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.383,
+  "corner_error_px": 0.0523,
+  "gt_ious": [
+   0.3547,
+   0.3451
+  ],
+  "gt_matched": [
+   true,
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false,
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "shifted_05",
+  "case_type": "shifted",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.378,
+  "corner_error_px": 0.064,
+  "gt_ious": [
+   0.3797,
+   0.3797
+  ],
+  "gt_matched": [
+   true,
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false,
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "shifted_06",
+  "case_type": "shifted",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.374,
+  "corner_error_px": 0.0728,
+  "gt_ious": [
+   0.4398,
+   0.4295
+  ],
+  "gt_matched": [
+   true,
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false,
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "shifted_07",
+  "case_type": "shifted",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.281,
+  "corner_error_px": 0.0817,
+  "gt_ious": [
+   0.4175,
+   0.4175
+  ],
+  "gt_matched": [
+   true,
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false,
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08716,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "foreign_object_00",
+  "case_type": "foreign_object",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.264,
+  "corner_error_px": 0.0323,
+  "gt_ious": [
+   0.8005
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08691,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "foreign_object_01",
+  "case_type": "foreign_object",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.282,
+  "corner_error_px": 0.0597,
+  "gt_ious": [
+   0.72
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08874,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "foreign_object_02",
+  "case_type": "foreign_object",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.37,
+  "corner_error_px": 0.0743,
+  "gt_ious": [
+   0.7463
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "foreign_object_03",
+  "case_type": "foreign_object",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.282,
+  "corner_error_px": 0.0898,
+  "gt_ious": [
+   0.7511
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08814,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "foreign_object_04",
+  "case_type": "foreign_object",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.359,
+  "corner_error_px": 0.0677,
+  "gt_ious": [
+   0.7931
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "foreign_object_05",
+  "case_type": "foreign_object",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.37,
+  "corner_error_px": 0.0703,
+  "gt_ious": [
+   0.6024
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "foreign_object_06",
+  "case_type": "foreign_object",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.28,
+  "corner_error_px": 0.0702,
+  "gt_ious": [
+   0.9286
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08709,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "foreign_object_07",
+  "case_type": "foreign_object",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.28,
+  "corner_error_px": 0.0698,
+  "gt_ious": [
+   0.705
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08691,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_hard_00",
+  "case_type": "missing_hard",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.282,
+  "corner_error_px": 0.0709,
+  "gt_ious": [
+   0.7405
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   true
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08946,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_hard_01",
+  "case_type": "missing_hard",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 6,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.362,
+  "corner_error_px": 0.0995,
+  "gt_ious": [
+   0.9355
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true,
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 5,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_hard_02",
+  "case_type": "missing_hard",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.368,
+  "corner_error_px": 0.1244,
+  "gt_ious": [
+   0.803
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_hard_03",
+  "case_type": "missing_hard",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.281,
+  "corner_error_px": 0.0649,
+  "gt_ious": [
+   0.8206
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08863,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_hard_04",
+  "case_type": "missing_hard",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 10,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.283,
+  "corner_error_px": 0.0729,
+  "gt_ious": [
+   0.8811
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 9,
+  "gt_near_marker": [
+   true
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08902,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_hard_05",
+  "case_type": "missing_hard",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 2,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.28,
+  "corner_error_px": 0.0635,
+  "gt_ious": [
+   0.9831
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true,
+   false
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 1,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08948,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_hard_06",
+  "case_type": "missing_hard",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.367,
+  "corner_error_px": 0.1212,
+  "gt_ious": [
+   0.7549
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_hard_07",
+  "case_type": "missing_hard",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 3,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.362,
+  "corner_error_px": 0.1163,
+  "gt_ious": [
+   0.7692
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   false,
+   true,
+   false
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 2,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "subtle_foreign_00",
+  "case_type": "subtle_foreign",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.369,
+  "corner_error_px": 0.0453,
+  "gt_ious": [
+   0.8333
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "subtle_foreign_01",
+  "case_type": "subtle_foreign",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.384,
+  "corner_error_px": 0.052,
+  "gt_ious": [
+   0.6627
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "subtle_foreign_02",
+  "case_type": "subtle_foreign",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": true,
+  "seconds": 0.375,
+  "corner_error_px": 0.0331,
+  "gt_ious": [
+   0.0
+  ],
+  "gt_matched": [
+   false
+  ],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "fn_no_regions"
+ },
+ {
+  "id": "subtle_foreign_03",
+  "case_type": "subtle_foreign",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.271,
+  "corner_error_px": 0.0402,
+  "gt_ious": [
+   0.6863
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08802,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "subtle_foreign_04",
+  "case_type": "subtle_foreign",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.375,
+  "corner_error_px": 0.0725,
+  "gt_ious": [
+   0.5132
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "subtle_foreign_05",
+  "case_type": "subtle_foreign",
+  "category": "defect",
+  "markers": false,
+  "status": "analyzed",
+  "method": "sift",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.362,
+  "corner_error_px": 0.072,
+  "gt_ious": [
+   0.8333
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "subtle_foreign_06",
+  "case_type": "subtle_foreign",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.287,
+  "corner_error_px": 0.1005,
+  "gt_ious": [
+   0.614
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08719,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "subtle_foreign_07",
+  "case_type": "subtle_foreign",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.284,
+  "corner_error_px": 0.0743,
+  "gt_ious": [
+   0.8366
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08671,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "unrelated_scene_00",
+  "case_type": "unrelated_scene",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.09,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": false,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "unrelated_scene_01",
+  "case_type": "unrelated_scene",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.088,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": false,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "unrelated_scene_02",
+  "case_type": "unrelated_scene",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.092,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": false,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "unrelated_scene_03",
+  "case_type": "unrelated_scene",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.089,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": false,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "unrelated_scene_04",
+  "case_type": "unrelated_scene",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.089,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": false,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "unrelated_scene_05",
+  "case_type": "unrelated_scene",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.087,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": false,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "unrelated_scene_06",
+  "case_type": "unrelated_scene",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.087,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": false,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "unrelated_scene_07",
+  "case_type": "unrelated_scene",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.09,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": false,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "low_overlap_00",
+  "case_type": "low_overlap",
+  "category": "registration_fail",
+  "markers": true,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "insufficient_overlap",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.081,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": false,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "low_overlap_01",
+  "case_type": "low_overlap",
+  "category": "registration_fail",
+  "markers": true,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "insufficient_overlap",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.08,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": false,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "low_overlap_02",
+  "case_type": "low_overlap",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "insufficient_overlap",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.079,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": false,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "low_overlap_03",
+  "case_type": "low_overlap",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "insufficient_overlap",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.09,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": false,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "low_overlap_04",
+  "case_type": "low_overlap",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "insufficient_overlap",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.081,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": false,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "low_overlap_05",
+  "case_type": "low_overlap",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "insufficient_overlap",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.08,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": false,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "low_overlap_06",
+  "case_type": "low_overlap",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "insufficient_overlap",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.086,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": false,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "low_overlap_07",
+  "case_type": "low_overlap",
+  "category": "registration_fail",
+  "markers": true,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "insufficient_overlap",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.089,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": false,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "heavy_blur_00",
+  "case_type": "heavy_blur",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.076,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": false,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "heavy_blur_01",
+  "case_type": "heavy_blur",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_matches",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.066,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": false,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "heavy_blur_02",
+  "case_type": "heavy_blur",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.068,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": false,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "heavy_blur_03",
+  "case_type": "heavy_blur",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.067,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": false,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "heavy_blur_04",
+  "case_type": "heavy_blur",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.066,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": false,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "heavy_blur_05",
+  "case_type": "heavy_blur",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.07,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": false,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "heavy_blur_06",
+  "case_type": "heavy_blur",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_inliers",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.067,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": false,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "heavy_blur_07",
+  "case_type": "heavy_blur",
+  "category": "registration_fail",
+  "markers": false,
+  "status": "registration_failed",
+  "method": null,
+  "failure_reason": "too_few_matches",
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.066,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": false,
+  "masked_fraction_of_valid": 0.0,
+  "outcome": "correct_rejection"
+ },
+ {
+  "id": "gamma_lighting_00",
+  "case_type": "gamma_lighting",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 3,
+  "predicted_defect": true,
+  "expected_defect": false,
+  "seconds": 0.27,
+  "corner_error_px": 0.0723,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [
+   false,
+   false,
+   false
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 3,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08689,
+  "outcome": "fp"
+ },
+ {
+  "id": "gamma_lighting_01",
+  "case_type": "gamma_lighting",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.267,
+  "corner_error_px": 0.0585,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08742,
+  "outcome": "tn"
+ },
+ {
+  "id": "gamma_lighting_02",
+  "case_type": "gamma_lighting",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.264,
+  "corner_error_px": 0.0281,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08758,
+  "outcome": "tn"
+ },
+ {
+  "id": "gamma_lighting_03",
+  "case_type": "gamma_lighting",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.264,
+  "corner_error_px": 0.064,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08756,
+  "outcome": "tn"
+ },
+ {
+  "id": "gamma_lighting_04",
+  "case_type": "gamma_lighting",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.265,
+  "corner_error_px": 0.0441,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08677,
+  "outcome": "tn"
+ },
+ {
+  "id": "gamma_lighting_05",
+  "case_type": "gamma_lighting",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.269,
+  "corner_error_px": 0.1045,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08597,
+  "outcome": "tn"
+ },
+ {
+  "id": "gamma_lighting_06",
+  "case_type": "gamma_lighting",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.265,
+  "corner_error_px": 0.0806,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08645,
+  "outcome": "tn"
+ },
+ {
+  "id": "gamma_lighting_07",
+  "case_type": "gamma_lighting",
+  "category": "nominal",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 0,
+  "predicted_defect": false,
+  "expected_defect": false,
+  "seconds": 0.268,
+  "corner_error_px": 0.0729,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08588,
+  "outcome": "tn"
+ },
+ {
+  "id": "missing_near_marker_00",
+  "case_type": "missing_near_marker",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.269,
+  "corner_error_px": 0.1152,
+  "gt_ious": [
+   0.8007
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08725,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_near_marker_01",
+  "case_type": "missing_near_marker",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.279,
+  "corner_error_px": 0.0607,
+  "gt_ious": [
+   0.84
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08607,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_near_marker_02",
+  "case_type": "missing_near_marker",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.282,
+  "corner_error_px": 0.0504,
+  "gt_ious": [
+   0.8243
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   true
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08899,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_near_marker_03",
+  "case_type": "missing_near_marker",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.285,
+  "corner_error_px": 0.0803,
+  "gt_ious": [
+   0.8745
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   true
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08863,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_near_marker_04",
+  "case_type": "missing_near_marker",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.28,
+  "corner_error_px": 0.0831,
+  "gt_ious": [
+   0.821
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08615,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_near_marker_05",
+  "case_type": "missing_near_marker",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.269,
+  "corner_error_px": 0.0387,
+  "gt_ious": [
+   0.8464
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08658,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_near_marker_06",
+  "case_type": "missing_near_marker",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.263,
+  "corner_error_px": 0.0432,
+  "gt_ious": [
+   0.9062
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08777,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "missing_near_marker_07",
+  "case_type": "missing_near_marker",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.267,
+  "corner_error_px": 0.0816,
+  "gt_ious": [
+   0.7869
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   false
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08752,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "foreign_near_marker_00",
+  "case_type": "foreign_near_marker",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.27,
+  "corner_error_px": 0.0576,
+  "gt_ious": [
+   0.7835
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   true
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08666,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "foreign_near_marker_01",
+  "case_type": "foreign_near_marker",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.267,
+  "corner_error_px": 0.0928,
+  "gt_ious": [
+   0.8129
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   true
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08623,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "foreign_near_marker_02",
+  "case_type": "foreign_near_marker",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.286,
+  "corner_error_px": 0.0845,
+  "gt_ious": [
+   0.6406
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   true
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08671,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "foreign_near_marker_03",
+  "case_type": "foreign_near_marker",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.288,
+  "corner_error_px": 0.0587,
+  "gt_ious": [
+   0.7583
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   true
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08715,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "foreign_near_marker_04",
+  "case_type": "foreign_near_marker",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.278,
+  "corner_error_px": 0.0534,
+  "gt_ious": [
+   0.575
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   true
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08676,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "foreign_near_marker_05",
+  "case_type": "foreign_near_marker",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.284,
+  "corner_error_px": 0.0741,
+  "gt_ious": [
+   0.7485
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   true
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08739,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "foreign_near_marker_06",
+  "case_type": "foreign_near_marker",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.28,
+  "corner_error_px": 0.0604,
+  "gt_ious": [
+   0.7099
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   true
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08753,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "foreign_near_marker_07",
+  "case_type": "foreign_near_marker",
+  "category": "defect",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 1,
+  "predicted_defect": true,
+  "expected_defect": true,
+  "seconds": 0.282,
+  "corner_error_px": 0.0673,
+  "gt_ious": [
+   0.7344
+  ],
+  "gt_matched": [
+   true
+  ],
+  "pred_matched": [
+   true
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 0,
+  "gt_near_marker": [
+   true
+  ],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08598,
+  "outcome": "tp_localized"
+ },
+ {
+  "id": "different_tray_00",
+  "case_type": "different_tray",
+  "category": "different_tray",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 13,
+  "predicted_defect": true,
+  "expected_defect": false,
+  "seconds": 0.286,
+  "corner_error_px": 0.0714,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 13,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08695,
+  "outcome": "safe_flagged"
+ },
+ {
+  "id": "different_tray_01",
+  "case_type": "different_tray",
+  "category": "different_tray",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 13,
+  "predicted_defect": true,
+  "expected_defect": false,
+  "seconds": 0.265,
+  "corner_error_px": 0.0698,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 13,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08801,
+  "outcome": "safe_flagged"
+ },
+ {
+  "id": "different_tray_02",
+  "case_type": "different_tray",
+  "category": "different_tray",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 13,
+  "predicted_defect": true,
+  "expected_defect": false,
+  "seconds": 0.29,
+  "corner_error_px": 0.0607,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 13,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08772,
+  "outcome": "safe_flagged"
+ },
+ {
+  "id": "different_tray_03",
+  "case_type": "different_tray",
+  "category": "different_tray",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 13,
+  "predicted_defect": true,
+  "expected_defect": false,
+  "seconds": 0.295,
+  "corner_error_px": 0.0675,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 13,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08756,
+  "outcome": "safe_flagged"
+ },
+ {
+  "id": "different_tray_04",
+  "case_type": "different_tray",
+  "category": "different_tray",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 13,
+  "predicted_defect": true,
+  "expected_defect": false,
+  "seconds": 0.272,
+  "corner_error_px": 0.0722,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 13,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08709,
+  "outcome": "safe_flagged"
+ },
+ {
+  "id": "different_tray_05",
+  "case_type": "different_tray",
+  "category": "different_tray",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 13,
+  "predicted_defect": true,
+  "expected_defect": false,
+  "seconds": 0.274,
+  "corner_error_px": 0.0487,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 13,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08654,
+  "outcome": "safe_flagged"
+ },
+ {
+  "id": "different_tray_06",
+  "case_type": "different_tray",
+  "category": "different_tray",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 13,
+  "predicted_defect": true,
+  "expected_defect": false,
+  "seconds": 0.288,
+  "corner_error_px": 0.0589,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 13,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08768,
+  "outcome": "safe_flagged"
+ },
+ {
+  "id": "different_tray_07",
+  "case_type": "different_tray",
+  "category": "different_tray",
+  "markers": true,
+  "status": "analyzed",
+  "method": "aruco",
+  "failure_reason": null,
+  "n_regions": 13,
+  "predicted_defect": true,
+  "expected_defect": false,
+  "seconds": 0.29,
+  "corner_error_px": 0.0911,
+  "gt_ious": [],
+  "gt_matched": [],
+  "pred_matched": [
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "marker_fp_regions": 0,
+  "unmatched_regions": 13,
+  "gt_near_marker": [],
+  "marker_masking_applied": true,
+  "masked_fraction_of_valid": 0.08621,
+  "outcome": "safe_flagged"
+ }
+]

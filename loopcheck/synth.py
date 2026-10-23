@@ -30,7 +30,24 @@ SLOT_AREA = (145, 70, 655, 530)
 NOMINAL_TYPES = ["identical", "lighting", "geometric", "blur_noise", "combined_nominal"]
 DEFECT_TYPES = ["missing", "shifted", "foreign_object", "missing_hard", "subtle_foreign"]
 REGFAIL_TYPES = ["unrelated_scene", "low_overlap", "heavy_blur"]
-CASE_TYPES = NOMINAL_TYPES + DEFECT_TYPES + REGFAIL_TYPES
+# D2.1 additions. Appended (never inserted) so the per-type seeds of older types, which
+# derive from CASE_TYPES.index(), are unchanged and older splits regenerate identically.
+NOMINAL_TYPES_V2 = ["gamma_lighting"]
+DEFECT_TYPES_V2 = ["missing_near_marker", "foreign_near_marker"]
+DIFFERENT_TRAY_TYPES = ["different_tray"]  # same marker ids/positions, different contents
+NOMINAL_TYPES = NOMINAL_TYPES + NOMINAL_TYPES_V2
+DEFECT_TYPES = DEFECT_TYPES + DEFECT_TYPES_V2
+CASE_TYPES = NOMINAL_TYPES[:5] + DEFECT_TYPES[:5] + REGFAIL_TYPES + NOMINAL_TYPES_V2 + DEFECT_TYPES_V2 + DIFFERENT_TRAY_TYPES
+D2_CASE_TYPES = CASE_TYPES[:13]  # the case set used for the D2 splits (seeds 1000/2000)
+MARKER_FORCED_TYPES = set(NOMINAL_TYPES_V2 + DEFECT_TYPES_V2 + DIFFERENT_TRAY_TYPES)
+QUIET_ZONE = 10  # white margin around each rendered marker (px)
+MARKER_SPOTS = [  # top-left pixel of markers 0..3 in reference px
+    (TRAY[0] + 14, TRAY[1] + 14),
+    (TRAY[2] - 14 - MARKER_SIZE, TRAY[1] + 14),
+    (TRAY[2] - 14 - MARKER_SIZE, TRAY[3] - 14 - MARKER_SIZE),
+    (TRAY[0] + 14, TRAY[3] - 14 - MARKER_SIZE),
+]
+NEAR_MARKER_PX = 40.0  # a GT box within this distance of a marker quiet zone counts as "near"
 KINDS = ("disk", "chip", "nut", "cylinder", "bolt", "resistor")
 
 
@@ -176,9 +193,8 @@ def render(scene: Scene) -> np.ndarray:
         cv2.rectangle(img, (sx1 + MARGIN, sy1 + MARGIN), (sx2 + MARGIN, sy2 + MARGIN), tuple(int(v * 0.7) for v in scene.slot_color), 2, cv2.LINE_AA)
     if scene.markers:
         dictionary = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
-        q = 10  # white quiet zone
-        spots = [(TRAY[0] + 14, TRAY[1] + 14), (TRAY[2] - 14 - MARKER_SIZE, TRAY[1] + 14), (TRAY[2] - 14 - MARKER_SIZE, TRAY[3] - 14 - MARKER_SIZE), (TRAY[0] + 14, TRAY[3] - 14 - MARKER_SIZE)]
-        for mid, (mx, my) in enumerate(spots):
+        q = QUIET_ZONE
+        for mid, (mx, my) in enumerate(MARKER_SPOTS):
             mx, my = mx + MARGIN, my + MARGIN
             cv2.rectangle(img, (mx - q, my - q), (mx + MARKER_SIZE + q, my + MARKER_SIZE + q), (255, 255, 255), -1)
             img[my : my + MARKER_SIZE, mx : mx + MARKER_SIZE] = cv2.cvtColor(cv2.aruco.generateImageMarker(dictionary, mid, MARKER_SIZE), cv2.COLOR_GRAY2BGR)
@@ -204,6 +220,35 @@ def _inside_tray(box, pad=8) -> bool:
     return x >= TRAY[0] + 70 and y >= TRAY[1] + pad and x + w <= TRAY[2] - 70 and y + h <= TRAY[3] - pad
 
 
+def marker_zone_boxes() -> list[list[int]]:
+    """Marker + white quiet zone boxes [x, y, w, h] in reference px."""
+    return [[mx - QUIET_ZONE, my - QUIET_ZONE, MARKER_SIZE + 2 * QUIET_ZONE, MARKER_SIZE + 2 * QUIET_ZONE] for mx, my in MARKER_SPOTS]
+
+
+def box_gap(a, b) -> float:
+    """Euclidean gap between two axis-aligned boxes (0 if they touch or overlap)."""
+    dx = max(0, b[0] - (a[0] + a[2]), a[0] - (b[0] + b[2]))
+    dy = max(0, b[1] - (a[1] + a[3]), a[1] - (b[1] + b[3]))
+    return float(math.hypot(dx, dy))
+
+
+def _foreign_near_marker(rng, scene: Scene) -> Component | None:
+    """Foreign object 2-25 px outside a marker's quiet zone, on free tray surface."""
+    boxes = [component_bbox(c) for c in scene.components]
+    zones = marker_zone_boxes()
+    for _ in range(2000):
+        zx, zy, zw, zh = zones[int(rng.integers(4))]
+        size = rng.uniform(13, 20)
+        c = Component("foreign", rng.uniform(zx - 40, zx + zw + 40), rng.uniform(zy - 40, zy + zh + 40), size, rng.uniform(0, 180),
+                      _far_color(rng, scene.tray_color, 110), _color(rng, 0, 255))
+        box = component_bbox(c)
+        gaps = [box_gap(box, z) for z in zones]
+        inside = box[0] >= TRAY[0] + 6 and box[1] >= TRAY[1] + 6 and box[0] + box[2] <= TRAY[2] - 6 and box[1] + box[3] <= TRAY[3] - 6
+        if inside and 2 <= min(gaps) <= 25 and not _overlaps(box, boxes):
+            return c
+    return None
+
+
 # --------------------------------------------------------------------------- #
 # Perturbations
 # --------------------------------------------------------------------------- #
@@ -214,13 +259,13 @@ def random_homography(rng, jitter: float, shift: float, base_shift=(0.0, 0.0)) -
     return cv2.getPerspectiveTransform(src, dst).astype(np.float64)
 
 
-def photometric(img: np.ndarray, rng, strength: float) -> tuple[np.ndarray, dict]:
+def photometric(img: np.ndarray, rng, strength: float, gamma_scale: float = 0.15) -> tuple[np.ndarray, dict]:
     if strength <= 0:
         return img, {}
     gain = 1 + rng.uniform(-0.25, 0.25) * strength
     offset = rng.uniform(-20, 20) * strength
     cast = 1 + rng.uniform(-0.10, 0.10, 3) * strength
-    gamma = 1 + rng.uniform(-0.15, 0.15) * strength
+    gamma = 1 + rng.uniform(-gamma_scale, gamma_scale) * strength
     g = rng.uniform(0, 0.15) * strength
     theta = rng.uniform(0, 2 * math.pi)
     yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
@@ -267,7 +312,13 @@ CASE_PARAMS = {
     "unrelated_scene":  (8,     8,    0.3,   0.5,  2.0,  90),
     "low_overlap":      (8,     8,    0.3,   0.5,  2.0,  90),
     "heavy_blur":       (8,     8,    0.3,   7.0,  4.0,  80),
+    # D2.1 (markers always present; stronger gamma via GAMMA_SCALE)
+    "gamma_lighting":      (6,  6,    1.0,   0.0,  1.5,  None),
+    "missing_near_marker": (8,  8,    0.6,   0.5,  2.0,  90),
+    "foreign_near_marker": (8,  8,    0.6,   0.5,  2.0,  90),
+    "different_tray":      (8,  8,    0.3,   0.5,  2.0,  90),
 }
+GAMMA_SCALE = {"gamma_lighting": 0.30, "missing_near_marker": 0.30, "foreign_near_marker": 0.30}  # default 0.15
 
 
 def _foreign(rng, scene: Scene, subtle: bool) -> Component | None:
@@ -288,7 +339,10 @@ def _foreign(rng, scene: Scene, subtle: bool) -> Component | None:
 
 def make_case(case_type: str, seed: int) -> dict:
     rng = np.random.default_rng(seed)
-    markers = case_type not in ("unrelated_scene", "heavy_blur") and bool(rng.random() < 0.5)
+    if case_type in MARKER_FORCED_TYPES:
+        markers = True
+    else:  # unchanged from D2 so older case types draw identical random numbers
+        markers = case_type not in ("unrelated_scene", "heavy_blur") and bool(rng.random() < 0.5)
     scene = make_scene(int(rng.integers(1 << 30)), markers)
     insp_scene = replace(scene, components=list(scene.components), foreign=[])
     gt_boxes: list[list[int]] = []
@@ -322,6 +376,23 @@ def make_case(case_type: str, seed: int) -> dict:
         defect_type = "foreign_object"
     elif case_type == "unrelated_scene":
         insp_scene = make_scene(int(rng.integers(1 << 30)), markers=False)
+    elif case_type == "missing_near_marker":
+        zones = marker_zone_boxes()
+        gaps = [min(box_gap(component_bbox(c), z) for z in zones) for c in scene.components]
+        nearest = np.argsort(gaps)[:4]  # components in the slots closest to the markers
+        k = int(nearest[int(rng.integers(len(nearest)))])
+        gt_boxes.append(component_bbox(scene.components[k]))
+        insp_scene.components.pop(k)
+        defect_type = "missing"
+    elif case_type == "foreign_near_marker":
+        f = _foreign_near_marker(rng, scene)
+        if f is None:
+            raise RuntimeError(f"could not place near-marker foreign object for seed {seed}")
+        insp_scene.foreign = [f]
+        gt_boxes.append(component_bbox(f))
+        defect_type = "foreign_object"
+    elif case_type == "different_tray":
+        insp_scene = make_scene(int(rng.integers(1 << 30)), markers=True)
 
     jitter, shift, photo, blur, noise, jpeg = CASE_PARAMS[case_type]
     base = (0.5 * W * (1 if rng.random() < 0.5 else -1), 0.0) if case_type == "low_overlap" else (0.0, 0.0)
@@ -330,15 +401,20 @@ def make_case(case_type: str, seed: int) -> dict:
     ref_canvas = render(scene)
     reference = ref_canvas[MARGIN : MARGIN + H, MARGIN : MARGIN + W].copy()
     inspection = reference.copy() if case_type == "identical" else to_inspection(render(insp_scene), H_true)
-    inspection, photo_params = photometric(inspection, rng, photo)
+    inspection, photo_params = photometric(inspection, rng, photo, GAMMA_SCALE.get(case_type, 0.15))
     inspection = degrade(inspection, rng, blur, noise, jpeg)
 
     if case_type in NOMINAL_TYPES:
         category, expected_status = "nominal", "analyzed"
     elif case_type in DEFECT_TYPES:
         category, expected_status = "defect", "analyzed"
+    elif case_type in DIFFERENT_TRAY_TYPES:
+        # Registers geometrically (same fixture markers) but the contents differ; any
+        # outcome other than "analyzed with no candidates" is safe.
+        category, expected_status = "different_tray", "not_approved"
     else:
         category, expected_status = "registration_fail", "registration_failed"
+    zones = marker_zone_boxes() if markers else []
     return {
         "case_type": case_type,
         "category": category,
@@ -347,8 +423,10 @@ def make_case(case_type: str, seed: int) -> dict:
         "defect_type": defect_type,
         "ambiguous": case_type == "subtle_foreign",
         "gt_boxes_xywh": gt_boxes,
+        "gt_marker_gap_px": [round(min(box_gap(b, z) for z in zones), 2) if zones else None for b in gt_boxes],
         "H_true": H_true.tolist() if case_type != "unrelated_scene" else None,
         "markers": markers,
+        "marker_zone_boxes_xywh": zones,
         "perturbation": {"jitter": jitter, "shift": shift, "photometric": photo_params, "blur": blur, "noise": noise, "jpeg": jpeg},
         "_images": (reference, inspection),
     }
@@ -357,7 +435,7 @@ def make_case(case_type: str, seed: int) -> dict:
 def generate(out: Path, seed: int, per_type: int, types: list[str] | None = None) -> list[dict]:
     out.mkdir(parents=True, exist_ok=True)
     cases = []
-    for t_idx, case_type in enumerate(types or CASE_TYPES):
+    for case_type in types or CASE_TYPES:
         for i in range(per_type):
             case_seed = int(np.random.SeedSequence([seed, CASE_TYPES.index(case_type), i]).generate_state(1)[0])
             case = make_case(case_type, case_seed)
@@ -378,9 +456,12 @@ def main(argv=None) -> int:
     p.add_argument("--out", type=Path, required=True)
     p.add_argument("--seed", type=int, required=True)
     p.add_argument("--per-type", type=int, default=8)
-    p.add_argument("--types", nargs="*", choices=CASE_TYPES)
+    p.add_argument("--case-set", choices=("d2", "d21"), default="d21",
+                   help="d2: the 13 original case types (reproduces the D2 splits); d21: all types incl. marker cases")
+    p.add_argument("--types", nargs="*", choices=CASE_TYPES, help="explicit subset (overrides --case-set)")
     args = p.parse_args(argv)
-    cases = generate(args.out, args.seed, args.per_type, args.types)
+    types = args.types or (D2_CASE_TYPES if args.case_set == "d2" else CASE_TYPES)
+    cases = generate(args.out, args.seed, args.per_type, types)
     print(f"wrote {len(cases)} cases to {args.out}")
     return 0
 

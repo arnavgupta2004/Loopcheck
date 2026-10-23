@@ -33,6 +33,7 @@ class ComparisonResult:
     cues: dict[str, np.ndarray]
     regions: list[dict]
     diagnostics: dict = field(default_factory=dict)
+    scoring_mask: np.ndarray | None = None  # valid overlap minus exclusions (255 = scored)
 
 
 # --------------------------------------------------------------------------- #
@@ -273,12 +274,33 @@ def _change_hint(edge_ref: float, edge_ins: float) -> str:
 # --------------------------------------------------------------------------- #
 # Entry point
 # --------------------------------------------------------------------------- #
-def compare(ref: np.ndarray, aligned: np.ndarray, valid: np.ndarray, cfg: CompareConfig) -> ComparisonResult:
+def compare(ref: np.ndarray, aligned: np.ndarray, valid: np.ndarray, cfg: CompareConfig, exclude: np.ndarray | None = None) -> ComparisonResult:
+    """Compare in reference coordinates. `valid` = observed overlap; `exclude` (optional,
+    255 = excluded) = pixels that must not be scored, e.g. fiducial markers."""
     if ref.shape != aligned.shape or ref.shape[:2] != valid.shape:
         raise ValueError(f"shape mismatch: ref {ref.shape}, aligned {aligned.shape}, valid {valid.shape}")
     # Fill unobserved pixels with the reference so blur/SSIM windows near the overlap
     # border do not see the black warp padding (they are zeroed in the map anyway).
     aligned = np.where(valid[..., None] > 0, aligned, ref)
+    excluded_px = 0
+    if exclude is not None and np.any(exclude):
+        ex = cv2.bitwise_and(exclude, valid)
+        if cfg.exclude_mode == "dilate":
+            # Leave both images untouched (no invented content) and grow the exclusion by
+            # the cues' spatial reach so excluded contrast cannot leak into scored pixels.
+            r = cfg.exclude_leak_px
+            if r > 0:
+                ex = cv2.bitwise_and(cv2.dilate(ex, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * r + 1, 2 * r + 1))), valid)
+        elif cfg.exclude_mode == "inpaint":
+            # Fill excluded pixels in both images from their own surroundings. Rejected as
+            # default: the fill boundary can cut through nearby structure (e.g. a tray edge)
+            # that is then reconstructed differently in a sharp vs a blurred image.
+            ref = cv2.inpaint(ref, ex, cfg.exclude_inpaint_radius, cv2.INPAINT_TELEA)
+            aligned = cv2.inpaint(np.ascontiguousarray(aligned), ex, cfg.exclude_inpaint_radius, cv2.INPAINT_TELEA)
+        else:
+            raise ValueError(f"unknown exclude_mode {cfg.exclude_mode!r}")
+        excluded_px = int(np.count_nonzero(ex))
+        valid = cv2.bitwise_and(valid, cv2.bitwise_not(ex))  # scoring mask from here on
     photometric: dict = {}
     if cfg.global_mode == "histogram":
         aligned, photometric["global"] = match_histograms(ref, aligned, valid, cfg)
@@ -297,6 +319,7 @@ def compare(ref: np.ndarray, aligned: np.ndarray, valid: np.ndarray, cfg: Compar
         "photometric": photometric,
         "sharpness": sharpness,
         "valid_fraction": float(m.mean()),
+        "excluded_px": excluded_px,
         "cue_mean": {c: round(float(cues[c][m].mean()), 4) for c in CUES},
         "cue_p99": {c: round(float(np.percentile(cues[c][m], 99)), 4) for c in CUES},
         "anomaly_p99": round(float(np.percentile(anomaly[m], 99)), 4) if m.any() else 0.0,
@@ -304,4 +327,4 @@ def compare(ref: np.ndarray, aligned: np.ndarray, valid: np.ndarray, cfg: Compar
         "fraction_above_threshold": round(float((anomaly[m] >= cfg.threshold).mean()), 5) if m.any() else 0.0,
         "regions": region_diag,
     }
-    return ComparisonResult(anomaly, cues, regions, diag)
+    return ComparisonResult(anomaly, cues, regions, diag, valid)

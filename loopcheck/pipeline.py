@@ -12,6 +12,7 @@ from . import OPENCV_VERSION, __version__
 from .compare import compare
 from .config import PipelineConfig
 from .imageio import InputError, validate_array
+from .markers import marker_exclusion
 from .registration import overlap_mask, project_points, register, scale_homography, warp_to_reference
 
 STATUS_ANALYZED = "analyzed"
@@ -79,8 +80,32 @@ def inspect(reference: np.ndarray, inspection: np.ndarray, config: PipelineConfi
     aligned = warp_to_reference(ins_w, reg.H, ref_w.shape)
     valid = overlap_mask(ins_w.shape, reg.H, ref_w.shape, cfg.registration.border_erode_px)
 
+    # Detected fiducials are excluded from scoring. compare() inpaints them in both images,
+    # drops them from the photometric fit and zeroes the map there, so they can neither
+    # form regions nor raise neighbouring scores.
+    marker_polys_ins: list[np.ndarray] = []
+    excl = None
+    if cfg.markers.enabled:
+        leak = cfg.compare.exclude_leak_px if cfg.compare.exclude_mode == "dilate" else 0
+        excl, minfo = marker_exclusion(ref_w.shape, ins_w.shape, reg.H, reg.markers_reference, reg.markers_inspection, valid, cfg.markers, leak)
+        minfo["cap_check_area_px"] = round(minfo["cap_check_area_px"] / (s_r * s_r))
+        for e in minfo["markers"]:
+            poly = e.pop("polygon_reference")
+            if e["masked"] and minfo["applied"]:
+                marker_polys_ins.append(project_points(poly, reg.H) / s_i)
+            e["polygon_reference"] = (poly / s_r).round(2).tolist()
+        minfo["masked_area_px"] = round(minfo["masked_area_px"] / (s_r * s_r))  # original reference px
+        report["marker_masking"] = minfo
+    else:
+        report["marker_masking"] = {"enabled": False}
+
     t_cmp = time.perf_counter()
-    cmp = compare(ref_w, aligned, valid, cfg.compare)
+    cmp = compare(ref_w, aligned, valid, cfg.compare, exclude=excl)
+    scoring = cmp.scoring_mask
+    if cfg.markers.enabled:  # area actually removed from scoring, incl. leak dilation
+        eff = cmp.diagnostics["excluded_px"]
+        report["marker_masking"]["effective_excluded_px"] = round(eff / (s_r * s_r))
+        report["marker_masking"]["effective_excluded_fraction_of_valid"] = round(eff / max(int(np.count_nonzero(valid)), 1), 5)
     report["comparison"] = {**cmp.diagnostics, "seconds": round(time.perf_counter() - t_cmp, 4)}
 
     regions = []
@@ -104,8 +129,8 @@ def inspect(reference: np.ndarray, inspection: np.ndarray, config: PipelineConfi
 
     images = {
         "aligned": aligned,
-        "heatmap": _heatmap(aligned, cmp.anomaly_map, valid),
-        "overlay": _overlay(ins, regions),
+        "heatmap": _heatmap(aligned, cmp.anomaly_map, scoring),
+        "overlay": _overlay(ins, regions, marker_polys_ins),
         "anomaly_map": (cmp.anomaly_map * 255).round().astype(np.uint8),
     }
     return InspectionResult(report, images)
@@ -114,9 +139,11 @@ def inspect(reference: np.ndarray, inspection: np.ndarray, config: PipelineConfi
 # --------------------------------------------------------------------------- #
 # Visualisation
 # --------------------------------------------------------------------------- #
-def _overlay(ins: np.ndarray, regions: list[dict]) -> np.ndarray:
+def _overlay(ins: np.ndarray, regions: list[dict], masked_polys: list[np.ndarray] = ()) -> np.ndarray:
     out = ins.copy()
     thick = max(2, round(max(ins.shape[:2]) / 400))
+    for poly in masked_polys:  # excluded fiducials: thin grey outline
+        cv2.polylines(out, [np.round(poly).astype(np.int32).reshape(-1, 1, 2)], True, (150, 150, 150), 1, cv2.LINE_AA)
     for r in regions:
         poly = np.array(r["polygon_inspection"], np.float32).round().astype(np.int32).reshape(-1, 1, 2)
         cv2.polylines(out, [poly], True, (0, 0, 255), thick, cv2.LINE_AA)

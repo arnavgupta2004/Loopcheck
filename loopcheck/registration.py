@@ -34,6 +34,10 @@ class RegistrationResult:
     metrics: dict = field(default_factory=dict)
     failure_reason: str | None = None
     attempts: list[dict] = field(default_factory=list)
+    # ArUco detections {id: 4x2 corners} in each image's own pixel coordinates (always
+    # populated from the ArUco attempt, whichever method finally registered the pair).
+    markers_reference: dict = field(default_factory=dict)
+    markers_inspection: dict = field(default_factory=dict)
 
 
 # --------------------------------------------------------------------------- #
@@ -124,6 +128,7 @@ def estimate_aruco(ref_gray, insp_gray, cfg: RegistrationConfig) -> dict:
     insp_m = detect_aruco(insp_gray, cfg.aruco_dictionary)
     common = sorted(set(ref_m) & set(insp_m))
     attempt = {"method": "aruco", "markers_reference": len(ref_m), "markers_inspection": len(insp_m), "markers_common": len(common)}
+    attempt["_detections"] = (ref_m, insp_m)  # private: reused for marker masking, not reported
     if len(common) < cfg.aruco_min_markers:
         attempt["failure_reason"] = "too_few_common_markers"
         return attempt
@@ -244,20 +249,23 @@ def register(ref: np.ndarray, insp: np.ndarray, cfg: RegistrationConfig) -> Regi
             chosen = attempt
             break
 
-    public = [{k: v for k, v in a.items() if k != "H"} for a in attempts]
+    ref_markers, insp_markers = attempts[0].get("_detections", ({}, {}))
+    public = [{k: v for k, v in a.items() if k != "H" and not k.startswith("_")} for a in attempts]
     if chosen is None:
-        return RegistrationResult(False, None, None, failure_reason=attempts[-1]["failure_reason"], attempts=public)
+        return RegistrationResult(False, None, None, failure_reason=attempts[-1]["failure_reason"], attempts=public,
+                                  markers_reference=ref_markers, markers_inspection=insp_markers)
 
     H = chosen["H"] / chosen["H"][2, 2]
-    metrics = {k: v for k, v in chosen.items() if k not in ("H", "method")}
+    metrics = {k: v for k, v in chosen.items() if k not in ("H", "method") and not k.startswith("_")}
     if cfg.ecc_enabled:
         H, ecc_info = refine_ecc(ref_gray, insp_gray, H, cfg)
         metrics["ecc"] = ecc_info
         if ecc_info["accepted"]:
             reason, sanity = sanity_check(H, ref.shape, insp.shape, cfg)
             if reason:  # should not happen given the corner-shift bound, but never trust it blindly
-                return RegistrationResult(False, chosen["method"], None, metrics, f"after_ecc_{reason}", public)
+                return RegistrationResult(False, chosen["method"], None, metrics, f"after_ecc_{reason}", public,
+                                          ref_markers, insp_markers)
             metrics.update(sanity)
     else:
         metrics["ecc"] = {"attempted": False}
-    return RegistrationResult(True, chosen["method"], H, metrics, None, public)
+    return RegistrationResult(True, chosen["method"], H, metrics, None, public, ref_markers, insp_markers)

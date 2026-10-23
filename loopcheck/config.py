@@ -95,12 +95,41 @@ class CompareConfig:
     min_region_peak: float = 0.45
     max_regions: int = 25
 
+    # Excluded pixels (e.g. markers): "dilate" grows the exclusion by exclude_leak_px and
+    # leaves both images untouched; "inpaint" fills them in both images (cv2.inpaint).
+    exclude_mode: str = "dilate"
+    exclude_leak_px: int = 6  # ~3 * ssim_sigma: reach of the blur/SSIM/smoothing windows
+    exclude_inpaint_radius: float = 3.0
+
+
+@dataclass
+class MarkerMaskConfig:
+    """Exclude detected ArUco fiducials (interior + white quiet zone) from anomaly scoring.
+
+    Markers are fixture, not inspected content, and their pure black/white pixels sit
+    at the tonal extremes where photometric normalisation is least accurate. Only
+    markers actually detected (in either image) are masked; nothing is extrapolated.
+    """
+
+    enabled: bool = True
+    # Each detected quad is grown outward by margin_frac * side + margin_px. A 4x4 marker
+    # is 6 modules wide (incl. black border), so a standard 1-module quiet zone is
+    # side / 6 = 0.167 * side; 0.25 covers it plus registration/interpolation slack.
+    margin_frac: float = 0.25
+    margin_px: float = 2.0
+    # Safety caps so masking cannot hide large areas: a marker whose grown polygon
+    # exceeds max_marker_area_frac of the reference image is not masked, and if all
+    # masks together exceed max_total_frac of the valid area, masking is skipped entirely.
+    max_marker_area_frac: float = 0.03
+    max_total_frac: float = 0.10
+
 
 @dataclass
 class PipelineConfig:
     work_max_dim: int = 1024
     registration: RegistrationConfig = field(default_factory=RegistrationConfig)
     compare: CompareConfig = field(default_factory=CompareConfig)
+    markers: MarkerMaskConfig = field(default_factory=MarkerMaskConfig)
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -113,6 +142,8 @@ class PipelineConfig:
                 _update(cfg.registration, value)
             elif key == "compare":
                 _update(cfg.compare, value)
+            elif key == "markers":
+                _update(cfg.markers, value)
             elif key == "work_max_dim":
                 cfg.work_max_dim = int(value)
             else:

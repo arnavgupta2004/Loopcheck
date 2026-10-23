@@ -32,6 +32,9 @@ from .pipeline import STATUS_ANALYZED, inspect
 from .registration import corner_error
 
 IOU_THRESHOLD = 0.3
+NEAR_MARKER_PX = 40.0  # matches synth.NEAR_MARKER_PX
+BAD_ALIGNMENT_PX = 2.0  # analysed case whose corner error exceeds this counts as misaligned
+GOOD_OUTCOMES = ("tn", "tp_localized", "correct_rejection", "safe_flagged", "safe_registration_failed")
 
 
 def iou(a, b) -> float:
@@ -77,7 +80,31 @@ def evaluate_case(case: dict, data_dir: Path, cfg: PipelineConfig) -> tuple[dict
     row["gt_ious"] = [round(max((iou(g, p) for p in pred_boxes), default=0.0), 4) for g in case["gt_boxes_xywh"]]
     row["gt_matched"] = [v >= IOU_THRESHOLD for v in row["gt_ious"]]
     row["pred_matched"] = [any(iou(g, p) >= IOU_THRESHOLD for g in case["gt_boxes_xywh"]) for p in pred_boxes]
+    # D2.1 fields (manifests from D2 lack marker metadata -> treated as "no markers").
+    zones = case.get("marker_zone_boxes_xywh", [])
+    row["marker_fp_regions"] = sum(not m and marker_attributable(p, zones) for p, m in zip(pred_boxes, row["pred_matched"]))
+    row["unmatched_regions"] = sum(not m for m in row["pred_matched"])
+    gaps = case.get("gt_marker_gap_px", [None] * len(case["gt_boxes_xywh"]))
+    row["gt_near_marker"] = [g is not None and g <= NEAR_MARKER_PX for g in gaps]
+    row["marker_masking_applied"] = bool(rep.get("marker_masking", {}).get("applied", False))
+    row["masked_fraction_of_valid"] = rep.get("marker_masking", {}).get("effective_excluded_fraction_of_valid", 0.0)
     return row, {"result": result, "ref": ref, "ins": ins, "pred_boxes": pred_boxes}
+
+
+def marker_attributable(box, zones, pad: float = 20.0, min_frac: float = 0.25) -> bool:
+    """A predicted box is marker-attributable if >= min_frac of it lies on a marker zone (+pad).
+
+    The marker zone already includes the white quiet zone; pad = 20 px reaches past the
+    widest mask margin evaluated (0.35 * 56 + 2 = 21.6 px from the marker edge, i.e.
+    11.6 px beyond the quiet zone), so artifacts at the mask boundary are counted too.
+    """
+    x, y, w, h = box
+    for zx, zy, zw, zh in zones:
+        ix = max(0.0, min(x + w, zx + zw + pad) - max(x, zx - pad))
+        iy = max(0.0, min(y + h, zy + zh + pad) - max(y, zy - pad))
+        if w * h > 0 and ix * iy >= min_frac * w * h:
+            return True
+    return False
 
 
 def summarize(rows: list[dict]) -> dict:
@@ -90,12 +117,23 @@ def summarize(rows: list[dict]) -> dict:
     defect = [r for r in rows if r["category"] == "defect"]
     gt_flags = [m for r in defect for m in r["gt_matched"]]
     pred_flags = [m for r in defect for m in r["pred_matched"]]
-    should_register = [r for r in rows if r["category"] != "registration_fail"]
+    should_register = [r for r in rows if r["category"] in ("nominal", "defect")]
     errs = [r["corner_error_px"] for r in should_register if "corner_error_px" in r]
     regfail = [r for r in rows if r["category"] == "registration_fail"]
+    diff_tray = [r for r in rows if r["category"] == "different_tray"]
 
     def q(v, p):
         return round(float(np.percentile(v, p)), 4) if v else None
+
+    def recall_group(pred):
+        flags = [m for r in defect for m, near in zip(r["gt_matched"], r["gt_near_marker"]) if pred(r, near)]
+        cases = [r for r in defect if any(pred(r, n) for n in r["gt_near_marker"])]
+        return {
+            "gt_boxes": len(flags),
+            "region_recall_iou30": (sum(flags) / len(flags)) if flags else None,
+            "cases": len(cases),
+            "image_recall": (sum(r["predicted_defect"] for r in cases) / len(cases)) if cases else None,
+        }
 
     summary = {
         "n_cases": len(rows),
@@ -115,6 +153,33 @@ def summarize(rows: list[dict]) -> dict:
             "correct_rejection_rate": sum(r["status"] != STATUS_ANALYZED for r in regfail) / len(regfail) if regfail else None,
         },
         "seconds_per_case": {"median": q([r["seconds"] for r in rows], 50), "max": max(r["seconds"] for r in rows)},
+        "markers": {
+            "marker_fp_regions_total": sum(r["marker_fp_regions"] for r in rows if r["category"] in ("nominal", "defect")),
+            "marker_fp_regions_nominal": sum(r["marker_fp_regions"] for r in nominal),
+            "marker_fp_regions_defect_cases": sum(r["marker_fp_regions"] for r in defect),
+            "nominal_images_with_marker_fp": sum(r["marker_fp_regions"] > 0 for r in nominal),
+            "unmatched_regions_defect_cases": sum(r["unmatched_regions"] for r in defect),
+            "cases_with_masking_applied": sum(r["marker_masking_applied"] for r in rows),
+            "median_masked_fraction_when_applied": q([r["masked_fraction_of_valid"] for r in rows if r["marker_masking_applied"]], 50),
+        },
+        "defects_near_vs_distant": {
+            f"near_marker (gap <= {NEAR_MARKER_PX:g} px)": recall_group(lambda r, near: near),
+            "distant_from_markers (markers present)": recall_group(lambda r, near: r["markers"] and not near),
+            "no_markers_in_scene": recall_group(lambda r, near: not r["markers"]),
+        },
+        "incorrect_alignments": {
+            "threshold_px": BAD_ALIGNMENT_PX,
+            "count": sum(r.get("corner_error_px", 0) > BAD_ALIGNMENT_PX for r in rows),
+            "cases": [r["id"] for r in rows if r.get("corner_error_px", 0) > BAD_ALIGNMENT_PX],
+        },
+        "different_tray": {
+            "n": len(diff_tray),
+            "registration_failed": sum(r["status"] != STATUS_ANALYZED for r in diff_tray),
+            "registered_and_flagged": sum(r["predicted_defect"] for r in diff_tray),
+            "registered_no_candidates_UNSAFE": sum(r["status"] == STATUS_ANALYZED and not r["predicted_defect"] for r in diff_tray),
+            "registered_via": {m: sum(r["method"] == m for r in diff_tray) for m in ("aruco", "sift")},
+            "median_regions": q([r["n_regions"] for r in diff_tray], 50),
+        },
     }
     per_type = {}
     for t in dict.fromkeys(r["case_type"] for r in rows):
@@ -157,6 +222,10 @@ def _panel(case: dict, row: dict, art: dict) -> np.ndarray:
 def classify_outcome(row: dict) -> str:
     if row["category"] == "registration_fail":
         return "correct_rejection" if row["status"] != STATUS_ANALYZED else "missed_rejection"
+    if row["category"] == "different_tray":
+        if row["status"] != STATUS_ANALYZED:
+            return "safe_registration_failed"
+        return "safe_flagged" if row["predicted_defect"] else "unsafe_no_candidates"
     if row["expected_defect"]:
         if row["status"] != STATUS_ANALYZED:
             return "fn_registration_failed"
@@ -174,7 +243,7 @@ def write_markdown(summary: dict, rows: list[dict], path: Path, title: str) -> N
     lines = [
         f"# {title}",
         "",
-        f"OpenCV {OPENCV_VERSION}; {summary['n_cases']} cases. Generated by `loopcheck.evaluate`. Do not edit by hand.",
+        f"**SYNTHETIC DATA.** OpenCV {OPENCV_VERSION}; {summary['n_cases']} cases. Generated by `loopcheck.evaluate`. Do not edit by hand.",
         "",
         "| Metric | Value |",
         "|---|---|",
@@ -198,7 +267,25 @@ def write_markdown(summary: dict, rows: list[dict], path: Path, title: str) -> N
     ]
     for t, s in summary["per_case_type"].items():
         lines.append(f"| {t} | {s['category']} | {s['n']} | {s['analyzed']} | {s['registration_failed']} | {s['flagged']} | {fmt(s['region_recall_iou30'])} | {s['mean_regions']} | {fmt(s['median_corner_error_px'])} |")
-    bad = [r for r in rows if r["outcome"] not in ("tn", "tp_localized", "correct_rejection")]
+    mk, dt, ia = summary["markers"], summary["different_tray"], summary["incorrect_alignments"]
+    lines += [
+        "",
+        "## Markers, near/distant defects, alignment",
+        "",
+        "| Metric | Value |",
+        "|---|---|",
+        f"| Marker-attributable false-positive regions (nominal + defect cases) | {mk['marker_fp_regions_total']} (nominal {mk['marker_fp_regions_nominal']}, defect cases {mk['marker_fp_regions_defect_cases']}) |",
+        f"| Nominal images with >= 1 marker-attributable region | {mk['nominal_images_with_marker_fp']} |",
+        f"| Unmatched regions in defect cases (all causes) | {mk['unmatched_regions_defect_cases']} |",
+        f"| Cases with marker masking applied / median effective excluded fraction of valid area | {mk['cases_with_masking_applied']} / {fmt(mk['median_masked_fraction_when_applied'])} |",
+    ]
+    for group, g in summary["defects_near_vs_distant"].items():
+        lines.append(f"| Defects {group}: cases, image recall / GT boxes, region recall@0.3 | {g['cases']}, {fmt(g['image_recall'])} / {g['gt_boxes']}, {fmt(g['region_recall_iou30'])} |")
+    lines += [
+        f"| Incorrect alignments (corner error > {ia['threshold_px']:g} px) | {ia['count']} {ia['cases'] or ''} |",
+        f"| Different tray, same marker ids (n={dt['n']}): registration failed / flagged / UNSAFE no candidates | {dt['registration_failed']} / {dt['registered_and_flagged']} / {dt['registered_no_candidates_UNSAFE']} (via ArUco {dt['registered_via']['aruco']}, SIFT {dt['registered_via']['sift']}) |",
+    ]
+    bad = [r for r in rows if r["outcome"] not in GOOD_OUTCOMES]
     lines += ["", "## Cases not handled correctly", "", "| Case | Outcome | Status / reason | Regions | GT IoU |", "|---|---|---|---|---|"]
     for r in bad:
         lines.append(f"| {r['id']} | {r['outcome']} | {r['status']} {r['failure_reason'] or ''} | {r['n_regions']} | {r['gt_ious']} |")
@@ -213,6 +300,7 @@ def main(argv=None) -> int:
     p.add_argument("--out", type=Path, required=True)
     p.add_argument("--config", type=Path)
     p.add_argument("--gallery", type=int, default=12, help="max failure panels to save (successes: one per type)")
+    p.add_argument("--title", default=None, help="summary.md heading")
     args = p.parse_args(argv)
 
     cfg = PipelineConfig.from_json(args.config) if args.config else PipelineConfig()
@@ -226,7 +314,7 @@ def main(argv=None) -> int:
         row, art = evaluate_case(case, args.data, cfg)
         row["outcome"] = classify_outcome(row)
         rows.append(row)
-        good = row["outcome"] in ("tn", "tp_localized", "correct_rejection")
+        good = row["outcome"] in GOOD_OUTCOMES
         if good and case["case_type"] not in saved_success:
             saved_success.add(case["case_type"])
             cv2.imwrite(str(gallery / f"ok_{case['id']}.jpg"), _panel(case, row, art), [cv2.IMWRITE_JPEG_QUALITY, 80])
@@ -239,7 +327,8 @@ def main(argv=None) -> int:
     summary.update(opencv_version=OPENCV_VERSION, data=str(args.data), data_seed=manifest["seed"], config=cfg.to_dict())
     (args.out / "metrics.json").write_text(json.dumps(summary, indent=2) + "\n")
     (args.out / "per_case.json").write_text(json.dumps(rows, indent=1) + "\n")
-    write_markdown(summary, rows, args.out / "summary.md", f"LoopCheck D2 evaluation: {args.data.name} split (seed {manifest['seed']})")
+    title = args.title or f"LoopCheck evaluation: {args.data.name} split (seed {manifest['seed']})"
+    write_markdown(summary, rows, args.out / "summary.md", title)
     il = summary["image_level"]
     print(f"\nP={il['precision']} R={il['recall']} F1={il['f1']} FPR={summary['false_positive_rate_nominal']} "
           f"region_recall={summary['region_recall_iou30']} reg_success={summary['registration']['success_rate']}")
