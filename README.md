@@ -33,11 +33,60 @@ uv run --frozen --group demo streamlit run app/streamlit_app.py
 - **Downloads:** the JSON report and the annotated overlay.
 - **Backend:** "Local (in-process)" runs the real controller in the Streamlit process.
   "HTTP API" calls `LOOPCHECK_API_URL`: the deployed API, or the local stand-in below.
+- **Where the API URL comes from, in order:**
+  1. the `LOOPCHECK_API_URL` environment variable;
+  2. `LOOPCHECK_API_URL` in Streamlit secrets;
+  3. `http://127.0.0.1:8000`.
+
+  A URL that comes from secrets is never shown: the URL field is replaced by a note, and the
+  URL is redacted from error messages.
+- **No browser calls to the API:** requests are made server-side by `loopcheck.client`
+  (Python `urllib`). The browser never contacts API Gateway, so the API's CORS setting does
+  not need to allow the Streamlit domain.
 
 ```bash
 uv run --frozen python -m loopcheck.local_server --port 8000   # same handler code as Lambda
 LOOPCHECK_API_URL=http://127.0.0.1:8000 uv run --frozen --group demo streamlit run app/streamlit_app.py
 ```
+
+### Deploy the UI on Streamlit Community Cloud
+
+The hosted app is only the frontend. Inspections run either in the app process ("Local") or
+through your deployed AWS API ("HTTP API"). Nothing is deployed to AWS by these steps.
+
+1. Push the branch you want to deploy to GitHub (for example `main` after merging).
+2. Go to [share.streamlit.io](https://share.streamlit.io), choose **Create app** → **Deploy a
+   public app from GitHub**, and set:
+   - **Repository:** `arnavgupta2004/Loopcheck`
+   - **Branch:** the branch from step 1
+   - **Main file path:** `app/streamlit_app.py`
+3. **Advanced settings:**
+   - **Python version: 3.13.** Use 3.12 or newer, because numpy 2.5.4 requires it. 3.13
+     matches local development and the Lambda runtime.
+   - **Secrets:** paste the following, with your real `ApiUrl` stack output and no trailing
+     path:
+     ```toml
+     LOOPCHECK_API_URL = "https://<api-id>.execute-api.ap-south-1.amazonaws.com"
+     ```
+4. **Deploy.**
+   - Cloud installs `app/requirements.txt`, which sits next to the entrypoint and is picked
+     before the root files: `streamlit==1.66.1`, `opencv-contrib-python-headless==5.0.0.93`,
+     `numpy==2.5.4`.
+   - OpenCV and NumPy are needed even in HTTP API mode, to decode and display images.
+5. **Verify** in the deployed app:
+   - choose **HTTP API**;
+   - **Check API health** must say `ok: OpenCV 5.0.0`;
+   - run a bundled case; the decision banner should read `… · HTTP API · …`.
+
+Secrets live only in the app's Cloud settings: **⋮ → Settings → Secrets**, where you can also
+edit them later; the app restarts on save. **Never commit** a `.streamlit/secrets.toml` with
+a real endpoint (it is Git-ignored). For local testing of the secrets path, put it in
+`~/.streamlit/secrets.toml` instead.
+
+The dependency files stay separate:
+- `app/requirements.txt`: hosted UI;
+- root `requirements.txt` / `pyproject.toml` / `uv.lock`: development;
+- `deploy/requirements-lambda.txt`: the Lambda zip, which never includes Streamlit.
 
 ## AWS backend (prepared, NOT deployed)
 
@@ -201,7 +250,7 @@ metrics are on **synthetic** data.
 ```
 loopcheck/      config, imageio, registration, markers, compare, pipeline, agent, cli, synth, evaluate, evaluate_agent,
                 service, aws_lambda, local_server, client (D4)
-app/            streamlit_app.py (D4 demo UI)
+app/            streamlit_app.py (D4 demo UI), requirements.txt (Streamlit Community Cloud only)
 deploy/         build_lambda_zip.sh, preflight.sh (read-only), requirements-lambda.txt, Dockerfile (alternative), .env.example, samconfig.example.toml, iam/ (least-privilege deployer policies)
 template.yaml   SAM template: HTTP API + Lambda (not deployed)
 tests/          pytest suite

@@ -4,7 +4,10 @@
 
 Runs the REAL D3 controller, either in-process ("Local") or through the HTTP API
 ("API": the deployed AWS Lambda behind API Gateway, or `python -m loopcheck.local_server`).
-The API URL comes from the sidebar or the LOOPCHECK_API_URL environment variable.
+API requests are made server-side by `loopcheck.client` (urllib), never from the browser.
+Default API URL: the LOOPCHECK_API_URL environment variable, else LOOPCHECK_API_URL in
+st.secrets (Streamlit Community Cloud "Secrets"), else http://127.0.0.1:8000. An endpoint
+from secrets is never displayed: the URL field is locked and the URL is redacted from errors.
 """
 
 from __future__ import annotations
@@ -33,6 +36,23 @@ STATUS_HELP = {"confirmed": "reproduced by independent re-inspection views", "di
                "ambiguous": "conflicting or partial evidence: escalated", "unresolved": "not examined (budget/early stop): escalated"}
 
 st.set_page_config(page_title="LoopCheck: agentic visual inspection", page_icon="🔍", layout="wide")
+
+
+def _secret_api_url() -> str | None:
+    """LOOPCHECK_API_URL from st.secrets; None when there is no secrets file, no key or a bad file."""
+    try:
+        value = st.secrets.get(client.API_URL_KEY)
+    except Exception:  # FileNotFoundError / StreamlitSecretNotFoundError / parse errors: fall back silently
+        return None
+    return value if isinstance(value, str) else None
+
+
+DEFAULT_API_URL, API_URL_SOURCE = client.resolve_api_url(os.environ, _secret_api_url())
+HIDE_API_URL = API_URL_SOURCE == "secrets"
+
+
+def _safe(message: str, url: str) -> str:
+    return client.redact(message, url) if HIDE_API_URL else message
 
 
 # --------------------------------------------------------------------------- helpers
@@ -73,7 +93,7 @@ def run_inspection(backend: str, api_url: str, ref: bytes, ins: bytes) -> dict:
     except ServiceError as exc:
         return {"response": exc.body(), "images": {}, "backend": backend, "wall_s": time.perf_counter() - t0}
     except client.ApiError as exc:
-        return {"response": {"decision": "HUMAN_REVIEW", "error": {"code": "api_unreachable", "message": str(exc)}},
+        return {"response": {"decision": "HUMAN_REVIEW", "error": {"code": "api_unreachable", "message": _safe(str(exc), api_url)}},
                 "images": {}, "backend": backend, "wall_s": time.perf_counter() - t0}
     except Exception as exc:  # the UI never turns a failure into APPROVE
         return {"response": {"decision": "HUMAN_REVIEW", "error": {"code": "ui_exception", "message": f"{type(exc).__name__}: {exc}"}},
@@ -102,14 +122,17 @@ with st.sidebar:
     st.header("Backend")
     backend = st.radio("Run the controller", ["Local (in-process)", "HTTP API"], key="backend",
                        help="Local runs loopcheck.service in this process. HTTP API calls the deployed Lambda (or loopcheck.local_server).")
-    api_url = st.text_input("API base URL", os.environ.get("LOOPCHECK_API_URL", "http://127.0.0.1:8000"), key="api_url",
-                            disabled=backend != "HTTP API")
+    if HIDE_API_URL:  # configured in Secrets: use it, never show it, and do not let visitors point the server elsewhere
+        api_url = DEFAULT_API_URL
+        st.caption("API endpoint: configured in the app's Secrets (not shown).")
+    else:
+        api_url = st.text_input("API base URL", DEFAULT_API_URL, key="api_url", disabled=backend != "HTTP API")
     if backend == "HTTP API" and st.button("Check API health", key="health"):
         try:
             h = client.health(api_url)
             (st.success if h.get("status") == "ok" else st.error)(f"{h.get('status')}: OpenCV {h.get('opencv_version')}")
         except client.ApiError as exc:
-            st.error(str(exc))
+            st.error(_safe(str(exc), api_url))
 
     st.header("Input")
     source = st.radio("Images", ["Bundled synthetic case", "Upload"], key="source")

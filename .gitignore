@@ -16,3 +16,6 @@ video/*.mp4
 video/voiceover.wav
 video/assets/pipeline/*/*.png
 video/assets/music/
+
+# Streamlit secrets (LOOPCHECK_API_URL etc.) are configured in the Cloud UI, never committed
+.streamlit/secrets.toml

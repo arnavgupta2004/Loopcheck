@@ -1,0 +1,8 @@
+# Streamlit Community Cloud dependencies for the UI (entrypoint: app/streamlit_app.py).
+# Cloud reads this file because it sits next to the entrypoint. Pins match uv.lock.
+# Separate from the root requirements.txt (uv export of the core package) and from
+# deploy/requirements-lambda.txt (the AWS Lambda zip, which never includes Streamlit).
+# Requires Python >= 3.12 (numpy 2.5.4); choose Python 3.13 under Advanced settings.
+streamlit==1.66.1
+opencv-contrib-python-headless==5.0.0.93
+numpy==2.5.4

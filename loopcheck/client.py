@@ -8,6 +8,34 @@ import urllib.error
 import urllib.request
 
 TIMEOUT_S = 35.0  # API Gateway HTTP API integrations time out at 30 s
+DEFAULT_API_URL = "http://127.0.0.1:8000"  # loopcheck.local_server for development
+API_URL_KEY = "LOOPCHECK_API_URL"
+REDACTED_URL = "<configured API endpoint>"
+
+
+def resolve_api_url(environ, secret: str | None) -> tuple[str, str]:
+    """Default API base URL and where it came from: ("env" | "secrets" | "default").
+
+    Order: the LOOPCHECK_API_URL environment variable, then the value from Streamlit secrets,
+    then the local development server. Streamlit Community Cloud also exports root-level
+    secrets as environment variables, so an env value equal to the secret counts as "secrets"
+    (the UI hides secret-sourced endpoints). Blank values are ignored.
+    """
+    env = (environ.get(API_URL_KEY) or "").strip()
+    sec = (secret or "").strip() if isinstance(secret, str) else ""
+    if env and env != sec:
+        return env, "env"
+    if sec:
+        return sec, "secrets"
+    return DEFAULT_API_URL, "default"
+
+
+def redact(message: str, url: str) -> str:
+    """Remove the endpoint (with or without a trailing slash) from a user-facing message."""
+    for u in sorted({url, url.rstrip("/")}, key=len, reverse=True):
+        if u:
+            message = message.replace(u, REDACTED_URL)
+    return message
 
 
 class ApiError(Exception):
