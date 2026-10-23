@@ -1,11 +1,15 @@
-# Copy to samconfig.toml in the repo root and fill in the region before `sam deploy`.
+# Optional: copy to samconfig.toml in the repo root to shorten `sam deploy`.
+# The runbook (docs/d4_demo_and_deployment.md) passes every flag explicitly instead.
+# No credentials belong here: authentication comes from the AWS CLI profile.
 version = 0.1
 
 [default.deploy.parameters]
 stack_name = "loopcheck-demo"
-region = "<region>"
-resolve_s3 = true                 # SAM-managed artifact bucket (uploads the 80 MiB zip)
-capabilities = "CAPABILITY_IAM"   # SAM creates the function's execution role
+region = "ap-south-1"
+profile = "loopcheck"
+resolve_s3 = true                 # SAM-managed artifact bucket (shared; persists after sam delete)
+s3_prefix = "loopcheck-demo"
+capabilities = "CAPABILITY_IAM"   # SAM creates the function's logging-only execution role
 confirm_changeset = true          # review the change set before anything is created
-parameter_overrides = "AllowedOrigin=http://localhost:8501 MemorySizeMB=2048 ThrottleRatePerSecond=2 ThrottleBurst=5"
+parameter_overrides = "AllowedOrigin=http://localhost:8501 ReservedConcurrency=2 ThrottleRatePerSecond=2 ThrottleBurst=5"
 tags = "project=loopcheck purpose=opencv-competition-demo"

@@ -11,6 +11,7 @@ approve, flag a defect or request human review.
 - D2.1 (exclude detected ArUco markers from anomaly scoring, validated on fresh synthetic splits): complete.
 - D3 (adaptive perception-decision-action controller with a traced APPROVE / DEFECT /
   HUMAN_REVIEW decision): complete. See [docs/d3_agent.md](docs/d3_agent.md).
+- D4.1 (hardened AWS configuration, read-only preflight, deployment runbook for ap-south-1): complete; not deployed.
 - D4 (Streamlit demo UI + AWS Lambda/API Gateway backend): demo complete and verified
   locally. AWS backend **prepared but NOT deployed**: no cloud resources exist and there is
   no public URL. See [docs/d4_demo_and_deployment.md](docs/d4_demo_and_deployment.md).
@@ -38,14 +39,28 @@ uv run --frozen python -m loopcheck.local_server --port 8000   # same handler co
 LOOPCHECK_API_URL=http://127.0.0.1:8000 uv run --frozen --group demo streamlit run app/streamlit_app.py
 ```
 
-## AWS backend (prepared, not deployed)
+## AWS backend (prepared, NOT deployed)
+
+The target is stack `loopcheck-demo` in `ap-south-1`, deployed with AWS profile `loopcheck`
+from your own machine. The full copy-paste runbook, including verification, logs and safe
+cleanup, is in [docs/d4_demo_and_deployment.md](docs/d4_demo_and_deployment.md#runbook-deploy-from-your-own-machine).
 
 ```bash
-bash deploy/build_lambda_zip.sh      # zip package, no Docker; verifies OpenCV 5 + /health locally
-sam validate --lint                  # needs the SAM CLI (uv tool install aws-sam-cli)
-sam deploy --guided --region <region>   # ONLY after approval: creates the resources listed in docs/d4_*
-sam delete --stack-name loopcheck-demo --region <region>   # cleanup
+# LOCAL, free: build + verify the zip, validate, read-only preflight
+bash deploy/build_lambda_zip.sh
+sam validate --lint --template template.yaml --region ap-south-1 --profile loopcheck
+bash deploy/preflight.sh                       # read-only; prints account/region; never prints credentials
+# BILLABLE: creates resources (shows a change set first)
+sam deploy --stack-name loopcheck-demo --region ap-south-1 --profile loopcheck --resolve-s3 --s3-prefix loopcheck-demo \
+  --capabilities CAPABILITY_IAM --confirm-changeset --parameter-overrides AllowedOrigin=http://localhost:8501 ReservedConcurrency=2
+# verify on AWS, then clean up
+uv run --frozen python -m loopcheck.client --url "<ApiUrl output>" --expect DEFECT
+sam delete --stack-name loopcheck-demo --region ap-south-1 --profile loopcheck
 ```
+
+Cost controls: API throttling at 2 requests/s with burst 5, reserved concurrency 2,
+logging-only IAM, logs containing metadata only, CORS limited to one origin (CORS is not
+authentication). These reduce risk but **cannot guarantee a maximum bill**.
 
 The API is `GET /health` and `POST /inspect` with
 `{"reference_b64", "inspection_b64", "options": {"include_images"}}`. The response carries
@@ -185,7 +200,7 @@ metrics are on **synthetic** data.
 loopcheck/      config, imageio, registration, markers, compare, pipeline, agent, cli, synth, evaluate, evaluate_agent,
                 service, aws_lambda, local_server, client (D4)
 app/            streamlit_app.py (D4 demo UI)
-deploy/         build_lambda_zip.sh, requirements-lambda.txt, Dockerfile (alternative), .env.example, samconfig.example.toml
+deploy/         build_lambda_zip.sh, preflight.sh (read-only), requirements-lambda.txt, Dockerfile (alternative), .env.example, samconfig.example.toml
 template.yaml   SAM template: HTTP API + Lambda (not deployed)
 tests/          pytest suite
 scripts/        check_opencv5.py (D1), compare_runs.py (D2.1 before/after)

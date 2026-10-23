@@ -3,14 +3,20 @@ Transform: AWS::Serverless-2016-10-31
 Description: >
   LoopCheck demo backend: API Gateway HTTP API -> Lambda (Python 3.13, OpenCV 5.0.0.93)
   running the deterministic comparison pipeline and the adaptive inspection agent.
+  Public, unauthenticated, throttled demo endpoint for temporary judging use.
   No S3 buckets, databases or other stateful resources are created by this template
   (SAM's managed deployment-artifact bucket is created by `sam deploy --resolve-s3`).
+  Throttling and reserved concurrency reduce cost risk but do not guarantee a maximum bill.
 
 Parameters:
   AllowedOrigin:
     Type: String
     Default: http://localhost:8501
-    Description: Browser origin allowed by CORS (the Streamlit UI). Use your UI's exact origin; avoid "*".
+    AllowedPattern: "^https?://[A-Za-z0-9.-]+(:[0-9]{1,5})?$"
+    ConstraintDescription: one exact origin such as https://my-ui.example.com or http://localhost:8501 (no "*", no path)
+    Description: >
+      Single browser origin allowed by CORS. CORS only restricts which web pages may call the API
+      from a browser; it is NOT authentication (curl or a server can call the API regardless).
   MemorySizeMB:
     Type: Number
     Default: 2048
@@ -26,10 +32,14 @@ Parameters:
     Description: Burst requests allowed by the HTTP API (cost guard).
   ReservedConcurrency:
     Type: Number
-    Default: 0
+    Default: 2
+    MinValue: 0
+    MaxValue: 10
     Description: >
-      0 = do not reserve concurrency. A positive value caps concurrent executions, but AWS
-      rejects it if the account's unreserved concurrency would drop below 10 (new accounts).
+      Caps concurrent executions of the function (default 2). AWS rejects a reservation that would
+      leave the account with fewer than 10 unreserved executions; accounts whose total concurrency
+      limit is 10 (common for new accounts) must deploy with ReservedConcurrency=0 (no reservation).
+      deploy/preflight.sh checks this read-only before deployment.
   LogRetentionDays:
     Type: Number
     Default: 7
@@ -56,7 +66,12 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Description: LoopCheck OpenCV 5 pipeline + adaptive agent
-      CodeUri: deploy/.build/lambda     # built by deploy/build_lambda_zip.sh (no Docker needed)
+      # The exact zip built AND import-verified by deploy/build_lambda_zip.sh (no Docker needed).
+      # Do not point CodeUri at the unpacked folder: `sam build`'s Python builder excludes *.so,
+      # *.dist-info and __pycache__ from source folders, which drops cv2.abi3.so and numpy's C
+      # extensions from the pre-vendored dependencies (observed with SAM CLI 1.170.0). With a
+      # .zip CodeUri, `sam build` passes the archive through unchanged and `sam deploy` uploads it.
+      CodeUri: deploy/.build/loopcheck-lambda-x86_64.zip
       Handler: loopcheck.aws_lambda.handler
       Runtime: python3.13
       Architectures: [x86_64]            # matches the wheels built and import-verified locally

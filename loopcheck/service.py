@@ -117,12 +117,35 @@ def render_images(agent: InspectionAgent, inspection: np.ndarray, report: dict) 
     return images
 
 
+INTERNAL_FAILURE_RULES = {"X0", "X1", "X2", "X3", "X4"}
+
+
+def publicize(report: dict) -> dict:
+    """Strip internal failure details (tracebacks, exception messages) from a report that is
+    returned over the public API. Decision, rule and evidence are unchanged; errors keep only
+    where they happened and the exception type."""
+    rep = dict(report)
+    rep["errors"] = [{"where": e.get("where"), "type": _exc_type(e.get("error", ""))} for e in report.get("errors", [])]
+    rep["steps"] = [{**s, "error": _exc_type(s["error"])} if "error" in s else s for s in report.get("steps", [])]
+    if rep.get("termination_rule") in INTERNAL_FAILURE_RULES and rep.get("termination_rule") != "X3":
+        rep["reasons"] = [f"internal failure (rule {rep['termination_rule']}); details are withheld from API responses"]
+    return rep
+
+
+def _exc_type(text: str) -> str:
+    """'Traceback ...\\nValueError: msg' or 'ValueError: msg' -> 'ValueError'."""
+    last = [ln for ln in str(text).strip().splitlines() if ln.strip()][-1:] or [""]
+    return last[0].split(":", 1)[0].strip()[:80] or "Error"
+
+
 def analyze(reference: bytes | np.ndarray, inspection: bytes | np.ndarray, include_images: bool = True,
-            pipeline_config: PipelineConfig | None = None, agent_config: AgentConfig | None = None) -> tuple[dict, dict]:
+            pipeline_config: PipelineConfig | None = None, agent_config: AgentConfig | None = None,
+            public: bool = False) -> tuple[dict, dict]:
     """Run the real controller. Returns (JSON-serialisable response, raw images for local use).
 
     Raises ServiceError for request problems. Unexpected exceptions are converted into a
-    HUMAN_REVIEW response (never APPROVE)."""
+    HUMAN_REVIEW response (never APPROVE). With public=True (the AWS API) internal failure
+    details are stripped from the response (see `publicize`)."""
     t0 = time.perf_counter()
     ref = reference if isinstance(reference, np.ndarray) else decode_image(reference, "reference")
     ins = inspection if isinstance(inspection, np.ndarray) else decode_image(inspection, "inspection")
@@ -138,6 +161,8 @@ def analyze(reference: bytes | np.ndarray, inspection: bytes | np.ndarray, inclu
             raw_images = render_images(agent, ins, report)
         except Exception as exc:  # visualisation must never change the decision
             report.setdefault("errors", []).append({"where": "render_images", "error": f"{type(exc).__name__}: {exc}"})
+    if public:
+        report = publicize(report)
     response = {
         "schema_version": SCHEMA_VERSION,
         "decision": report["decision"],
