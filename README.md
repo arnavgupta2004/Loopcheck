@@ -41,22 +41,22 @@ LOOPCHECK_API_URL=http://127.0.0.1:8000 uv run --frozen --group demo streamlit r
 
 ## AWS backend (prepared, NOT deployed)
 
-The target is stack `loopcheck-demo` in `ap-south-1`, deployed with AWS profile `loopcheck`
-from your own machine. The full copy-paste runbook, including verification, logs and safe
+The target is stack `loopcheck-demo` in `ap-south-1`, deployed with AWS profile `loopcheck-deployer`
+from your own machine: a dedicated least-privilege IAM identity, never root ([docs/d4_2_deployment_identity.md](docs/d4_2_deployment_identity.md)). The full copy-paste runbook, including verification, logs and safe
 cleanup, is in [docs/d4_demo_and_deployment.md](docs/d4_demo_and_deployment.md#runbook-deploy-from-your-own-machine).
 
 ```bash
 # LOCAL, free: build + verify the zip, validate, read-only preflight
 bash deploy/build_lambda_zip.sh
-sam validate --lint --template template.yaml --region ap-south-1 --profile loopcheck
+sam validate --lint --template template.yaml --region ap-south-1 --profile loopcheck-deployer
 bash deploy/preflight.sh                       # read-only; prints account/region; never prints credentials
 # BILLABLE: creates resources (shows a change set first)
-sam deploy --stack-name loopcheck-demo --region ap-south-1 --profile loopcheck --resolve-s3 --s3-prefix loopcheck-demo \
+sam deploy --stack-name loopcheck-demo --region ap-south-1 --profile loopcheck-deployer --resolve-s3 --s3-prefix loopcheck-demo \
   --capabilities CAPABILITY_IAM --confirm-changeset --parameter-overrides AllowedOrigin=http://localhost:8501 ConcurrencyMode=reserved
 # (if the preflight recommends it: ConcurrencyMode=unreserved, which omits the reservation; never use 0)
 # verify on AWS, then clean up
 uv run --frozen python -m loopcheck.client --url "<ApiUrl output>" --expect DEFECT
-sam delete --stack-name loopcheck-demo --region ap-south-1 --profile loopcheck
+sam delete --stack-name loopcheck-demo --region ap-south-1 --profile loopcheck-deployer
 ```
 
 Cost controls: API throttling at 2 requests/s with burst 5, reserved concurrency 2 when the
@@ -202,12 +202,13 @@ metrics are on **synthetic** data.
 loopcheck/      config, imageio, registration, markers, compare, pipeline, agent, cli, synth, evaluate, evaluate_agent,
                 service, aws_lambda, local_server, client (D4)
 app/            streamlit_app.py (D4 demo UI)
-deploy/         build_lambda_zip.sh, preflight.sh (read-only), requirements-lambda.txt, Dockerfile (alternative), .env.example, samconfig.example.toml
+deploy/         build_lambda_zip.sh, preflight.sh (read-only), requirements-lambda.txt, Dockerfile (alternative), .env.example, samconfig.example.toml, iam/ (least-privilege deployer policies)
 template.yaml   SAM template: HTTP API + Lambda (not deployed)
 tests/          pytest suite
 scripts/        check_opencv5.py (D1), compare_runs.py (D2.1 before/after)
 configs/        baseline_no_marker_mask.json
-docs/           opencv5_verification.md (D1), d2_pipeline.md (D2 + D2.1), d3_agent.md (D3 controller, results, limitations)
+docs/           opencv5_verification.md (D1), d2_pipeline.md (D2 + D2.1), d3_agent.md (D3 controller, results, limitations),
+                d4_demo_and_deployment.md (D4 runbook), d4_2_deployment_identity.md (least-privilege deployer)
 results/        opencv5_check.json, eval_dev/ + eval_test/ (D2), d21/ (D2.1), d3/ (D3, incl. agent traces)
 data/demo/      demo reference/inspection pair + ground truth
 data/demo_cases/ 8 bundled synthetic UI cases (seed 5000) with ground truth and selection notes

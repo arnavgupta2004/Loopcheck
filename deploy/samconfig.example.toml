@@ -6,12 +6,12 @@ version = 0.1
 [default.deploy.parameters]
 stack_name = "loopcheck-demo"
 region = "ap-south-1"
-profile = "loopcheck"
+profile = "loopcheck-deployer"    # dedicated least-privilege identity (docs/d4_2_deployment_identity.md), never root
 resolve_s3 = true                 # SAM-managed artifact bucket (shared; persists after sam delete)
 s3_prefix = "loopcheck-demo"
 capabilities = "CAPABILITY_IAM"   # SAM creates the function's logging-only execution role
 confirm_changeset = true          # review the change set before anything is created
 # ConcurrencyMode: "reserved" (ReservedConcurrentExecutions 2) or "unreserved" (property omitted);
 # run deploy/preflight.sh to see which your account supports. There is no 0 option on purpose.
-parameter_overrides = "AllowedOrigin=http://localhost:8501 ConcurrencyMode=reserved ThrottleRatePerSecond=2 ThrottleBurst=5"
+parameter_overrides = "AllowedOrigin=http://localhost:8501 ConcurrencyMode=unreserved ThrottleRatePerSecond=2 ThrottleBurst=5"
 tags = "project=loopcheck purpose=opencv-competition-demo"

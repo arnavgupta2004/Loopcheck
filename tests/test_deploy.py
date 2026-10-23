@@ -319,10 +319,10 @@ FAKE_AWS = r"""#!/usr/bin/env bash
 echo "aws $*" >> "$CALL_LOG"
 case "$*" in
   "--version") echo "aws-cli/2.99.0 fake" ;;
-  "configure list-profiles") printf 'default\nloopcheck\n' ;;
-  "configure get region --profile loopcheck") echo "ap-south-1" ;;
+  "configure list-profiles") printf 'default\nloopcheck-deployer\n' ;;
+  "configure get region --profile loopcheck-deployer") echo "ap-south-1" ;;
   *"sts get-caller-identity"*) if [ -n "${FAKE_STS_FAIL:-}" ]; then echo "An error occurred (InvalidClientTokenId)" >&2; exit 254; fi
-                               printf '111122223333\tarn:aws:iam::111122223333:user/demo\n' ;;
+                               printf '111122223333\t%s\n' "${FAKE_ARN:-arn:aws:iam::111122223333:user/loopcheck-deployer}" ;;
   *"lambda get-account-settings"*) printf '%s\n' "${FAKE_LIMITS:-1000	1000}" ;;
   *"lambda get-function-concurrency"*) printf '%s\n' "${FAKE_FN_RESERVED:-None}" ;;
   *"cloudformation describe-stacks --stack-name loopcheck-demo"*)
@@ -352,8 +352,8 @@ case "$1" in
   *) echo "unexpected sam call: $*" >&2; exit 99 ;;
 esac
 """
-READ_ONLY = re.compile(r"^(aws (--version|configure list-profiles|configure get region --profile loopcheck"
-                       r"|--profile loopcheck --region ap-south-1 (sts get-caller-identity|lambda get-account-settings|lambda get-function-concurrency"
+READ_ONLY = re.compile(r"^(aws (--version|configure list-profiles|configure get region --profile loopcheck-deployer"
+                       r"|--profile loopcheck-deployer --region ap-south-1 (sts get-caller-identity|lambda get-account-settings|lambda get-function-concurrency"
                        r"|cloudformation describe-stacks|cloudformation describe-stack-resource) .*)|sam (--version|validate --lint .*))$")
 
 
@@ -391,7 +391,8 @@ def test_preflight_is_read_only_and_prints_account_and_region(sandbox):
     assert "account: 111122223333" in out and "region: ap-south-1" in out and "Nothing was created or modified" in out
     assert "AWS_SECRET_ACCESS_KEY" in out and SECRET not in out  # names only, never values
     assert calls and all(READ_ONLY.match(c) for c in calls), [c for c in calls if not READ_ONLY.match(c)]
-    assert not any(w in " ".join(calls) for w in ("deploy", "create-", "delete", "put-", "update", "package", " sync", " build", " rm "))
+    joined = " ".join(calls).replace("--profile loopcheck-deployer", "--profile P")
+    assert not any(w in joined for w in ("deploy", "create-", "delete", "put-", "update", "package", " sync", " build", " rm "))
 
 
 def _no_zero_recommendation(out: str) -> None:
@@ -427,6 +428,23 @@ def test_preflight_fails_and_stops_on_invalid_identity(sandbox):
     p, calls = _preflight(sandbox, FAKE_STS_FAIL="1")
     assert p.returncode == 1 and "RESULT: FAIL" in p.stdout and "InvalidClientTokenId" in p.stdout
     assert not any("lambda" in c or "cloudformation" in c for c in calls)
+
+
+def test_preflight_defaults_to_the_dedicated_deployer_profile(sandbox):
+    p, calls = _preflight(sandbox)
+    assert p.returncode == 0 and "profile=loopcheck-deployer" in p.stdout and "dedicated LoopCheck deployment identity" in p.stdout
+    assert any("--profile loopcheck-deployer --region ap-south-1 sts get-caller-identity" in c for c in calls)
+
+
+def test_preflight_refuses_root_identity_and_stops_before_other_aws_calls(sandbox):
+    p, calls = _preflight(sandbox, FAKE_ARN="arn:aws:iam::111122223333:root")
+    assert p.returncode == 1 and "RESULT: FAIL" in p.stdout and "ROOT user" in p.stdout
+    assert not any("lambda" in c or "cloudformation" in c for c in calls)
+
+
+def test_preflight_warns_on_other_non_root_identity(sandbox):
+    p, _ = _preflight(sandbox, FAKE_ARN="arn:aws:iam::111122223333:user/someone-else")
+    assert p.returncode == 0 and "[WARN] not the dedicated LoopCheck deployer identity" in p.stdout
 
 
 def test_preflight_fails_cleanly_without_aws_cli(tmp_path):

@@ -3,8 +3,9 @@
 **Deployment status (2026-10-23): NOT deployed.** No AWS resource has been created,
 modified or deleted, no artifact has been uploaded, and there is no public URL. The backend
 and this runbook are prepared and verified locally (see [Verification](#what-was-verified-locally)).
-**You** run the deployment from your own machine with the AWS profile `loopcheck` in
-`ap-south-1` (Mumbai).
+**You** run the deployment from your own machine with the AWS profile `loopcheck-deployer` in
+`ap-south-1` (Mumbai): a dedicated least-privilege identity, never root (see
+[d4_2_deployment_identity.md](d4_2_deployment_identity.md)).
 
 All metrics and bundled cases are **synthetic**. Anomaly scores are uncalibrated heuristics,
 **not probabilities**. Excluded marker areas are **not inspected** and are never shown as clean.
@@ -153,12 +154,12 @@ The alternative container path (`deploy/Dockerfile`) is not used and was not bui
 
 Never paste credentials into chat, into this repository or into any file in it.
 Authenticate only through the AWS CLI's own credential store or SSO (step 2). Every command
-passes `--profile loopcheck --region ap-south-1` explicitly.
+passes `--profile loopcheck-deployer --region ap-south-1` explicitly.
 
 Run these from the repository root:
 
 ```bash
-export AWS_PROFILE_NAME=loopcheck REGION=ap-south-1 STACK=loopcheck-demo
+export AWS_PROFILE_NAME=loopcheck-deployer REGION=ap-south-1 STACK=loopcheck-demo
 export SAM_CLI_TELEMETRY=0 AWS_PAGER=""
 ```
 
@@ -177,18 +178,22 @@ sam --version          # verified with SAM CLI 1.170.0
 uv --version           # needed by the build script
 ```
 
-### 2. Authenticate locally with profile `loopcheck` 🟢
+### 2. Authenticate locally with profile `loopcheck-deployer` 🟢
 
-Prefer IAM Identity Center (SSO) or another short-lived credential. The CLI stores the
-result in `~/.aws/`, outside the repository:
+Use the dedicated least-privilege identity from
+[d4_2_deployment_identity.md](d4_2_deployment_identity.md), **never the root user**. It needs
+the IAM user `loopcheck-deployer` with `LoopCheckDeployerPolicy` and MFA, created once in the
+console. The CLI gets temporary credentials and no access keys exist. The CLI stores them
+in `~/.aws/`, outside the repository:
 
 ```bash
-aws configure sso --profile loopcheck      # interactive; choose the account, a deploy-capable role, region ap-south-1
-aws sso login --profile loopcheck          # when the session expires
-# (if you must use long-lived access keys: aws configure --profile loopcheck — and enter them only at the CLI prompt)
+aws login --profile loopcheck-deployer     # AWS CLI >= 2.32.0; sign in as the IAM user loopcheck-deployer, not root
+aws configure set region ap-south-1 --profile loopcheck-deployer
+# IAM Identity Center alternative: aws configure sso --profile loopcheck-deployer  (permission set LoopCheckDeployer)
 ```
 
-If `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` or `AWS_SESSION_TOKEN` are set in your
+If your older `loopcheck` profile is signed in as root, don't use it; `aws logout --profile loopcheck`
+clears it locally. If `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` or `AWS_SESSION_TOKEN` are set in your
 shell, unset them so it is unambiguous which identity is used:
 `unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN`.
 
@@ -198,7 +203,8 @@ shell, unset them so it is unambiguous which identity is used:
 aws sts get-caller-identity --profile "$AWS_PROFILE_NAME" --region "$REGION" --query '[Account,Arn]' --output text
 ```
 
-**Confirm that the printed account ID is the one you intend to use before continuing.**
+**Confirm that the printed account ID is the one you intend to use and that the ARN ends in
+`:user/loopcheck-deployer`, not `:root`, before continuing.** The preflight fails on root.
 
 ### 4. Build, validate and preflight 🟢 (local; the preflight's AWS calls are read-only)
 
@@ -421,9 +427,10 @@ These are estimates, not measurements; use the AWS Pricing Calculator for ap-sou
 
 ## Blockers before you deploy
 
-1. **Valid credentials for profile `loopcheck` on your machine** (step 2), with permission
-   to create CloudFormation stacks, Lambda functions, IAM roles (`CAPABILITY_IAM`), HTTP
-   APIs, log groups, and S3 objects in SAM's bucket.
+1. **Temporary credentials for profile `loopcheck-deployer` on your machine** (step 2). This is
+   the IAM user with `LoopCheckDeployerPolicy` (and, for the very first SAM deploy in the
+   region only, `LoopCheckSamBootstrapPolicy`), as described in
+   [d4_2_deployment_identity.md](d4_2_deployment_identity.md). It is not root and not `AdministratorAccess`.
 2. **AWS CLI v2 and SAM CLI installed locally** (step 1).
 3. **Your review of the change set** that `sam deploy --confirm-changeset` shows.
 4. **If the preflight reports that reserving 2 is not possible** (e.g. an account

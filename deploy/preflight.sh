@@ -2,7 +2,7 @@
 # LoopCheck deployment preflight — READ-ONLY. Creates, modifies and deletes nothing.
 #
 #   bash deploy/preflight.sh
-#   LOOPCHECK_AWS_PROFILE=loopcheck LOOPCHECK_AWS_REGION=ap-south-1 bash deploy/preflight.sh
+#   LOOPCHECK_AWS_PROFILE=loopcheck-deployer LOOPCHECK_AWS_REGION=ap-south-1 bash deploy/preflight.sh
 #
 # AWS calls made (all read-only): sts get-caller-identity, lambda get-account-settings,
 # lambda get-function-concurrency (only if the stack exists), cloudformation describe-stacks (x2),
@@ -15,7 +15,7 @@
 # (the property is omitted). It never recommends 0, which Lambda treats as "throttle everything".
 set -uo pipefail
 
-PROFILE="${LOOPCHECK_AWS_PROFILE:-loopcheck}"
+PROFILE="${LOOPCHECK_AWS_PROFILE:-loopcheck-deployer}"
 REGION="${LOOPCHECK_AWS_REGION:-ap-south-1}"
 STACK="loopcheck-demo"
 RESERVED=2   # must equal the literal in template.yaml (tests/test_deploy.py checks)
@@ -43,7 +43,7 @@ if [ -n "$set_vars" ]; then warn "set in this shell: $set_vars— commands below
 
 echo "3. Profile"
 if aws configure list-profiles 2>/dev/null | grep -Fxq "$PROFILE"; then ok "profile '$PROFILE' exists"; else
-  fail "profile '$PROFILE' not found — create it locally: 'aws configure sso --profile $PROFILE' (recommended) or 'aws configure --profile $PROFILE'"; fi
+  fail "profile '$PROFILE' not found — create it locally: 'aws login --profile $PROFILE' (docs/d4_2_deployment_identity.md)"; fi
 cfg_region=$(aws configure get region --profile "$PROFILE" 2>/dev/null || true)
 if [ "$cfg_region" = "$REGION" ]; then ok "profile region = $REGION"; else warn "profile region is '${cfg_region:-unset}'; every command passes --region $REGION explicitly"; fi
 
@@ -51,9 +51,14 @@ echo "4. Identity (confirm this is the intended account)"
 if ident=$(aws_ro sts get-caller-identity --query '[Account, Arn]' --output text 2>&1); then
   read -r ACCOUNT ARN <<<"$ident"
   ok "account: $ACCOUNT"; ok "principal: $ARN"; ok "region: $REGION"
+  case "$ARN" in
+    *:root) fail "this is the account ROOT user — do not use root for routine deployment; sign in as the LoopCheck deployer (docs/d4_2_deployment_identity.md): aws login --profile loopcheck-deployer" ;;
+    *:user/loopcheck-deployer|*:assumed-role/AWSReservedSSO_LoopCheckDeployer_*) ok "dedicated LoopCheck deployment identity" ;;
+    *) warn "not the dedicated LoopCheck deployer identity — confirm this principal is least-privilege (docs/d4_2_deployment_identity.md)" ;;
+  esac
 else
   fail "sts get-caller-identity failed: $(printf '%s' "$ident" | head -1 | cut -c1-200)"
-  echo "   If you use SSO: aws sso login --profile $PROFILE"
+  echo "   Sign in again: aws login --profile $PROFILE   (IAM Identity Center profiles: aws sso login --profile $PROFILE)"
 fi
 
 if [ "$FAILS" -eq 0 ]; then
