@@ -33,6 +33,23 @@ def _resize_for_work(img: np.ndarray, max_dim: int) -> tuple[np.ndarray, float]:
     return cv2.resize(img, None, fx=s, fy=s, interpolation=cv2.INTER_AREA), s
 
 
+def align_and_mask(ref_w: np.ndarray, ins_w: np.ndarray, reg, cfg: PipelineConfig):
+    """Warp the inspection into reference coords and build the scoring masks (working res).
+
+    Returns (aligned, valid overlap mask, marker exclusion mask or None, marker info or
+    None). Detected fiducials are excluded from scoring: compare() drops them from the
+    photometric fit and zeroes the map there, so they can neither form regions nor raise
+    neighbouring scores. Marker polygons in the info are in working reference px.
+    """
+    aligned = warp_to_reference(ins_w, reg.H, ref_w.shape)
+    valid = overlap_mask(ins_w.shape, reg.H, ref_w.shape, cfg.registration.border_erode_px)
+    if not cfg.markers.enabled:
+        return aligned, valid, None, None
+    leak = cfg.compare.exclude_leak_px if cfg.compare.exclude_mode == "dilate" else 0
+    excl, minfo = marker_exclusion(ref_w.shape, ins_w.shape, reg.H, reg.markers_reference, reg.markers_inspection, valid, cfg.markers, leak)
+    return aligned, valid, excl, minfo
+
+
 def inspect(reference: np.ndarray, inspection: np.ndarray, config: PipelineConfig | None = None, input_info: dict | None = None) -> InspectionResult:
     """Run the deterministic pipeline on two in-memory images (any of 1/3/4 channels)."""
     cfg = config or PipelineConfig()
@@ -77,17 +94,9 @@ def inspect(reference: np.ndarray, inspection: np.ndarray, config: PipelineConfi
     H_full = scale_homography(reg.H, 1.0 / s_r, 1.0 / s_i)
     report["registration"]["homography_ref_to_insp"] = (H_full / H_full[2, 2]).round(8).tolist()
 
-    aligned = warp_to_reference(ins_w, reg.H, ref_w.shape)
-    valid = overlap_mask(ins_w.shape, reg.H, ref_w.shape, cfg.registration.border_erode_px)
-
-    # Detected fiducials are excluded from scoring. compare() inpaints them in both images,
-    # drops them from the photometric fit and zeroes the map there, so they can neither
-    # form regions nor raise neighbouring scores.
+    aligned, valid, excl, minfo = align_and_mask(ref_w, ins_w, reg, cfg)
     marker_polys_ins: list[np.ndarray] = []
-    excl = None
-    if cfg.markers.enabled:
-        leak = cfg.compare.exclude_leak_px if cfg.compare.exclude_mode == "dilate" else 0
-        excl, minfo = marker_exclusion(ref_w.shape, ins_w.shape, reg.H, reg.markers_reference, reg.markers_inspection, valid, cfg.markers, leak)
+    if minfo is not None:
         minfo["cap_check_area_px"] = round(minfo["cap_check_area_px"] / (s_r * s_r))
         for e in minfo["markers"]:
             poly = e.pop("polygon_reference")

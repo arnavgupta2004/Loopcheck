@@ -1,9 +1,15 @@
 """Command-line entry point.
 
     uv run python -m loopcheck.cli --reference REF --inspection INSP --output-dir DIR [--config cfg.json]
+    uv run python -m loopcheck.cli ... --agent [--agent-config agent.json]
 
-Writes report.json plus overlay.png (and aligned.png, heatmap.png, anomaly_map.png when
-analysis ran). Exit codes: 0 analysed, 2 input error, 3 registration failed.
+One-shot mode (default, D2/D2.1 behaviour): writes report.json plus overlay.png (and
+aligned.png, heatmap.png, anomaly_map.png when analysis ran).
+Exit codes: 0 analysed, 2 input error, 3 registration failed.
+
+Agent mode (--agent, D3): runs the adaptive controller, prints the step-by-step trace,
+writes report.json (decision, reasons, candidates, coverage, full trace) and overlay.png.
+Exit codes: 0 APPROVE, 4 DEFECT, 5 HUMAN_REVIEW (including input errors).
 """
 
 from __future__ import annotations
@@ -16,6 +22,7 @@ from pathlib import Path
 import cv2
 import numpy as np
 
+from .agent import APPROVE, DEFECT, HUMAN_REVIEW, AgentConfig, InspectionAgent, draw_agent_overlay, format_trace
 from .config import PipelineConfig
 from .imageio import InputError, load_image
 from .pipeline import STATUS_ANALYZED, STATUS_INPUT_ERROR, STATUS_REGISTRATION_FAILED, inspect
@@ -61,6 +68,28 @@ def run(reference: Path, inspection: Path, output_dir: Path, config: PipelineCon
     return report
 
 
+AGENT_EXIT_CODES = {APPROVE: 0, DEFECT: 4, HUMAN_REVIEW: 5}
+
+
+def run_agent(reference: Path, inspection: Path, output_dir: Path, config: PipelineConfig, agent_config: AgentConfig) -> dict:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    ins = None
+    try:
+        ref, _ = load_image(reference)
+        ins, _ = load_image(inspection)
+        report = InspectionAgent(config, agent_config).run(ref, ins)
+    except InputError as exc:  # unreadable input is never approved
+        report = {"loopcheck_version": __version__, "opencv_version": OPENCV_VERSION, "mode": "agent",
+                  "decision": HUMAN_REVIEW, "termination_rule": "E0", "reasons": [f"input error {exc.code}: {exc.message}"], "steps": []}
+    outputs = {"report": "report.json"}
+    if ins is not None:
+        cv2.imwrite(str(output_dir / "overlay.png"), draw_agent_overlay(ins, report))
+        outputs["overlay"] = "overlay.png"
+    report["output_files"] = outputs
+    (output_dir / "report.json").write_text(json.dumps(report, indent=2, default=_json_default) + "\n")
+    return report
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="loopcheck", description="Compare an inspection image against a reference image.")
     p.add_argument("--reference", required=True, type=Path)
@@ -68,11 +97,20 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--output-dir", required=True, type=Path)
     p.add_argument("--config", type=Path, help="JSON file overriding PipelineConfig fields")
     p.add_argument("--ecc", action="store_true", help="enable ECC refinement (off by default)")
+    p.add_argument("--agent", action="store_true", help="run the adaptive D3 controller instead of the one-shot pipeline")
+    p.add_argument("--agent-config", type=Path, help="JSON file overriding AgentConfig fields (with --agent)")
+    p.add_argument("--quiet", action="store_true", help="agent mode: print only the decision")
     args = p.parse_args(argv)
 
     cfg = PipelineConfig.from_json(args.config) if args.config else PipelineConfig()
     if args.ecc:
         cfg.registration.ecc_enabled = True
+    if args.agent:
+        acfg = AgentConfig.from_dict(json.loads(args.agent_config.read_text())) if args.agent_config else AgentConfig()
+        report = run_agent(args.reference, args.inspection, args.output_dir, cfg, acfg)
+        print(f"decision={report['decision']}" if args.quiet else format_trace(report))
+        print(f"report: {args.output_dir / 'report.json'}")
+        return AGENT_EXIT_CODES[report["decision"]]
     report = run(args.reference, args.inspection, args.output_dir, cfg)
 
     status = report["status"]

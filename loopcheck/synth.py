@@ -37,8 +37,14 @@ DEFECT_TYPES_V2 = ["missing_near_marker", "foreign_near_marker"]
 DIFFERENT_TRAY_TYPES = ["different_tray"]  # same marker ids/positions, different contents
 NOMINAL_TYPES = NOMINAL_TYPES + NOMINAL_TYPES_V2
 DEFECT_TYPES = DEFECT_TYPES + DEFECT_TYPES_V2
-CASE_TYPES = NOMINAL_TYPES[:5] + DEFECT_TYPES[:5] + REGFAIL_TYPES + NOMINAL_TYPES_V2 + DEFECT_TYPES_V2 + DIFFERENT_TRAY_TYPES
+# D3 addition: a real defect under a strong gamma shift (conflicting evidence).
+DEFECT_TYPES_V3 = ["gamma_missing"]
+DEFECT_TYPES = DEFECT_TYPES + DEFECT_TYPES_V3
+CASE_TYPES = (NOMINAL_TYPES[:5] + DEFECT_TYPES[:5] + REGFAIL_TYPES + NOMINAL_TYPES_V2 + DEFECT_TYPES_V2
+              + DIFFERENT_TRAY_TYPES + DEFECT_TYPES_V3)
 D2_CASE_TYPES = CASE_TYPES[:13]  # the case set used for the D2 splits (seeds 1000/2000)
+D21_CASE_TYPES = CASE_TYPES[:17]  # D2.1 splits (seeds 3100/3200)
+CASE_SETS = {"d2": D2_CASE_TYPES, "d21": D21_CASE_TYPES, "d3": CASE_TYPES}
 MARKER_FORCED_TYPES = set(NOMINAL_TYPES_V2 + DEFECT_TYPES_V2 + DIFFERENT_TRAY_TYPES)
 QUIET_ZONE = 10  # white margin around each rendered marker (px)
 MARKER_SPOTS = [  # top-left pixel of markers 0..3 in reference px
@@ -317,8 +323,9 @@ CASE_PARAMS = {
     "missing_near_marker": (8,  8,    0.6,   0.5,  2.0,  90),
     "foreign_near_marker": (8,  8,    0.6,   0.5,  2.0,  90),
     "different_tray":      (8,  8,    0.3,   0.5,  2.0,  90),
+    "gamma_missing":       (6,  6,    1.0,   0.0,  1.5,  None),
 }
-GAMMA_SCALE = {"gamma_lighting": 0.30, "missing_near_marker": 0.30, "foreign_near_marker": 0.30}  # default 0.15
+GAMMA_SCALE = {"gamma_lighting": 0.30, "missing_near_marker": 0.30, "foreign_near_marker": 0.30, "gamma_missing": 0.30}  # default 0.15
 
 
 def _foreign(rng, scene: Scene, subtle: bool) -> Component | None:
@@ -348,7 +355,7 @@ def make_case(case_type: str, seed: int) -> dict:
     gt_boxes: list[list[int]] = []
     defect_type = None
 
-    if case_type in ("missing", "missing_hard"):
+    if case_type in ("missing", "missing_hard", "gamma_missing"):
         k = int(rng.integers(len(scene.components)))
         gt_boxes.append(component_bbox(scene.components[k]))
         insp_scene.components.pop(k)
@@ -456,11 +463,11 @@ def main(argv=None) -> int:
     p.add_argument("--out", type=Path, required=True)
     p.add_argument("--seed", type=int, required=True)
     p.add_argument("--per-type", type=int, default=8)
-    p.add_argument("--case-set", choices=("d2", "d21"), default="d21",
-                   help="d2: the 13 original case types (reproduces the D2 splits); d21: all types incl. marker cases")
+    p.add_argument("--case-set", choices=tuple(CASE_SETS), default="d3",
+                   help="d2: 13 original types (D2 splits); d21: + marker cases (D2.1 splits); d3: + gamma_missing")
     p.add_argument("--types", nargs="*", choices=CASE_TYPES, help="explicit subset (overrides --case-set)")
     args = p.parse_args(argv)
-    types = args.types or (D2_CASE_TYPES if args.case_set == "d2" else CASE_TYPES)
+    types = args.types or CASE_SETS[args.case_set]
     cases = generate(args.out, args.seed, args.per_type, types)
     print(f"wrote {len(cases)} cases to {args.out}")
     return 0
