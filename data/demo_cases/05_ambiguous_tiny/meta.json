@@ -1,0 +1,50 @@
+{
+ "title": "Ambiguous tiny object",
+ "description": "A 7-10 px low-contrast object: evidence is weak, the agent escalates instead of guessing.",
+ "synthetic": true,
+ "case_type": "subtle_foreign",
+ "category": "defect",
+ "generator": {
+  "module": "loopcheck.synth.make_case",
+  "case_type": "subtle_foreign",
+  "seed": 2577091415,
+  "derived_from": "SeedSequence([5000, 9, 0])"
+ },
+ "ground_truth": {
+  "defect_type": "foreign_object",
+  "gt_boxes_xywh": [
+   [
+    582,
+    246,
+    14,
+    12
+   ]
+  ],
+  "markers": true,
+  "H_true": [
+   [
+    1.0287242538152996,
+    -0.005945728871593281,
+    0.947296142578125
+   ],
+   [
+    0.014937427130616425,
+    1.015258645754294,
+    -9.048354148864746
+   ],
+   [
+    3.080282614577011e-05,
+    1.1799504437509228e-05,
+    1.0
+   ]
+  ]
+ },
+ "selection": "first case (index 0 of seed 5000) whose agent run gave HUMAN_REVIEW; illustrative only \u2014 see results/d3 for aggregate metrics and failures",
+ "agent_decision_at_selection": "HUMAN_REVIEW",
+ "agent_rule_at_selection": "T2",
+ "agent_branches_at_selection": [
+  "D",
+  "E",
+  "F"
+ ]
+}

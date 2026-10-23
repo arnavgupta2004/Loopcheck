@@ -6,3 +6,5 @@ __pycache__/
 .aws/
 data/synthetic/
 outputs/
+deploy/.build/
+.aws-sam/

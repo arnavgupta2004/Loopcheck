@@ -1,0 +1,43 @@
+{
+ "title": "Clean (identical)",
+ "description": "Reference and inspection are the same tray image; nothing has changed.",
+ "synthetic": true,
+ "case_type": "identical",
+ "category": "nominal",
+ "generator": {
+  "module": "loopcheck.synth.make_case",
+  "case_type": "identical",
+  "seed": 870093547,
+  "derived_from": "SeedSequence([5000, 0, 0])"
+ },
+ "ground_truth": {
+  "defect_type": null,
+  "gt_boxes_xywh": [],
+  "markers": true,
+  "H_true": [
+   [
+    1.0,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    1.0,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    1.0
+   ]
+  ]
+ },
+ "selection": "first case (index 0 of seed 5000) whose agent run gave APPROVE; illustrative only \u2014 see results/d3 for aggregate metrics and failures",
+ "agent_decision_at_selection": "APPROVE",
+ "agent_rule_at_selection": "T5",
+ "agent_branches_at_selection": [
+  "E",
+  "F",
+  "G"
+ ]
+}

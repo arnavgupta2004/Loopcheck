@@ -11,7 +11,46 @@ approve, flag a defect or request human review.
 - D2.1 (exclude detected ArUco markers from anomaly scoring, validated on fresh synthetic splits): complete.
 - D3 (adaptive perception-decision-action controller with a traced APPROVE / DEFECT /
   HUMAN_REVIEW decision): complete. See [docs/d3_agent.md](docs/d3_agent.md).
-- Not built yet: AWS deployment and a UI.
+- D4 (Streamlit demo UI + AWS Lambda/API Gateway backend): demo complete and verified
+  locally. AWS backend **prepared but NOT deployed**: no cloud resources exist and there is
+  no public URL. See [docs/d4_demo_and_deployment.md](docs/d4_demo_and_deployment.md).
+
+## Demo UI (D4)
+
+```bash
+uv sync --frozen --group demo                          # adds Streamlit (not part of the Lambda package)
+uv run --frozen --group demo streamlit run app/streamlit_app.py
+# open http://localhost:8501
+```
+
+- **Inputs:** pick one of 8 bundled **synthetic** cases (clean, missing part, shifted part,
+  lighting change, ambiguous tiny object, defect next to a marker, different tray,
+  registration failure), or upload two PNG/JPEG images (≤ 2 MB, ≤ 4096 px).
+- **What it shows:** the decision, the step-by-step agent trace, regions with re-inspection
+  evidence, registration and coverage (excluded marker areas are labelled NOT inspected),
+  latency and limitations.
+- **Downloads:** the JSON report and the annotated overlay.
+- **Backend:** "Local (in-process)" runs the real controller in the Streamlit process.
+  "HTTP API" calls `LOOPCHECK_API_URL`: the deployed API, or the local stand-in below.
+
+```bash
+uv run --frozen python -m loopcheck.local_server --port 8000   # same handler code as Lambda
+LOOPCHECK_API_URL=http://127.0.0.1:8000 uv run --frozen --group demo streamlit run app/streamlit_app.py
+```
+
+## AWS backend (prepared, not deployed)
+
+```bash
+bash deploy/build_lambda_zip.sh      # zip package, no Docker; verifies OpenCV 5 + /health locally
+sam validate --lint                  # needs the SAM CLI (uv tool install aws-sam-cli)
+sam deploy --guided --region <region>   # ONLY after approval: creates the resources listed in docs/d4_*
+sam delete --stack-name loopcheck-demo --region <region>   # cleanup
+```
+
+The API is `GET /health` and `POST /inspect` with
+`{"reference_b64", "inspection_b64", "options": {"include_images"}}`. The response carries
+the decision, the full trace and JPEG images. Every error response carries
+`"decision": "HUMAN_REVIEW"`. Templates and packaging live in `template.yaml` and `deploy/`.
 
 ## Setup
 
@@ -97,7 +136,7 @@ Options:
 ## Tests and evaluation
 
 ```bash
-uv run --frozen pytest -q                                   # unit + integration tests
+uv run --frozen --group demo pytest -q                      # all tests (UI tests are skipped without the demo group)
 uv run --frozen python scripts/check_opencv5.py             # D1 OpenCV 5 verification
 ```
 
@@ -143,11 +182,16 @@ metrics are on **synthetic** data.
 ## Layout
 
 ```
-loopcheck/      config, imageio, registration, markers, compare, pipeline, agent, cli, synth, evaluate, evaluate_agent
+loopcheck/      config, imageio, registration, markers, compare, pipeline, agent, cli, synth, evaluate, evaluate_agent,
+                service, aws_lambda, local_server, client (D4)
+app/            streamlit_app.py (D4 demo UI)
+deploy/         build_lambda_zip.sh, requirements-lambda.txt, Dockerfile (alternative), .env.example, samconfig.example.toml
+template.yaml   SAM template: HTTP API + Lambda (not deployed)
 tests/          pytest suite
 scripts/        check_opencv5.py (D1), compare_runs.py (D2.1 before/after)
 configs/        baseline_no_marker_mask.json
 docs/           opencv5_verification.md (D1), d2_pipeline.md (D2 + D2.1), d3_agent.md (D3 controller, results, limitations)
 results/        opencv5_check.json, eval_dev/ + eval_test/ (D2), d21/ (D2.1), d3/ (D3, incl. agent traces)
 data/demo/      demo reference/inspection pair + ground truth
+data/demo_cases/ 8 bundled synthetic UI cases (seed 5000) with ground truth and selection notes
 ```

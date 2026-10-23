@@ -1,0 +1,103 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  LoopCheck demo backend: API Gateway HTTP API -> Lambda (Python 3.13, OpenCV 5.0.0.93)
+  running the deterministic comparison pipeline and the adaptive inspection agent.
+  No S3 buckets, databases or other stateful resources are created by this template
+  (SAM's managed deployment-artifact bucket is created by `sam deploy --resolve-s3`).
+
+Parameters:
+  AllowedOrigin:
+    Type: String
+    Default: http://localhost:8501
+    Description: Browser origin allowed by CORS (the Streamlit UI). Use your UI's exact origin; avoid "*".
+  MemorySizeMB:
+    Type: Number
+    Default: 2048
+    AllowedValues: [1024, 1536, 2048, 3008]
+    Description: Lambda memory (CPU scales with memory).
+  ThrottleRatePerSecond:
+    Type: Number
+    Default: 2
+    Description: Steady-state requests per second allowed by the HTTP API (cost guard).
+  ThrottleBurst:
+    Type: Number
+    Default: 5
+    Description: Burst requests allowed by the HTTP API (cost guard).
+  ReservedConcurrency:
+    Type: Number
+    Default: 0
+    Description: >
+      0 = do not reserve concurrency. A positive value caps concurrent executions, but AWS
+      rejects it if the account's unreserved concurrency would drop below 10 (new accounts).
+  LogRetentionDays:
+    Type: Number
+    Default: 7
+    AllowedValues: [1, 3, 5, 7, 14, 30]
+
+Conditions:
+  HasReservedConcurrency: !Not [!Equals [!Ref ReservedConcurrency, 0]]
+
+Resources:
+  InspectApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      Description: LoopCheck inspection API (public, unauthenticated demo; throttled)
+      CorsConfiguration:
+        AllowOrigins: [!Ref AllowedOrigin]
+        AllowMethods: [GET, POST, OPTIONS]
+        AllowHeaders: [content-type]
+        MaxAge: 600
+      DefaultRouteSettings:
+        ThrottlingRateLimit: !Ref ThrottleRatePerSecond
+        ThrottlingBurstLimit: !Ref ThrottleBurst
+
+  InspectFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: LoopCheck OpenCV 5 pipeline + adaptive agent
+      CodeUri: deploy/.build/lambda     # built by deploy/build_lambda_zip.sh (no Docker needed)
+      Handler: loopcheck.aws_lambda.handler
+      Runtime: python3.13
+      Architectures: [x86_64]            # matches the wheels built and import-verified locally
+      MemorySize: !Ref MemorySizeMB
+      Timeout: 29                         # HTTP API integrations time out at 30 s
+      EphemeralStorage:
+        Size: 512
+      ReservedConcurrentExecutions: !If [HasReservedConcurrency, !Ref ReservedConcurrency, !Ref AWS::NoValue]
+      LoggingConfig:
+        LogGroup: !Ref InspectLogGroup
+      Environment:
+        Variables:
+          OPENCV_LOG_LEVEL: ERROR
+      # Least privilege: no Policies. SAM attaches only AWSLambdaBasicExecutionRole
+      # (CloudWatch Logs). The function reads nothing from S3 and holds no secrets.
+      Events:
+        Health:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref InspectApi
+            Method: GET
+            Path: /health
+            PayloadFormatVersion: "2.0"
+        Inspect:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref InspectApi
+            Method: POST
+            Path: /inspect
+            PayloadFormatVersion: "2.0"
+            TimeoutInMillis: 29000
+
+  InspectLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${AWS::StackName}-inspect
+      RetentionInDays: !Ref LogRetentionDays
+
+Outputs:
+  ApiUrl:
+    Description: Base URL for LOOPCHECK_API_URL (GET /health, POST /inspect)
+    Value: !Sub https://${InspectApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}
+  FunctionName:
+    Value: !Ref InspectFunction

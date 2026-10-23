@@ -1,0 +1,44 @@
+{
+ "title": "Lighting change (good tray)",
+ "description": "No defect; strong gamma, gain, colour-cast and illumination gradient. The illumination branch runs.",
+ "synthetic": true,
+ "case_type": "gamma_lighting",
+ "category": "nominal",
+ "generator": {
+  "module": "loopcheck.synth.make_case",
+  "case_type": "gamma_lighting",
+  "seed": 3133195357,
+  "derived_from": "SeedSequence([5000, 13, 1])"
+ },
+ "ground_truth": {
+  "defect_type": null,
+  "gt_boxes_xywh": [],
+  "markers": true,
+  "H_true": [
+   [
+    0.9663428574377467,
+    -0.005116603994059259,
+    5.375919818878174
+   ],
+   [
+    -0.008837653711160229,
+    0.9713310703639441,
+    -0.8556692600250244
+   ],
+   [
+    -3.078415798315835e-05,
+    -2.138744497599738e-05,
+    1.0
+   ]
+  ]
+ },
+ "selection": "first case (index 1 of seed 5000) whose agent run gave APPROVE with branch B; illustrative only \u2014 see results/d3 for aggregate metrics and failures",
+ "agent_decision_at_selection": "APPROVE",
+ "agent_rule_at_selection": "T5",
+ "agent_branches_at_selection": [
+  "B",
+  "E",
+  "F",
+  "G"
+ ]
+}

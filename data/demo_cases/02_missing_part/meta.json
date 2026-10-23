@@ -1,0 +1,46 @@
+{
+ "title": "Missing part",
+ "description": "One component removed; mild perspective, lighting, blur, noise and JPEG.",
+ "synthetic": true,
+ "case_type": "missing",
+ "category": "defect",
+ "generator": {
+  "module": "loopcheck.synth.make_case",
+  "case_type": "missing",
+  "seed": 1824835492,
+  "derived_from": "SeedSequence([5000, 5, 0])"
+ },
+ "ground_truth": {
+  "defect_type": "missing",
+  "gt_boxes_xywh": [
+   [
+    314,
+    115,
+    45,
+    64
+   ]
+  ],
+  "markers": false,
+  "H_true": [
+   [
+    0.9826552703531758,
+    -0.0006079753727392549,
+    -11.447421073913574
+   ],
+   [
+    -0.004477247398054595,
+    0.9954188965298698,
+    -0.23307086527347565
+   ],
+   [
+    -3.7874609981339856e-05,
+    1.2309563671996604e-05,
+    1.0
+   ]
+  ]
+ },
+ "selection": "first case (index 0 of seed 5000) whose agent run gave DEFECT; illustrative only \u2014 see results/d3 for aggregate metrics and failures",
+ "agent_decision_at_selection": "DEFECT",
+ "agent_rule_at_selection": "T1",
+ "agent_branches_at_selection": []
+}

@@ -674,6 +674,9 @@ class InspectionAgent:
 
     # ------------------------------------------------------------------ run loop
     def run(self, reference: np.ndarray, inspection: np.ndarray) -> dict:
+        """Run the controller. The final AgentState (aligned image, comparison maps) is kept
+        on `self.last_state` for visualisation; it does not influence the decision."""
+        self.last_state = None
         t0 = time.perf_counter()
         report = {"loopcheck_version": __version__, "opencv_version": OPENCV_VERSION, "mode": "agent",
                   "agent_config": _round(asdict(self.cfg)), "coordinate_convention": "boxes in reference px"}
@@ -686,6 +689,7 @@ class InspectionAgent:
         ref_w, s_r = _resize_for_work(ref, self.pcfg.work_max_dim)
         ins_w, s_i = _resize_for_work(ins, self.pcfg.work_max_dim)
         st = AgentState(ref_w, ins_w, s_r, s_i)
+        self.last_state = st
         tools = {"register": self.tool_register, "compare": self.tool_compare, "reinspect": self.tool_reinspect,
                  "marker_band_check": self.tool_marker_band_check, "content_check": self.tool_content_check}
 

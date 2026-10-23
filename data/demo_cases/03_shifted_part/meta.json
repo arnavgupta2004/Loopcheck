@@ -1,0 +1,55 @@
+{
+ "title": "Shifted part",
+ "description": "One component moved 35-55 px within the tray.",
+ "synthetic": true,
+ "case_type": "shifted",
+ "category": "defect",
+ "generator": {
+  "module": "loopcheck.synth.make_case",
+  "case_type": "shifted",
+  "seed": 2095535578,
+  "derived_from": "SeedSequence([5000, 6, 0])"
+ },
+ "ground_truth": {
+  "defect_type": "shifted",
+  "gt_boxes_xywh": [
+   [
+    306,
+    419,
+    67,
+    67
+   ],
+   [
+    333,
+    456,
+    67,
+    67
+   ]
+  ],
+  "markers": true,
+  "H_true": [
+   [
+    0.968924333990292,
+    -0.0004081449152733644,
+    -6.742459297180176
+   ],
+   [
+    -0.012810420627402003,
+    0.9865757116346741,
+    11.219249725341797
+   ],
+   [
+    -5.03931957884944e-05,
+    1.557404705777861e-05,
+    1.0
+   ]
+  ]
+ },
+ "selection": "first case (index 0 of seed 5000) whose agent run gave DEFECT; illustrative only \u2014 see results/d3 for aggregate metrics and failures",
+ "agent_decision_at_selection": "DEFECT",
+ "agent_rule_at_selection": "T1",
+ "agent_branches_at_selection": [
+  "E",
+  "F"
+ ]
+}

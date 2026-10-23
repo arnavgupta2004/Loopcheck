@@ -1,0 +1,41 @@
+{
+ "title": "Different tray, same markers",
+ "description": "Markers align perfectly, but the contents are a different tray: the content check escalates.",
+ "synthetic": true,
+ "case_type": "different_tray",
+ "category": "different_tray",
+ "generator": {
+  "module": "loopcheck.synth.make_case",
+  "case_type": "different_tray",
+  "seed": 2944945069,
+  "derived_from": "SeedSequence([5000, 16, 0])"
+ },
+ "ground_truth": {
+  "defect_type": null,
+  "gt_boxes_xywh": [],
+  "markers": true,
+  "H_true": [
+   [
+    0.9924285705750567,
+    0.011126403853786163,
+    -5.5122389793396
+   ],
+   [
+    -0.01584825444831188,
+    0.9965161131415622,
+    3.85945463180542
+   ],
+   [
+    -2.1192398530795773e-05,
+    4.588322442583531e-06,
+    1.0
+   ]
+  ]
+ },
+ "selection": "first case (index 0 of seed 5000) whose agent run gave HUMAN_REVIEW with branch F; illustrative only \u2014 see results/d3 for aggregate metrics and failures",
+ "agent_decision_at_selection": "HUMAN_REVIEW",
+ "agent_rule_at_selection": "F2",
+ "agent_branches_at_selection": [
+  "F"
+ ]
+}

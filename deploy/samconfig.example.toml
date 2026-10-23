@@ -1,0 +1,11 @@
+# Copy to samconfig.toml in the repo root and fill in the region before `sam deploy`.
+version = 0.1
+
+[default.deploy.parameters]
+stack_name = "loopcheck-demo"
+region = "<region>"
+resolve_s3 = true                 # SAM-managed artifact bucket (uploads the 80 MiB zip)
+capabilities = "CAPABILITY_IAM"   # SAM creates the function's execution role
+confirm_changeset = true          # review the change set before anything is created
+parameter_overrides = "AllowedOrigin=http://localhost:8501 MemorySizeMB=2048 ThrottleRatePerSecond=2 ThrottleBurst=5"
+tags = "project=loopcheck purpose=opencv-competition-demo"

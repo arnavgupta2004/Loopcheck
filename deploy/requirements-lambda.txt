@@ -1,0 +1,4 @@
+# Runtime dependencies of the Lambda function (Python 3.13). Versions match uv.lock.
+# Streamlit, pytest and other tooling are deliberately excluded.
+opencv-contrib-python-headless==5.0.0.93
+numpy==2.5.4

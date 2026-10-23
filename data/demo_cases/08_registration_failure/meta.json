@@ -1,0 +1,41 @@
+{
+ "title": "Registration failure",
+ "description": "Inspection shows only half the tray: all registration strategies fail, no verdict is issued.",
+ "synthetic": true,
+ "case_type": "low_overlap",
+ "category": "registration_fail",
+ "generator": {
+  "module": "loopcheck.synth.make_case",
+  "case_type": "low_overlap",
+  "seed": 4107905218,
+  "derived_from": "SeedSequence([5000, 11, 0])"
+ },
+ "ground_truth": {
+  "defect_type": null,
+  "gt_boxes_xywh": [],
+  "markers": true,
+  "H_true": [
+   [
+    0.9983223524370262,
+    0.03511649055897132,
+    399.6305847167969
+   ],
+   [
+    -0.003911761757701456,
+    1.0053624921158728,
+    2.1401171684265137
+   ],
+   [
+    -8.817904273979055e-06,
+    3.9063071349522185e-05,
+    1.0
+   ]
+  ]
+ },
+ "selection": "first case (index 0 of seed 5000) whose agent run gave HUMAN_REVIEW with branch A; illustrative only \u2014 see results/d3 for aggregate metrics and failures",
+ "agent_decision_at_selection": "HUMAN_REVIEW",
+ "agent_rule_at_selection": "A2",
+ "agent_branches_at_selection": [
+  "A"
+ ]
+}

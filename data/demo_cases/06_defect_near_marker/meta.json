@@ -1,0 +1,51 @@
+{
+ "title": "Defect next to an ArUco marker",
+ "description": "Foreign object 2-25 px from a marker's quiet zone; marker pixels are excluded and the band is screened.",
+ "synthetic": true,
+ "case_type": "foreign_near_marker",
+ "category": "defect",
+ "generator": {
+  "module": "loopcheck.synth.make_case",
+  "case_type": "foreign_near_marker",
+  "seed": 3749142853,
+  "derived_from": "SeedSequence([5000, 15, 1])"
+ },
+ "ground_truth": {
+  "defect_type": "foreign_object",
+  "gt_boxes_xywh": [
+   [
+    142,
+    100,
+    24,
+    24
+   ]
+  ],
+  "markers": true,
+  "H_true": [
+   [
+    1.0211951267546298,
+    -0.022119602162247603,
+    9.535405158996582
+   ],
+   [
+    0.003156899680494068,
+    0.9894296781851385,
+    1.952933430671692
+   ],
+   [
+    3.760233669664557e-05,
+    -2.5211453272856294e-05,
+    1.0
+   ]
+  ]
+ },
+ "selection": "first case (index 1 of seed 5000) whose agent run gave DEFECT with branch E; illustrative only \u2014 see results/d3 for aggregate metrics and failures",
+ "agent_decision_at_selection": "DEFECT",
+ "agent_rule_at_selection": "T1",
+ "agent_branches_at_selection": [
+  "B",
+  "C",
+  "E",
+  "F"
+ ]
+}

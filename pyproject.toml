@@ -14,6 +14,9 @@ dependencies = [
 package = false
 
 [dependency-groups]
+demo = [
+    "streamlit>=1.66.1",
+]
 dev = [
     "pytest>=9.1.1",
 ]
