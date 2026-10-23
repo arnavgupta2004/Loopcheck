@@ -1,0 +1,21 @@
+{
+  "health_status": "ok",
+  "health_opencv_version": "5.0.0",
+  "inspect_opencv_version": "5.0.0",
+  "decision": "DEFECT",
+  "termination_rule": "T1",
+  "error": null,
+  "agent_tool_sequence": [
+    "R0:register",
+    "R1:compare"
+  ],
+  "agent_tool_calls": 2,
+  "images_returned": [
+    "aligned",
+    "heatmap",
+    "overlay"
+  ],
+  "server_seconds": 0.6139,
+  "wall_seconds": 0.631
+}
+SMOKE TEST: PASS

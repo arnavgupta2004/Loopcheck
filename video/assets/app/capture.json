@@ -1,0 +1,394 @@
+{
+ "app_url": "local",
+ "viewport_css": [
+  1600,
+  2000
+ ],
+ "device_scale_factor": 2,
+ "backend": "Local (in-process)",
+ "captured_unix": 1792767975,
+ "landing_eval": {
+  "size": [
+   3200,
+   4000
+  ],
+  "boxes": {
+   "title": {
+    "x": 760,
+    "y": 192,
+    "width": 2280,
+    "height": 177.6
+   },
+   "warning": {
+    "x": 760,
+    "y": 446.4,
+    "width": 2280,
+    "height": 208
+   },
+   "eval_table": {
+    "x": 794,
+    "y": 942.4,
+    "width": 2212,
+    "height": 422
+   },
+   "sidebar": {
+    "x": 0,
+    "y": 0,
+    "width": 600,
+    "height": 4000
+   },
+   "local_radio": {
+    "x": 108,
+    "y": 320,
+    "width": 205.4,
+    "height": 44.8
+   }
+  }
+ },
+ "clean_images": {
+  "size": [
+   3200,
+   4000
+  ],
+  "boxes": {
+   "case_select": {
+    "x": 60,
+    "y": 899.1,
+    "width": 480,
+    "height": 136
+   },
+   "run_button": {
+    "x": 60,
+    "y": 1233.5,
+    "width": 480,
+    "height": 80
+   },
+   "banner": {
+    "x": 760,
+    "y": 686.4,
+    "width": 2280,
+    "height": 137.9
+   },
+   "images": [
+    {
+     "x": 760,
+     "y": 1307.4,
+     "width": 1124,
+     "height": 907.8
+    },
+    {
+     "x": 1916,
+     "y": 1307.4,
+     "width": 1124,
+     "height": 907.8
+    },
+    {
+     "x": 760,
+     "y": 2247.2,
+     "width": 738.7,
+     "height": 708.3
+    },
+    {
+     "x": 1530.7,
+     "y": 2247.2,
+     "width": 738.7,
+     "height": 618.8
+    },
+    {
+     "x": 2301.3,
+     "y": 2247.2,
+     "width": 738.7,
+     "height": 708.3
+    }
+   ],
+   "reasons": {
+    "x": 760,
+    "y": 830.6,
+    "width": 2280,
+    "height": 51.2
+   }
+  },
+  "decision": "APPROVE",
+  "rule": "T5",
+  "banner_text": "APPROVErule T5 \u00b7 Local (in-process) \u00b7 0.48s wall"
+ },
+ "clean_trace": {
+  "size": [
+   3200,
+   4000
+  ],
+  "boxes": {
+   "banner": {
+    "x": 760,
+    "y": 686.4,
+    "width": 2280,
+    "height": 137.9
+   },
+   "trace_tab": {
+    "x": 1104.8,
+    "y": 1195.4,
+    "width": 131.9,
+    "height": 80
+   },
+   "steps": [
+    {
+     "x": 760,
+     "y": 1384.2,
+     "width": 2280,
+     "height": 440.3
+    },
+    {
+     "x": 760,
+     "y": 1856.5,
+     "width": 2280,
+     "height": 600.3
+    },
+    {
+     "x": 760,
+     "y": 2488.8,
+     "width": 2280,
+     "height": 80
+    },
+    {
+     "x": 760,
+     "y": 2600.8,
+     "width": 2280,
+     "height": 80
+    }
+   ]
+  },
+  "decision": "APPROVE",
+  "rule": "T5"
+ },
+ "missing_images": {
+  "size": [
+   3200,
+   4000
+  ],
+  "boxes": {
+   "case_select": {
+    "x": 60,
+    "y": 899.1,
+    "width": 480,
+    "height": 136
+   },
+   "run_button": {
+    "x": 60,
+    "y": 1233.5,
+    "width": 480,
+    "height": 80
+   },
+   "banner": {
+    "x": 760,
+    "y": 686.4,
+    "width": 2280,
+    "height": 137.9
+   },
+   "images": [
+    {
+     "x": 760,
+     "y": 1217.8,
+     "width": 1124,
+     "height": 907.8
+    },
+    {
+     "x": 1916,
+     "y": 1217.8,
+     "width": 1124,
+     "height": 907.8
+    },
+    {
+     "x": 760,
+     "y": 2157.6,
+     "width": 738.7,
+     "height": 708.3
+    },
+    {
+     "x": 1530.7,
+     "y": 2157.6,
+     "width": 738.7,
+     "height": 618.8
+    },
+    {
+     "x": 2301.3,
+     "y": 2157.6,
+     "width": 738.7,
+     "height": 708.3
+    }
+   ],
+   "reasons": {
+    "x": 760,
+    "y": 830.6,
+    "width": 2280,
+    "height": 51.2
+   }
+  },
+  "decision": "DEFECT",
+  "rule": "T1",
+  "banner_text": "DEFECTrule T1 \u00b7 Local (in-process) \u00b7 0.59s wall"
+ },
+ "missing_trace": {
+  "size": [
+   3200,
+   4000
+  ],
+  "boxes": {
+   "banner": {
+    "x": 760,
+    "y": 686.4,
+    "width": 2280,
+    "height": 137.9
+   },
+   "trace_tab": {
+    "x": 1104.8,
+    "y": 1105.8,
+    "width": 131.9,
+    "height": 80
+   },
+   "steps": [
+    {
+     "x": 760,
+     "y": 1294.6,
+     "width": 2280,
+     "height": 440.3
+    },
+    {
+     "x": 760,
+     "y": 1766.9,
+     "width": 2280,
+     "height": 651.5
+    }
+   ]
+  },
+  "decision": "DEFECT",
+  "rule": "T1"
+ },
+ "ambiguous_images": {
+  "size": [
+   3200,
+   4000
+  ],
+  "boxes": {
+   "case_select": {
+    "x": 60,
+    "y": 899.1,
+    "width": 480,
+    "height": 136
+   },
+   "run_button": {
+    "x": 60,
+    "y": 1233.5,
+    "width": 480,
+    "height": 80
+   },
+   "banner": {
+    "x": 760,
+    "y": 686.4,
+    "width": 2280,
+    "height": 137.9
+   },
+   "images": [
+    {
+     "x": 760,
+     "y": 1217.8,
+     "width": 1124,
+     "height": 907.8
+    },
+    {
+     "x": 1916,
+     "y": 1217.8,
+     "width": 1124,
+     "height": 907.8
+    },
+    {
+     "x": 760,
+     "y": 2157.6,
+     "width": 738.7,
+     "height": 708.3
+    },
+    {
+     "x": 1530.7,
+     "y": 2157.6,
+     "width": 738.7,
+     "height": 618.8
+    },
+    {
+     "x": 2301.3,
+     "y": 2157.6,
+     "width": 738.7,
+     "height": 708.3
+    }
+   ],
+   "reasons": {
+    "x": 760,
+    "y": 830.6,
+    "width": 2280,
+    "height": 51.2
+   }
+  },
+  "decision": "HUMAN_REVIEW",
+  "rule": "T2",
+  "banner_text": "HUMAN_REVIEWrule T2 \u00b7 Local (in-process) \u00b7 0.89s wall"
+ },
+ "ambiguous_trace": {
+  "size": [
+   3200,
+   4000
+  ],
+  "boxes": {
+   "banner": {
+    "x": 760,
+    "y": 686.4,
+    "width": 2280,
+    "height": 137.9
+   },
+   "trace_tab": {
+    "x": 1104.8,
+    "y": 1105.8,
+    "width": 131.9,
+    "height": 80
+   },
+   "steps": [
+    null,
+    {
+     "x": 760,
+     "y": 1294.6,
+     "width": 2280,
+     "height": 440.3
+    },
+    {
+     "x": 760,
+     "y": 1766.9,
+     "width": 2280,
+     "height": 600.3
+    },
+    {
+     "x": 760,
+     "y": 2399.2,
+     "width": 2280,
+     "height": 80
+    },
+    {
+     "x": 760,
+     "y": 2511.2,
+     "width": 2280,
+     "height": 80
+    },
+    {
+     "x": 760,
+     "y": 2623.2,
+     "width": 2280,
+     "height": 80
+    },
+    {
+     "x": 760,
+     "y": 2735.2,
+     "width": 2280,
+     "height": 80
+    }
+   ]
+  },
+  "decision": "HUMAN_REVIEW",
+  "rule": "T2"
+ }
+}

@@ -1,0 +1,44 @@
+{
+ "case": "01_clean",
+ "title": "Clean (identical)",
+ "description": "Reference and inspection are the same tray image; nothing has changed.",
+ "opencv_version": "5.0.0",
+ "decision": "APPROVE",
+ "termination_rule": "T5",
+ "reasons": [
+  "reliable registration (aruco), inspected 89.4% of the reference frame, no unresolved evidence",
+  "8.3% excluded (markers): screened by contrast diagnostic, NOT inspected"
+ ],
+ "tool_sequence": [
+  "R0:register",
+  "R1:compare",
+  "F1:content_check",
+  "E1:marker_band_check"
+ ],
+ "registration_method": "aruco",
+ "H_ref_to_insp": [
+  [
+   1.0,
+   0.0,
+   0.0
+  ],
+  [
+   -0.0,
+   1.0,
+   0.0
+  ],
+  [
+   -0.0,
+   -0.0,
+   1.0
+  ]
+ ],
+ "candidates": [],
+ "coverage": {
+  "reference_px": 480000,
+  "observed_fraction": 0.9768,
+  "inspected_fraction": 0.8939,
+  "excluded_markers_fraction": 0.0829
+ },
+ "ground_truth_boxes_xywh_reference": []
+}

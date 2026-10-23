@@ -1,0 +1,65 @@
+{
+ "case": "05_ambiguous_tiny",
+ "title": "Ambiguous tiny object",
+ "description": "A 7-10 px low-contrast object: evidence is weak, the agent escalates instead of guessing.",
+ "opencv_version": "5.0.0",
+ "decision": "HUMAN_REVIEW",
+ "termination_rule": "T2",
+ "reasons": [
+  "1 candidate(s) neither confirmed nor explained"
+ ],
+ "tool_sequence": [
+  "R0:register",
+  "R1:compare",
+  "F1:content_check",
+  "D1:compare",
+  "C1:reinspect",
+  "E1:marker_band_check"
+ ],
+ "registration_method": "aruco",
+ "H_ref_to_insp": [
+  [
+   1.02860343,
+   -0.00598624,
+   0.96026931
+  ],
+  [
+   0.01492386,
+   1.01512456,
+   -9.00953475
+  ],
+  [
+   3.071e-05,
+   1.152e-05,
+   1.0
+  ]
+ ],
+ "candidates": [
+  {
+   "id": 0,
+   "status": "ambiguous",
+   "bbox_xywh_reference": [
+    581.0,
+    244.0,
+    17.0,
+    15.0
+   ],
+   "peak": 0.394,
+   "area_px": 196
+  }
+ ],
+ "coverage": {
+  "reference_px": 480000,
+  "observed_fraction": 0.9689,
+  "inspected_fraction": 0.8849,
+  "excluded_markers_fraction": 0.084
+ },
+ "ground_truth_boxes_xywh_reference": [
+  [
+   582,
+   246,
+   14,
+   12
+  ]
+ ]
+}

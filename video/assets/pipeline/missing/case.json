@@ -1,0 +1,61 @@
+{
+ "case": "02_missing_part",
+ "title": "Missing part",
+ "description": "One component removed; mild perspective, lighting, blur, noise and JPEG.",
+ "opencv_version": "5.0.0",
+ "decision": "DEFECT",
+ "termination_rule": "T1",
+ "reasons": [
+  "1 confirmed defect region(s)"
+ ],
+ "tool_sequence": [
+  "R0:register",
+  "R1:compare"
+ ],
+ "registration_method": "sift",
+ "H_ref_to_insp": [
+  [
+   0.98245438,
+   -0.00085953,
+   -11.29772791
+  ],
+  [
+   -0.0045577,
+   0.99532238,
+   -0.19585212
+  ],
+  [
+   -3.794e-05,
+   1.212e-05,
+   1.0
+  ]
+ ],
+ "candidates": [
+  {
+   "id": 0,
+   "status": "confirmed",
+   "bbox_xywh_reference": [
+    312.0,
+    113.0,
+    49.0,
+    68.0
+   ],
+   "peak": 0.9415,
+   "area_px": 1831
+  }
+ ],
+ "coverage": {
+  "reference_px": 480000,
+  "observed_fraction": 0.9556,
+  "inspected_fraction": 0.9556,
+  "excluded_markers_fraction": 0.0
+ },
+ "ground_truth_boxes_xywh_reference": [
+  [
+   314,
+   115,
+   45,
+   64
+  ]
+ ]
+}

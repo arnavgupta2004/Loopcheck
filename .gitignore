@@ -8,3 +8,11 @@ data/synthetic/
 outputs/
 deploy/.build/
 .aws-sam/
+
+# demo film: generated media (rebuild with: uv run --frozen python video/render_video.py)
+video/build/
+video/audio/
+video/*.mp4
+video/voiceover.wav
+video/assets/pipeline/*/*.png
+video/assets/music/
