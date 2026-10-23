@@ -23,3 +23,7 @@ video/assets/music/
 # Devpost gallery images: shared on request, not pushed without approval
 devpost/media/*.png
 devpost/media/capture_log.json
+
+# Submission package: built by devpost/src/build_submission.py, shared on request
+devpost/build/
+devpost/LoopCheck-submission-materials.zip

@@ -1,0 +1,35 @@
+/* Print stylesheet for the LoopCheck technical report (pandoc HTML -> Chromium PDF). */
+@font-face { font-family: "Inter"; font-weight: 400; src: url("fonts/Inter-Regular.otf"); }
+@font-face { font-family: "Inter"; font-weight: 500; src: url("fonts/Inter-Medium.otf"); }
+@font-face { font-family: "Inter"; font-weight: 600; src: url("fonts/Inter-SemiBold.otf"); }
+@font-face { font-family: "Inter Display"; font-weight: 600; src: url("fonts/InterDisplay-SemiBold.otf"); }
+@font-face { font-family: "JetBrains Mono"; font-weight: 400; src: url("fonts/JetBrainsMono-Regular.ttf"); }
+
+@page { size: A4; margin: 18mm 17mm 20mm 17mm; }
+:root { --ink: #16181d; --muted: #5b6270; --line: #d9dde3; --accent: #c62828; --blue: #1f6fae; --soft: #f4f6f8; }
+html { font-size: 10.2pt; }
+body { font-family: "Inter", sans-serif; color: var(--ink); line-height: 1.5; max-width: none; margin: 0; padding: 0;
+       -webkit-print-color-adjust: exact; print-color-adjust: exact; font-feature-settings: "tnum" 1; }
+header#title-block-header { border-bottom: 3px solid var(--accent); padding-bottom: 10pt; margin-bottom: 14pt; }
+h1.title { font-family: "Inter Display", sans-serif; font-size: 25pt; line-height: 1.15; margin: 0 0 4pt; letter-spacing: -0.01em; }
+p.subtitle { font-size: 11.5pt; color: var(--muted); margin: 0; }
+h1 { font-family: "Inter Display", sans-serif; font-size: 15pt; margin: 20pt 0 6pt; padding-top: 4pt; border-top: 1px solid var(--line);
+     break-after: avoid; letter-spacing: -0.005em; }
+h2 { font-family: "Inter", sans-serif; font-weight: 600; font-size: 11.6pt; margin: 14pt 0 4pt; color: var(--ink); break-after: avoid; }
+p, li { orphans: 3; widows: 3; }
+a { color: var(--blue); text-decoration: none; }
+strong { font-weight: 600; }
+code { font-family: "JetBrains Mono", monospace; font-size: 8.7pt; background: var(--soft); padding: 0.5pt 3pt; border-radius: 3px; }
+pre { background: #0f1115; color: #e6e8ec; border-radius: 6px; padding: 9pt 11pt; font-size: 8.4pt; line-height: 1.45;
+      white-space: pre-wrap; break-inside: avoid; }
+pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+blockquote { margin: 10pt 0; padding: 8pt 12pt; border-left: 4px solid var(--accent); background: #fbf1f1; border-radius: 0 6px 6px 0; }
+blockquote p { margin: 0; }
+table { border-collapse: collapse; width: 100%; margin: 8pt 0 12pt; font-size: 9pt; break-inside: avoid; }
+th { text-align: left; font-weight: 600; background: var(--soft); border-bottom: 1.5px solid #b9bfc8; padding: 4pt 6pt; }
+td { border-bottom: 1px solid var(--line); padding: 3.5pt 6pt; vertical-align: top; }
+figure { margin: 12pt 0; break-inside: avoid; text-align: center; }
+figure img { max-width: 100%; max-height: 118mm; border: 1px solid var(--line); border-radius: 4px; }
+figure img[src*="app_"] { max-height: 205mm; }
+figcaption { font-size: 8.8pt; color: var(--muted); margin-top: 4pt; text-align: left; }
+hr { border: none; border-top: 1px solid var(--line); }
