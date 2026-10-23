@@ -61,17 +61,40 @@ else
   echo "   Sign in again: aws login --profile $PROFILE   (IAM Identity Center profiles: aws sso login --profile $PROFILE)"
 fi
 
+# describe-stacks by name: "does not exist" is a normal answer for a new stack, but AccessDenied
+# (or any other error) is a permission/identity problem and must never be read as "not created yet".
+# Sets LOOKUP=exists|missing|denied|error and LOOKUP_OUT (status or first error line).
+stack_lookup() {
+  local out rc
+  out=$(aws_ro cloudformation describe-stacks --stack-name "$1" --query 'Stacks[0].StackStatus' --output text 2>&1); rc=$?
+  LOOKUP_OUT=$(printf '%s' "$out" | grep -v '^[[:space:]]*$' | head -1 | cut -c1-500)
+  if [ "$rc" -eq 0 ]; then LOOKUP=exists
+  elif printf '%s' "$out" | grep -q "does not exist"; then LOOKUP=missing
+  elif printf '%s' "$out" | grep -Eq "AccessDenied|not authorized"; then LOOKUP=denied
+  else LOOKUP=error; fi
+}
+denied_hint() {
+  fail "$1: AccessDenied — the policy attached in IAM does not allow it: $LOOKUP_OUT"
+  echo "         -> check the ATTACHED LoopCheckDeployerPolicy (account ID filled in correctly, default version):"
+  echo "            python3 deploy/iam/policy_tool.py check <policy copied from IAM>.json --account-id <12-digit id>"
+  echo "            (docs/d4_2_deployment_identity.md, 'AccessDenied on cloudformation:DescribeStacks')"
+}
+
 if [ "$FAILS" -eq 0 ]; then
   echo "5. Existing CloudFormation stacks"
   EXISTING_RESERVED=0
-  if st=$(aws_ro cloudformation describe-stacks --stack-name "$STACK" --query 'Stacks[0].StackStatus' --output text 2>/dev/null); then
+  stack_lookup "$STACK"
+  if [ "$LOOKUP" = exists ]; then
+    st=$LOOKUP_OUT
     warn "stack $STACK already exists ($st): 'sam deploy' would UPDATE it"
     fn=$(aws_ro cloudformation describe-stack-resource --stack-name "$STACK" --logical-resource-id InspectFunction --query 'StackResourceDetail.PhysicalResourceId' --output text 2>/dev/null || true)
     if [ -n "$fn" ] && cur=$(aws_ro lambda get-function-concurrency --function-name "$fn" --query 'ReservedConcurrentExecutions' --output text 2>/dev/null); then
       case "$cur" in ''|None|null) ok "existing function has no reserved concurrency (unreserved mode)" ;;
         *) EXISTING_RESERVED="$cur"; ok "existing function already reserves $cur (counted back in below)" ;; esac
     fi
-  else ok "stack $STACK does not exist yet"; fi
+  elif [ "$LOOKUP" = missing ]; then ok "stack $STACK does not exist yet (describe-stacks allowed: 'does not exist')"
+  elif [ "$LOOKUP" = denied ]; then denied_hint "cloudformation:DescribeStacks on stack/$STACK"
+  else fail "describe-stacks $STACK failed: $LOOKUP_OUT"; fi
 
   echo "6. Lambda concurrency mode (reserved 2 needs >= 10 unreserved executions left in the account)"
   RECOMMENDED_MODE=""
@@ -88,11 +111,16 @@ if [ "$FAILS" -eq 0 ]; then
       echo "            (no per-function cap). API Gateway throttling (2 req/s, burst 5) still applies."
     fi
     echo "  RECOMMENDED: --parameter-overrides ... ConcurrencyMode=$RECOMMENDED_MODE   (never set reserved concurrency to 0: it throttles every request)"
+  elif printf '%s' "$lim" | grep -Eq "AccessDenied|not authorized"; then
+    LOOKUP_OUT=$(printf '%s' "$lim" | head -1 | cut -c1-500); denied_hint "lambda:GetAccountSettings"
   else warn "could not read Lambda account settings: $(printf '%s' "$lim" | head -1 | cut -c1-160) — default ConcurrencyMode=reserved may be rejected; unreserved is the fallback"; fi
-  if aws_ro cloudformation describe-stacks --stack-name aws-sam-cli-managed-default >/dev/null 2>&1; then
+  stack_lookup aws-sam-cli-managed-default
+  if [ "$LOOKUP" = exists ]; then
     bucket=$(aws_ro cloudformation describe-stack-resource --stack-name aws-sam-cli-managed-default --logical-resource-id SamCliSourceBucket --query 'StackResourceDetail.PhysicalResourceId' --output text 2>/dev/null || echo "?")
     ok "SAM managed artifact bucket exists ($bucket) — shared by all SAM projects in this account/region; it will be reused"
-  else ok "no SAM managed stack in $REGION — 'sam deploy --resolve-s3' will create aws-sam-cli-managed-default (one private S3 bucket)"; fi
+  elif [ "$LOOKUP" = missing ]; then ok "no SAM managed stack in $REGION — 'sam deploy --resolve-s3' will create aws-sam-cli-managed-default (one private S3 bucket; needs LoopCheckSamBootstrapPolicy once)"
+  elif [ "$LOOKUP" = denied ]; then denied_hint "cloudformation:DescribeStacks on stack/aws-sam-cli-managed-default"
+  else fail "describe-stacks aws-sam-cli-managed-default failed: $LOOKUP_OUT"; fi
 fi
 
 echo "7. Local build artifact (template.yaml CodeUri)"

@@ -317,6 +317,9 @@ def test_local_mode_keeps_details_for_debugging(monkeypatch):
 # --------------------------------------------------------------------------- preflight (offline, fake aws/sam)
 FAKE_AWS = r"""#!/usr/bin/env bash
 echo "aws $*" >> "$CALL_LOG"
+if [ -n "${FAKE_CFN_DENIED:-}" ] && [[ "$*" == *"cloudformation describe-stacks"* ]]; then
+  echo "An error occurred (AccessDenied) when calling the DescribeStacks operation: User: arn:aws:iam::111122223333:user/loopcheck-deployer is not authorized to perform: cloudformation:DescribeStacks on resource: arn:aws:cloudformation:ap-south-1:111122223333:stack/loopcheck-demo/* because no identity-based policy allows the cloudformation:DescribeStacks action" >&2; exit 254
+fi
 case "$*" in
   "--version") echo "aws-cli/2.99.0 fake" ;;
   "configure list-profiles") printf 'default\nloopcheck-deployer\n' ;;
@@ -326,9 +329,9 @@ case "$*" in
   *"lambda get-account-settings"*) printf '%s\n' "${FAKE_LIMITS:-1000	1000}" ;;
   *"lambda get-function-concurrency"*) printf '%s\n' "${FAKE_FN_RESERVED:-None}" ;;
   *"cloudformation describe-stacks --stack-name loopcheck-demo"*)
-      if [ -n "${FAKE_STACK_EXISTS:-}" ]; then echo "CREATE_COMPLETE"; else echo "Stack does not exist" >&2; exit 254; fi ;;
+      if [ -n "${FAKE_STACK_EXISTS:-}" ]; then echo "CREATE_COMPLETE"; else echo "An error occurred (ValidationError) when calling the DescribeStacks operation: Stack with id loopcheck-demo does not exist" >&2; exit 254; fi ;;
   *"cloudformation describe-stack-resource --stack-name loopcheck-demo --logical-resource-id InspectFunction"*) echo "loopcheck-demo-InspectFunction-ABC123" ;;
-  *"cloudformation describe-stacks"*) echo "Stack does not exist" >&2; exit 254 ;;
+  *"cloudformation describe-stacks"*) echo "An error occurred (ValidationError) when calling the DescribeStacks operation: Stack with id aws-sam-cli-managed-default does not exist" >&2; exit 254 ;;
   *) echo "unexpected aws call: $*" >&2; exit 99 ;;
 esac
 """
@@ -445,6 +448,23 @@ def test_preflight_refuses_root_identity_and_stops_before_other_aws_calls(sandbo
 def test_preflight_warns_on_other_non_root_identity(sandbox):
     p, _ = _preflight(sandbox, FAKE_ARN="arn:aws:iam::111122223333:user/someone-else")
     assert p.returncode == 0 and "[WARN] not the dedicated LoopCheck deployer identity" in p.stdout
+
+
+def test_preflight_reports_access_denied_instead_of_stack_does_not_exist(sandbox):
+    # The real failure mode: a mis-rendered policy denies DescribeStacks; that must not read as "not created yet".
+    p, calls = _preflight(sandbox, FAKE_CFN_DENIED="1")
+    out = p.stdout
+    assert p.returncode == 1 and "RESULT: FAIL" in out
+    assert "[FAIL] cloudformation:DescribeStacks on stack/loopcheck-demo: AccessDenied" in out
+    assert "no identity-based policy allows" in out and "policy_tool.py check" in out
+    assert "does not exist yet" not in out
+    assert all(READ_ONLY.match(c) for c in calls)
+
+
+def test_preflight_treats_validation_error_as_new_stack(sandbox):
+    p, _ = _preflight(sandbox)
+    assert "stack loopcheck-demo does not exist yet (describe-stacks allowed" in p.stdout
+    assert "no SAM managed stack in ap-south-1" in p.stdout
 
 
 def test_preflight_fails_cleanly_without_aws_cli(tmp_path):

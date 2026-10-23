@@ -6,7 +6,8 @@
       "Effect": "Allow",
       "Action": [
         "lambda:GetAccountSettings",
-        "cloudformation:ValidateTemplate"
+        "cloudformation:ValidateTemplate",
+        "logs:DescribeLogGroups"
       ],
       "Resource": "*",
       "Condition": {"StringEquals": {"aws:RequestedRegion": "ap-south-1"}}
@@ -171,12 +172,6 @@
         "arn:aws:logs:ap-south-1:ACCOUNT_ID:log-group:/aws/lambda/loopcheck-demo-inspect",
         "arn:aws:logs:ap-south-1:ACCOUNT_ID:log-group:/aws/lambda/loopcheck-demo-inspect:*"
       ]
-    },
-    {
-      "Sid": "DescribeLogGroupsInRegion",
-      "Effect": "Allow",
-      "Action": "logs:DescribeLogGroups",
-      "Resource": "arn:aws:logs:ap-south-1:ACCOUNT_ID:log-group:*"
     }
   ]
 }

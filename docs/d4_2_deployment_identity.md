@@ -63,7 +63,7 @@ for `loopcheck-deployer` either.** `aws login` makes them unnecessary.
 | Pass the role | `iam:PassRole` **only to `lambda.amazonaws.com`** | Same role prefix |
 | HTTP API (routes, integration, `$default` stage, throttling, CORS, tags) | `apigateway:GET`/`POST`/`PUT`/`PATCH`/`DELETE` | `/apis`, `/apis/*`, `/tags/*` in ap-south-1. **Broader**: see below |
 | Log group (7-day retention) and reading logs | `logs:CreateLogGroup`, `DeleteLogGroup`, `Put`/`DeleteRetentionPolicy`, tag actions, `GetDataProtectionPolicy`, `FilterLogEvents`, `GetLogEvents`, `DescribeLogStreams` | `log-group:/aws/lambda/loopcheck-demo-inspect` only |
-| Find the log group | `logs:DescribeLogGroups` | `log-group:*` in ap-south-1 (needs list-level scope; read-only metadata) |
+| Find the log group | `logs:DescribeLogGroups` | `*`, ap-south-1 only. It has **no resource-level support**: a scoped ARN such as `log-group:*` never matches. Read-only metadata |
 | Console/CLI sign-in | AWS managed policy `SignInLocalDevelopmentAccess` (`signin:AuthorizeOAuth2Access`, `signin:CreateOAuth2Token`) | Lets `aws login` turn the console session into CLI credentials |
 
 **Deliberately absent:**
@@ -107,9 +107,13 @@ Even a misused deployer can only run code with CloudWatch-Logs-only rights.
      the console, as root or an administrator. Then deploy with `--s3-bucket <name>`
      instead of `--resolve-s3`, after changing the S3 ARNs in the deployer policy to that
      bucket.
-3. **Read-only calls with `Resource: "*"`.** `lambda:GetAccountSettings` and
-   `cloudformation:ValidateTemplate` have no resource-level permissions. They are read-only
-   and limited to ap-south-1.
+3. **Read-only calls with `Resource: "*"`.** `lambda:GetAccountSettings`,
+   `cloudformation:ValidateTemplate` and `logs:DescribeLogGroups` have no resource-level
+   permissions (their "Resource types" column in the Service Authorization Reference is
+   empty), so IAM matches them only with `"*"`. They are read-only and limited to ap-south-1.
+   `cloudformation:DescribeStacks` is **not** in this group. It supports the `stack`
+   resource type, so it stays scoped to `stack/loopcheck-demo/*` (see
+   [AccessDenied on cloudformation:DescribeStacks](#accessdenied-on-cloudformationdescribestacks)).
 4. **`s3:ListBucket` on the shared SAM bucket** also lists other SAM projects' artifact
    *names* (not contents). *Narrower:* add
    `"Condition": {"StringLike": {"s3:prefix": ["loopcheck-demo/*"]}}`. If `sam deploy`
@@ -130,6 +134,10 @@ be used.
 
 ### If a permission is missing
 
+For `AccessDenied` on `cloudformation:DescribeStacks` right after the artifact upload, see
+[AccessDenied on cloudformation:DescribeStacks](#accessdenied-on-cloudformationdescribestacks)
+first: it is almost always a mis-filled account ID, not a missing action.
+
 `sam deploy` shows the change set and CloudFormation then reports each failure as a
 stack event like:
 `... is not authorized to perform: logs:SomeAction on resource: arn:aws:logs:ap-south-1:…`.
@@ -140,6 +148,126 @@ CloudFormation rolls the stack back. Then:
 3. If the stack is in `ROLLBACK_COMPLETE`, delete it with `sam delete` (allowed by the policy)
    and deploy again.
 
+### AccessDenied on cloudformation:DescribeStacks
+
+**Symptom (observed):**
+- `sam deploy --profile loopcheck-deployer --region ap-south-1 --s3-bucket <existing bucket>`
+  uploads the 80 MiB artifact.
+- It then stops with:
+  `User: arn:aws:iam::<account>:user/loopcheck-deployer is not authorized to perform:
+  cloudformation:DescribeStacks on resource: arn:aws:cloudformation:ap-south-1:<account>:stack/loopcheck-demo/*
+  because no identity-based policy allows the cloudformation:DescribeStacks action`.
+
+**What it means:**
+- **"No identity-based policy allows"** is an *implicit* deny: no Allow statement in the
+  policies attached to the user matched the action and resource.
+  - It is not an explicit Deny.
+  - It is not a permissions boundary or an SCP; those produce differently worded messages.
+- **The reported resource is the one IAM evaluated.** For a stack that doesn't exist yet,
+  CloudFormation authorizes the request as `stack/loopcheck-demo/*`.
+- **SAM's first CloudFormation call after the upload** is `has_stack()`, which is
+  `DescribeStacks(StackName="loopcheck-demo")` (SAM CLI 1.170.0,
+  `samcli/lib/deploy/deployer.py`).
+  - It treats only `Stack with id … does not exist` as "new stack", and stops on any other
+    error.
+  - A by-name `DescribeStacks` therefore never needs `Resource: "*"`. That would only be
+    needed to list *all* stacks, which SAM doesn't do here.
+
+**The repository policy allows exactly that ARN:**
+- `LoopCheckStack` allows `cloudformation:DescribeStacks` on
+  `arn:aws:cloudformation:ap-south-1:ACCOUNT_ID:stack/loopcheck-demo/*`.
+- Once rendered with the right account ID, that is character-for-character the reported
+  resource (`tests/test_iam_policy.py` checks it).
+
+**So the policy that is attached in IAM differs from the repository's rendered policy.**
+The upload succeeding is consistent with this: S3 ARNs contain no account ID, so a
+wrong account field breaks only the account-scoped statements (CloudFormation, Lambda,
+IAM, Logs), and `DescribeStacks` is the first of those SAM calls. Likely causes, most likely
+first:
+1. **Account ID not filled in:** the repository JSON was pasted with the literal `ACCOUNT_ID`.
+2. **Empty account field:** `sed "s/ACCOUNT_ID/$ACCOUNT_ID/g"` ran in a shell where
+   `ACCOUNT_ID` was unset (the earlier instructions allowed this, and their `grep -c` check
+   could not catch it).
+3. **Wrong digits:** a typo, or a **dropped leading zero** (11 digits).
+4. **The edit isn't effective:**
+   - the edited policy was never saved;
+   - a different version is the **default** (Policy versions tab);
+   - the policy is attached to a different user;
+   - or only the bootstrap policy is attached.
+5. **Stack name or region differs:** `--stack-name` other than `loopcheck-demo`, or a
+   region other than ap-south-1 in either the command or the policy.
+
+**Diagnose offline:**
+1. As root, open **IAM → Policies → `LoopCheckDeployerPolicy` → Permissions**. Make sure
+   the default version is shown.
+2. Choose **JSON** and copy the whole document into a local file outside the repository,
+   e.g. `~/loopcheck-attached.json`.
+3. Run:
+   ```bash
+   python3 deploy/iam/policy_tool.py check ~/loopcheck-attached.json --account-id <12-digit id> [--bucket <your --s3-bucket>]
+   ```
+   It names each statement whose account field is a placeholder, empty, short or
+   different. It also reports whether `DescribeStacks` on `stack/loopcheck-demo/*`, and the
+   other key `sam deploy` requests, are allowed, and lists differences from the repository.
+   Expect `CHECK: PASS`.
+
+**Fix it in IAM.** Editing the repository has **no effect on AWS**. The corrected
+document must be saved as the policy's default version before you retry.
+1. Render locally:
+   ```bash
+   python3 deploy/iam/policy_tool.py render --account-id <12-digit id> [--bucket <your --s3-bucket>]
+   ```
+   Then check the result:
+   ```bash
+   python3 deploy/iam/policy_tool.py check deploy/.build/iam/deployer.json --account-id <id> [--bucket …]
+   ```
+   Expect `CHECK: PASS`.
+2. As root in the console, open **IAM → Policies** and search for `LoopCheckDeployerPolicy`
+   (Type: Customer managed). Open it.
+3. Choose **Edit**, then the **JSON** tab. Select all, delete, and paste the full contents of
+   `deploy/.build/iam/deployer.json`.
+4. Review the policy validator panel below the editor and resolve every **error**.
+   Security warnings or suggestions about `"*"` resources are expected only for the
+   `ReadOnlyCallsWithoutResourceLevelSupport` statement.
+5. Choose **Next**, review the summary, then **Save changes**. IAM stores this as a new
+   version and makes it the **default**.
+   - A managed policy keeps at most 5 versions. If the console asks, delete an old,
+     non-default version first.
+   - The policy stays attached to `loopcheck-deployer`; there is no need to detach and
+     re-attach it.
+6. Confirm that **Policy versions** shows the new version as default, and that **Entities
+   attached** lists `loopcheck-deployer`.
+7. Copy the JSON again and rerun `policy_tool.py check` on it. Expect `CHECK: PASS`.
+8. As the deployer, run the read-only preflight:
+   `LOOPCHECK_AWS_PROFILE=loopcheck-deployer bash deploy/preflight.sh`.
+   Step 5 must print `stack loopcheck-demo does not exist yet (describe-stacks allowed …)`.
+   The preflight now **fails** on AccessDenied; earlier versions wrongly reported it as
+   "does not exist yet".
+9. Retry the same `sam deploy` command.
+   - Nothing needs cleaning up from the failed run. It stopped before `CreateChangeSet`, so
+     no stack was created.
+   - The uploaded artifact stays in the bucket, and SAM skips re-uploading an identical
+     file. **Don't delete anything from S3.**
+   - IAM changes usually apply within seconds; if the first retry is still denied, wait a
+     minute.
+
+**Also fixed in the repository policy at the same time:** `logs:DescribeLogGroups` had been
+scoped to `log-group:*`. It has no resource-level support, so that could never match, and
+it would have been the next denial: CloudFormation's log-group handler and runbook step 10
+call it. It now sits in the `ReadOnlyCallsWithoutResourceLevelSupport` statement (`*`,
+ap-south-1 only). **Paste the updated policy even if the account ID turns out to be right.**
+
+**How this was checked:**
+- The fetch of `docs.aws.amazon.com` was blocked by this development environment's network
+  policy.
+- The resource-level facts above therefore come from the Service Authorization Reference
+  data bundled in `policy_sentry` 0.15.2 (PyPI, April 2026):
+  - `DescribeStacks` supports resource type `stack`, ARN `stack/${StackName}/${Id}`;
+  - `DescribeLogGroups`, `GetAccountSettings` and `ValidateTemplate` have none.
+- SAM's calls come from the SAM CLI 1.170.0 source.
+- Re-check against the live reference if you can open it:
+  https://docs.aws.amazon.com/service-authorization/latest/reference/list_awscloudformation.html
+
 ## One-time setup in the AWS Console (as root, MFA on; no access keys)
 
 These steps **create IAM resources** (IAM itself is free). Do them yourself; nothing here
@@ -149,16 +277,19 @@ was run on your behalf.
    - Confirm **MFA** is assigned.
    - Confirm **Access keys** shows none. If one exists and you don't use it, deactivate,
      then delete it.
-1. **Note your account ID** (account menu, top right). Fill it into both policies locally;
-   this is a file-only edit with no AWS call:
+1. **Note your account ID** (account menu, top right): all 12 digits, **including leading
+   zeros**. Fill it into the policies locally; this is a file-only step with no AWS call:
    ```bash
-   ACCOUNT_ID=123456789012   # your 12-digit account ID (not a secret, but don't commit the rendered files)
-   mkdir -p deploy/.build/iam
-   sed "s/ACCOUNT_ID/$ACCOUNT_ID/g" deploy/iam/loopcheck-deployer-policy.json > deploy/.build/iam/deployer.json
-   sed "s/ACCOUNT_ID/$ACCOUNT_ID/g" deploy/iam/loopcheck-sam-bootstrap-policy.json > deploy/.build/iam/bootstrap.json
-   grep -c ACCOUNT_ID deploy/.build/iam/*.json   # expect 0 for both
+   python3 deploy/iam/policy_tool.py render --account-id 123456789012
+   #   writes deploy/.build/iam/deployer.json and bootstrap.json, and prints the stack ARN to eyeball
+   #   with an explicit existing artifact bucket (sam deploy --s3-bucket NAME), add: --bucket NAME
+   #   (scopes S3 to that bucket's loopcheck-demo/ prefix; no bootstrap policy is written or needed)
    ```
-   `deploy/.build/` is git-ignored.
+   The renderer refuses anything that isn't exactly 12 digits. It also refuses to write a
+   policy whose account field is empty, shortened or still `ACCOUNT_ID`. IAM accepts such a
+   policy without complaint, but it matches nothing (see troubleshooting). **Don't** use
+   `sed` with a shell variable: run in a shell where the variable is unset, it silently
+   writes an empty account field. `deploy/.build/` is git-ignored.
 2. **IAM → Policies → Create policy → JSON.** Paste `deploy/.build/iam/deployer.json`.
    - The editor validates it. Expect no errors. Fix any reported error before continuing.
    - **Next.** Name: `LoopCheckDeployerPolicy`. Description: `Deploy/update/delete stack
@@ -285,7 +416,9 @@ sam deploy --stack-name loopcheck-demo --region ap-south-1 --profile loopcheck-d
 
 `tests/test_iam_policy.py` (no AWS calls) checks that:
 - both policies are valid JSON with no wildcard actions;
-- `*` resources appear only for the two read-only actions, pinned to ap-south-1;
+- `*` resources appear only for the three read-only actions without resource-level support
+  (`lambda:GetAccountSettings`, `cloudformation:ValidateTemplate`, `logs:DescribeLogGroups`),
+  pinned to ap-south-1, and those actions never appear with a scoped ARN;
 - every regional ARN is in ap-south-1, and both policies fit the 6,144-character managed
   policy limit;
 - no escalation actions exist (`PutRolePolicy`, `CreateAccessKey`, `PassRole` without a
@@ -297,4 +430,14 @@ sam deploy --stack-name loopcheck-demo --region ap-south-1 --profile loopcheck-d
   names match.
 
 `tests/test_deploy.py` checks that the preflight defaults to `loopcheck-deployer`, fails on
-a root ARN before making any other AWS call, and warns on any other identity.
+a root ARN before making any other AWS call, warns on any other identity, and reports
+AccessDenied on `describe-stacks` as a FAIL (never as "stack does not exist yet").
+
+`deploy/iam/policy_tool.py` (tested in `tests/test_iam_policy.py`) renders the policies and
+checks a copy of the attached one. The tests check that:
+- the rendered policy allows `cloudformation:DescribeStacks` on exactly the ARN from the
+  AccessDenied message, and on the real stack ARN, but not on other stacks;
+- account IDs that are not exactly 12 digits are rejected;
+- the checker explains the denial for the placeholder, empty, dropped-leading-zero and
+  other-account cases;
+- the `--bucket` mode keeps S3 scoped to the `loopcheck-demo/` prefix.

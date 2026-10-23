@@ -17,8 +17,10 @@ BOOTSTRAP = IAM / "loopcheck-sam-bootstrap-policy.json"
 STACK = "loopcheck-demo"
 REGION = "ap-south-1"
 BASIC_EXEC = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
-# Only these read-only actions have no resource-level support and may use Resource "*".
-STAR_RESOURCE_OK = {"lambda:GetAccountSettings", "cloudformation:ValidateTemplate"}
+# Read-only actions with NO resource-level support (Service Authorization Reference "Resource types"
+# column empty; checked against policy_sentry 0.15.2's bundled copy of that reference). IAM only
+# matches them with Resource "*"; a scoped ARN such as log-group:* silently never matches.
+STAR_RESOURCE_OK = {"lambda:GetAccountSettings", "cloudformation:ValidateTemplate", "logs:DescribeLogGroups"}
 
 
 class _Loader(yaml.SafeLoader):
@@ -127,7 +129,91 @@ def test_docs_and_defaults_use_the_deployer_profile():
     assert 'profile = "loopcheck-deployer"' in (ROOT / "deploy" / "samconfig.example.toml").read_text()
     doc = (ROOT / "docs" / "d4_2_deployment_identity.md").read_text()
     for needle in ("aws login --profile loopcheck-deployer", "aws sts get-caller-identity", "LoopCheckDeployerPolicy",
-                   "SignInLocalDevelopmentAccess", "ConcurrencyMode=unreserved", "never create access keys", "AdministratorAccess"):
+                   "SignInLocalDevelopmentAccess", "ConcurrencyMode=unreserved", "never create access keys", "AdministratorAccess",
+                   "AccessDenied on cloudformation:DescribeStacks", "policy_tool.py render --account-id", "policy_tool.py check",
+                   "no effect on AWS", "Save changes"):
         assert needle in doc, needle
     runbook = (ROOT / "docs" / "d4_demo_and_deployment.md").read_text()
     assert "AWS_PROFILE_NAME=loopcheck-deployer" in runbook and "aws configure sso --profile loopcheck " not in runbook
+
+
+def test_actions_without_resource_level_support_use_star():
+    for st in _statements(DEPLOYER) + _statements(BOOTSTRAP):
+        acts = set(_as_list(st["Action"]))
+        if acts & STAR_RESOURCE_OK:
+            assert _as_list(st["Resource"]) == ["*"] and acts <= STAR_RESOURCE_OK, st["Sid"]
+
+
+# --------------------------------------------------------------------------- deploy/iam/policy_tool.py (offline)
+import importlib.util  # noqa: E402
+
+_spec = importlib.util.spec_from_file_location("policy_tool", IAM / "policy_tool.py")
+pt = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(pt)
+ACCT = "012345678901"   # fictitious, with a leading zero on purpose
+DENIED_ARN = f"arn:aws:cloudformation:ap-south-1:{ACCT}:stack/loopcheck-demo/*"  # as shown in the AccessDenied message
+
+
+def test_rendered_policy_allows_the_exact_failing_request():
+    pol = json.loads(pt.render("deployer", ACCT))
+    assert pt.allowing_statements(pol, "cloudformation:DescribeStacks", DENIED_ARN) == ["LoopCheckStack"]
+    # existing stack (real stack ID) is matched too, other stacks are not
+    assert pt.allowing_statements(pol, "cloudformation:DescribeStacks", DENIED_ARN[:-1] + "1b2c3d4e-0000-1111-2222-333344445555")
+    assert not pt.allowing_statements(pol, "cloudformation:DescribeStacks", DENIED_ARN.replace("loopcheck-demo", "other-stack"))
+    assert not pt.allowing_statements(pol, "cloudformation:DescribeStacks", DENIED_ARN.replace("loopcheck-demo/", "loopcheck-demo2/"))
+    errors, _ = pt.check(pol, ACCT)
+    assert errors == []
+    assert f":{ACCT}:" in json.dumps(pol) and "ACCOUNT_ID" not in json.dumps(pol)
+
+
+@pytest.mark.parametrize("bad", ["", "12345678901", "1234567890123", "0123-4567-8901", "ACCOUNT_ID", " 012345678901"])
+def test_render_rejects_bad_account_ids(bad):
+    with pytest.raises(ValueError):
+        pt.render("deployer", bad)
+
+
+@pytest.mark.parametrize("label, transform", [
+    ("placeholder left in", lambda t: t),
+    ("empty substitution (sed with an unset variable)", lambda t: t.replace("ACCOUNT_ID", "")),
+    ("leading zero dropped", lambda t: t.replace("ACCOUNT_ID", ACCT.lstrip("0"))),
+    ("another account", lambda t: t.replace("ACCOUNT_ID", "999988887777")),
+])
+def test_check_explains_why_describe_stacks_is_denied(label, transform):
+    attached = json.loads(transform(DEPLOYER.read_text()))
+    errors, _ = pt.check(attached, ACCT)
+    assert any(e.startswith(f"cloudformation:DescribeStacks on {DENIED_ARN}: NOT allowed") for e in errors), label
+    assert any("LoopCheckStack:" in e for e in errors), label
+
+
+def test_check_flags_missing_and_extra_statements():
+    pol = json.loads(pt.render("deployer", ACCT))
+    pol["Statement"] = [st for st in pol["Statement"] if st["Sid"] != "ReadOnlyCallsWithoutResourceLevelSupport"]
+    pol["Statement"].append({"Sid": "Extra", "Effect": "Allow", "Action": "s3:GetObject", "Resource": "arn:aws:s3:::other/*"})
+    errors, notes = pt.check(pol, ACCT)
+    assert any("logs:DescribeLogGroups on *: NOT allowed" in e for e in errors)
+    assert any("missing vs repository: lambda:getaccountsettings on *" in e for e in errors)
+    assert any("extra vs repository (review): s3:getobject on arn:aws:s3:::other/*" in n for n in notes)
+
+
+def test_policy_tool_cli_and_no_network(tmp_path):
+    assert pt.main(["render", "--account-id", ACCT, "--out-dir", str(tmp_path)]) == 0
+    assert json.loads((tmp_path / "deployer.json").read_text()) and (tmp_path / "bootstrap.json").exists()
+    assert pt.main(["check", str(tmp_path / "deployer.json"), "--account-id", ACCT]) == 0
+    assert pt.main(["check", str(DEPLOYER), "--account-id", ACCT]) == 1
+    assert pt.main(["render", "--account-id", "123", "--out-dir", str(tmp_path / "x")]) == 1
+    src = (IAM / "policy_tool.py").read_text()
+    assert not re.search(r"^\s*(import|from)\s+(boto3|botocore|subprocess|socket|urllib|http)", src, re.M)
+
+
+def test_explicit_bucket_rendering_keeps_prefix_scope(tmp_path):
+    pol = json.loads(pt.render("deployer", ACCT, "my-loopcheck-artifacts"))
+    text = json.dumps(pol)
+    assert "samclisourcebucket" not in text
+    assert "arn:aws:s3:::my-loopcheck-artifacts/loopcheck-demo/*" in text and "arn:aws:s3:::my-loopcheck-artifacts\"" in text
+    assert pt.allowing_statements(pol, "s3:PutObject", "arn:aws:s3:::my-loopcheck-artifacts/loopcheck-demo/abc123")
+    assert not pt.allowing_statements(pol, "s3:PutObject", "arn:aws:s3:::my-loopcheck-artifacts/other/abc123")
+    assert pt.check(pol, ACCT, bucket="my-loopcheck-artifacts")[0] == []
+    with pytest.raises(ValueError):
+        pt.render("deployer", ACCT, "Bad_Bucket")
+    assert pt.main(["render", "--account-id", ACCT, "--bucket", "my-loopcheck-artifacts", "--out-dir", str(tmp_path)]) == 0
+    assert (tmp_path / "deployer.json").exists() and not (tmp_path / "bootstrap.json").exists()
