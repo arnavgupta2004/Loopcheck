@@ -19,3 +19,7 @@ video/assets/music/
 
 # Streamlit secrets (LOOPCHECK_API_URL etc.) are configured in the Cloud UI, never committed
 .streamlit/secrets.toml
+
+# Devpost gallery images: shared on request, not pushed without approval
+devpost/media/*.png
+devpost/media/capture_log.json
