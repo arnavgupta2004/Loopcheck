@@ -232,7 +232,10 @@ def main(argv=None) -> int:
     text = subprocess.run(["pdftotext", "-layout", str(pdf), "-"], capture_output=True, text=True, check=True).stdout
     flat = " ".join(text.split())
     for phrase in ("not probabilities", "synthetic", "No neural network was trained", "HUMAN_REVIEW", "OpenCV 5",
-                   "https://loopcheck.streamlit.app", "https://github.com/arnavgupta2004/Loopcheck"):
+                   "https://loopcheck.streamlit.app", "https://github.com/arnavgupta2004/Loopcheck",
+                   # deployment facts and their qualifications (docs/d4_demo_and_deployment.md "Deployment status")
+                   "loopcheck-demo", "ap-south-1", "1.55 s", "4.30 s", "not a latency benchmark",
+                   "local-backend (in-process) run, not from the live deployed API", "re-run locally"):
         check(phrase.lower() in flat.lower(), f"PDF text lacks {phrase!r}")
     for pat, what in SECRET_PATTERNS:
         check(re.search(pat, text) is None, f"PDF contains {what}")

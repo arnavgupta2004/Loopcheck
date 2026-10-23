@@ -11,10 +11,15 @@ approve, flag a defect or request human review.
 - D2.1 (exclude detected ArUco markers from anomaly scoring, validated on fresh synthetic splits): complete.
 - D3 (adaptive perception-decision-action controller with a traced APPROVE / DEFECT /
   HUMAN_REVIEW decision): complete. See [docs/d3_agent.md](docs/d3_agent.md).
-- D4.1 (hardened AWS configuration, read-only preflight, deployment runbook for ap-south-1): complete; not deployed.
-- D4 (Streamlit demo UI + AWS Lambda/API Gateway backend): demo complete and verified
-  locally. AWS backend **prepared but NOT deployed**: no cloud resources exist and there is
-  no public URL. See [docs/d4_demo_and_deployment.md](docs/d4_demo_and_deployment.md).
+- D4.1 (hardened AWS configuration, read-only preflight, deployment runbook for ap-south-1):
+  complete, and used for the deployment.
+- D4 (Streamlit demo UI + AWS Lambda/API Gateway backend): complete and **deployed**.
+  - Backend: stack `loopcheck-demo` in `ap-south-1`. The deployed API smoke test passed:
+    health `ok`, OpenCV 5.0.0, `DEFECT` T1 via R0 → R1.
+  - Public demo: <https://loopcheck.streamlit.app>, using HTTP API mode.
+  - Details and limits: [docs/d4_demo_and_deployment.md](docs/d4_demo_and_deployment.md#deployment-status).
+- **Evaluation remains synthetic-data-only.** No real-photograph validation and no AWS
+  cold-start or memory benchmark has been done.
 
 ## Demo UI (D4)
 
@@ -88,10 +93,26 @@ The dependency files stay separate:
 - root `requirements.txt` / `pyproject.toml` / `uv.lock`: development;
 - `deploy/requirements-lambda.txt`: the Lambda zip, which never includes Streamlit.
 
-## AWS backend (prepared, NOT deployed)
+## AWS backend (deployed in ap-south-1)
 
-The target is stack `loopcheck-demo` in `ap-south-1`, deployed with AWS profile `loopcheck-deployer`
-from your own machine: a dedicated least-privilege IAM identity, never root ([docs/d4_2_deployment_identity.md](docs/d4_2_deployment_identity.md)). The full copy-paste runbook, including verification, logs and safe
+Stack `loopcheck-demo` was created in `ap-south-1`.
+
+**Deployed API smoke test** (`python -m loopcheck.client`, case 02 "Missing part"):
+- health `ok`, and OpenCV `5.0.0` in both the health and inspection responses;
+- decision `DEFECT`, rule `T1`, tool sequence `R0:register → R1:compare`;
+- `SMOKE TEST: PASS`;
+- about 1.55 s server-side and 4.30 s end-to-end for that single request.
+
+This shows that one request succeeded on AWS. It is not a measure of detection accuracy
+(which is evaluated on synthetic data only) and not a latency or cold-start benchmark.
+
+The public Streamlit app (<https://loopcheck.streamlit.app>) is configured to use this API
+in HTTP API mode and was validated manually. The endpoint itself is deliberately not
+published in this repository.
+
+**To deploy your own copy:** deploy stack `loopcheck-demo` in `ap-south-1` with AWS profile
+`loopcheck-deployer` from your own machine. That profile is a dedicated least-privilege IAM
+identity, never root ([docs/d4_2_deployment_identity.md](docs/d4_2_deployment_identity.md)). The full copy-paste runbook, including verification, logs and safe
 cleanup, is in [docs/d4_demo_and_deployment.md](docs/d4_demo_and_deployment.md#runbook-deploy-from-your-own-machine).
 
 ```bash
@@ -252,7 +273,7 @@ loopcheck/      config, imageio, registration, markers, compare, pipeline, agent
                 service, aws_lambda, local_server, client (D4)
 app/            streamlit_app.py (D4 demo UI), requirements.txt (Streamlit Community Cloud only)
 deploy/         build_lambda_zip.sh, preflight.sh (read-only), requirements-lambda.txt, Dockerfile (alternative), .env.example, samconfig.example.toml, iam/ (least-privilege deployer policies)
-template.yaml   SAM template: HTTP API + Lambda (not deployed)
+template.yaml   SAM template: HTTP API + Lambda (deployed as stack loopcheck-demo, ap-south-1)
 tests/          pytest suite
 scripts/        check_opencv5.py (D1), compare_runs.py (D2.1 before/after)
 configs/        baseline_no_marker_mask.json

@@ -1,9 +1,18 @@
 # D4.2: least-privilege deployment identity for LoopCheck
 
-**Status: prepared, NOT created.** Nothing in this document has been run against AWS. No
-IAM user, policy, role or credential exists yet, and these policies have **not** been tested
-against a real deployment. Your first `sam deploy` with them is that test (see
-[If a permission is missing](#if-a-permission-is-missing)).
+**Status: in use.** The team created this deployment identity in its own AWS account and used
+it to deploy stack `loopcheck-demo` in `ap-south-1` (see
+[d4_demo_and_deployment.md](d4_demo_and_deployment.md#deployment-status)). The first deployment
+attempts hit two AccessDenied errors, both documented below:
+- `cloudformation:DescribeStacks`: the committed policy already allowed it, so the policy
+  attached in IAM was corrected. The most likely cause, a mis-filled account ID, was
+  inferred and never confirmed;
+- `apigateway:TagResource` on HTTP API stage creation: a genuinely missing permission, now
+  added to the committed policy.
+
+Account IDs, IAM user details and credentials are deliberately not recorded in this
+repository. If a future change needs a new permission, see
+[If a permission is missing](#if-a-permission-is-missing).
 
 The goal is to deploy stack `loopcheck-demo` in `ap-south-1` from your personal account
 **without using the root user for routine work**. Root is used once, in the console, to

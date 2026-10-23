@@ -11,6 +11,16 @@ subtitle: "Technical report · OpenCV AI Competition 2026"
 > not probabilities**. No neural network was trained: the system is classical OpenCV 5
 > computer vision driven by an **explicit, rule-based agent controller**.
 
+**Status at a glance:**
+
+| Kind of claim | What it says | Evidence |
+|---|---|---|
+| **Verified deployment facts** | Stack `loopcheck-demo` was created in AWS `ap-south-1`. The public Streamlit frontend at <https://loopcheck.streamlit.app> is configured for HTTP API mode and was validated manually | Deployment by the team (§5) |
+| **Deployed API smoke test** | One request passed: health `ok`; OpenCV 5.0.0 in both the health and inspection responses; `DEFECT`, rule T1, tools R0 → R1; about 1.55 s server-side and 4.30 s end-to-end | Smoke-test client output (§5) |
+| **Synthetic evaluation** | Held-out results on 180 synthetic cases | `evidence/metrics_d3_test.json` (§6) |
+| **Not measured** | Real-photograph accuracy; AWS cold-start time, memory headroom, latency distribution, cost | None reported |
+| **Screenshots in this package** | Captured from **local-backend** runs of the app, not from the live deployed API | §4 figure captions |
+
 # 1. Problem and intended users
 
 Many assembly and kitting processes end with a visual check: does the tray, fixture or
@@ -192,9 +202,9 @@ The adaptive branches are:
 - a candidate is *dismissed* only when no view reproduces it **and** a concrete
   explanation exists. Otherwise it stays ambiguous and is escalated.
 
-![The running app (Local backend capture) on bundled case 02 "Missing part": DEFECT, rule T1, with reference, inspection, annotated overlay, aligned image and anomaly heatmap.](figures/app_missing_part.jpg)
+![The Streamlit app on bundled case 02 "Missing part": DEFECT, rule T1, with reference, inspection, annotated overlay, aligned image and anomaly heatmap. Captured from a local-backend (in-process) run, not from the live deployed API.](figures/app_missing_part.jpg)
 
-![Agent trace in the app for bundled case 05 "Ambiguous tiny object": six steps (R0 register, R1 compare, F1 content check, D1 sensitive compare, C1 re-inspect, E1 marker band) ending in HUMAN_REVIEW, rule T2.](figures/app_agent_trace.jpg)
+![Agent trace in the app for bundled case 05 "Ambiguous tiny object": six steps (R0 register, R1 compare, F1 content check, D1 sensitive compare, C1 re-inspect, E1 marker band) ending in HUMAN_REVIEW, rule T2. Captured from a local-backend (in-process) run, not from the live deployed API.](figures/app_agent_trace.jpg)
 
 # 5. Deployment on AWS
 
@@ -223,22 +233,42 @@ The adaptive branches are:
   checked by offline tests.
 - **Preflight.** `deploy/preflight.sh` runs read-only checks before deploying.
 
-**Smoke-test evidence: what is included and what is not.**
-- **Reported by the team (deployed system).** The stack was deployed and the API smoke
-  test (`python -m loopcheck.client --url <ApiUrl> --expect DEFECT`) completed
-  successfully. The public demo uses that API in HTTP API mode. The verbatim terminal
-  output from the deployed run is *not* stored in the repository, and endpoints are
-  deliberately not published, so this package does not reproduce it.
-- **Verifiable in this package.** `evidence/smoke_test_local_handler.txt` is the output of
-  the same smoke-test client run against `loopcheck.local_server`, which serves the
-  identical Lambda handler on localhost. It shows:
-  - health `ok`, OpenCV `5.0.0` at health and at inspect;
-  - decision `DEFECT`, rule `T1`;
-  - tool sequence `R0:register → R1:compare`;
-  - evidence images returned;
-  - `SMOKE TEST: PASS`.
-- **Not measured.** Deployed latency, cold-start times and cost were not recorded, so none
-  are reported.
+**Deployment status (verified facts):**
+- Stack `loopcheck-demo` was created in `ap-south-1` by the team, from its own machine,
+  with the least-privilege deployer identity.
+- The public frontend, <https://loopcheck.streamlit.app>, runs on Streamlit Community Cloud.
+  It is configured to use the deployed API in HTTP API mode, and that path was validated
+  manually.
+- The API endpoint is kept in the app's Secrets and is not published.
+
+**Deployed API smoke test.** Command:
+`python -m loopcheck.client --url <ApiUrl> --case data/demo_cases/02_missing_part --expect DEFECT`.
+It passed:
+- `GET /health`: status `ok`, OpenCV `5.0.0`;
+- `POST /inspect`: OpenCV `5.0.0`, decision `DEFECT`, termination rule `T1`, tool sequence
+  `R0:register → R1:compare`;
+- about **1.55 s** server-side (the service's own runtime) and **4.30 s** end-to-end, for
+  that single request.
+
+**How to read it:**
+- The smoke test verifies that one request succeeded end to end on AWS, with the OpenCV 5
+  pipeline and the agent controller running inside Lambda.
+- It is **not** a measure of detection accuracy. Accuracy is reported only on synthetic data
+  (§6).
+- The two timings come from one request. Whether that request included a cold start was not
+  recorded, so they are **not** a latency benchmark.
+- The raw terminal output is not reproduced here, so that the endpoint stays unpublished.
+
+**Also included, from the repository:** `evidence/smoke_test_local_handler.txt` is the same
+smoke-test client run against `loopcheck.local_server`, which serves the identical Lambda
+handler on localhost. It is a local run and is labelled as one.
+
+The eight bundled cases (`evidence/bundled_cases_verification.json`) were re-run **locally**
+with `loopcheck.service.analyze` when this package was built. They were not individually
+re-run against AWS: the deployed smoke test covered case 02.
+
+**Not measured:** AWS cold-start time, memory headroom, latency distribution under load, and
+cost.
 
 # 6. Synthetic evaluation
 
@@ -310,6 +340,8 @@ development split the agent made one automatic error, which approved one subtle 
   hotspots, can be missed.
 - **Fixture assumptions.** Registration assumes a mostly planar scene; the content check
   needs texture outside the markers.
+- **Unmeasured cloud performance.** There are no AWS cold-start, memory or latency
+  benchmarks. Only a single smoke-test request was timed (§5).
 
 **Known failure cases:**
 - gamma-shifted good trays escalated;
@@ -352,4 +384,5 @@ development split the agent made one automatic error, which approved one subtle 
 | Agent rules, branches and D3 results | `docs/d3_agent.md`, `results/d3/test/metrics.json` (copied to `evidence/`) |
 | OpenCV 5 verification | `docs/opencv5_verification.md`, `results/opencv5_check.json` (copied to `evidence/`) |
 | AWS architecture | `template.yaml`, `loopcheck/aws_lambda.py`, `docs/d4_demo_and_deployment.md` |
+| Deployment status and smoke test | `docs/d4_demo_and_deployment.md` (Deployment status section) |
 | Tests | `tests/`: 262 passing at the time of packaging (`uv run --frozen --group demo pytest -q`) |

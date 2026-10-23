@@ -7,8 +7,9 @@ title: "LoopCheck: reproduction and testing guide"
 
 ## 1. Try the live demo (no installation)
 
-1. Open <https://loopcheck.streamlit.app>. If the app has been idle it may need about a
-   minute to wake up.
+1. Open <https://loopcheck.streamlit.app>. It is the public frontend, configured to call the
+   deployed AWS backend (stack `loopcheck-demo`, `ap-south-1`) in HTTP API mode. If the app
+   has been idle it may need about a minute to wake up.
 2. In the sidebar, under **Backend**, choose **HTTP API**. This runs the inspection on the
    AWS Lambda backend. Press **Check API health**; it should report `ok: OpenCV 5.0.0`.
    (**Local (in-process)** runs the same code inside the app instead.)
@@ -20,8 +21,12 @@ title: "LoopCheck: reproduction and testing guide"
    - **Agent trace:** each step with its rule, rationale, observations, tool and effect;
    - **Registration & coverage**, **Limitations**, and **Raw JSON & downloads**.
 
-**Bundled cases.** All are synthetic. The decisions below were re-verified at packaging
-time with `loopcheck.service.analyze`, the same code the API runs:
+**Bundled cases.** All are synthetic.
+- The decisions below were re-verified **locally** when this package was built, with
+  `loopcheck.service.analyze` (the same code the Lambda runs).
+- They were not individually re-run against the deployed API. The deployed smoke test
+  covered case 02 "Missing part": `DEFECT`, rule T1.
+- Results through the live app should match, but this table is local evidence.
 
 | Case | Decision | Rule | What it shows |
 |---|---|---|---|

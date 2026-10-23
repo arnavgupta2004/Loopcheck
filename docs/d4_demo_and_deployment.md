@@ -1,11 +1,16 @@
 # D4 / D4.1: Demo interface, AWS backend and deployment runbook
 
-**Deployment status (2026-10-23): NOT deployed.** No AWS resource has been created,
-modified or deleted, no artifact has been uploaded, and there is no public URL. The backend
-and this runbook are prepared and verified locally (see [Verification](#what-was-verified-locally)).
-**You** run the deployment from your own machine with the AWS profile `loopcheck-deployer` in
-`ap-south-1` (Mumbai): a dedicated least-privilege identity, never root (see
-[d4_2_deployment_identity.md](d4_2_deployment_identity.md)).
+## Deployment status
+
+| | |
+|---|---|
+| **AWS backend** | **Deployed.** Stack `loopcheck-demo` was created in `ap-south-1` (Mumbai) from the team's own machine, with the least-privilege `loopcheck-deployer` identity, never root ([d4_2_deployment_identity.md](d4_2_deployment_identity.md)) |
+| **Deployed API smoke test** | **Passed.** `python -m loopcheck.client`, case 02 "Missing part": health `ok`; OpenCV `5.0.0` in both the health and the inspection response; decision `DEFECT`, rule `T1`, tool sequence `R0:register → R1:compare`; about 1.55 s server-side and 4.30 s end-to-end for that one request |
+| **Public frontend** | <https://loopcheck.streamlit.app> on Streamlit Community Cloud. Configured for HTTP API mode and validated manually. The endpoint is kept in the app's Secrets and is not published here |
+| **What this does not show** | The smoke test proves that one request succeeded on AWS. It does not measure detection accuracy (the aggregate evaluation is synthetic-data-only), and it is not a latency, cold-start or memory benchmark: none of those has been measured |
+
+The runbook below is how the deployment was done. It can be repeated to deploy your own
+copy.
 
 All metrics and bundled cases are **synthetic**. Anomaly scores are uncalibrated heuristics,
 **not probabilities**. Excluded marker areas are **not inspected** and are never shown as clean.
@@ -17,7 +22,7 @@ flowchart LR
     U[Judge / user<br/>browser] --> S[Streamlit UI<br/>app/streamlit_app.py]
     S -- "Local mode<br/>(in-process)" --> SV
     S -- "API mode<br/>HTTPS JSON (base64 images)" --> AG
-    subgraph AWS["AWS ap-south-1 (template.yaml, NOT deployed)"]
+    subgraph AWS["AWS ap-south-1 (template.yaml, deployed as stack loopcheck-demo)"]
         AG[API Gateway HTTP API<br/>GET /health · POST /inspect<br/>CORS: one origin · throttling 2 rps / burst 5<br/>29 s integration timeout]
         AG --> L["Lambda python3.13 x86_64<br/>loopcheck.aws_lambda.handler<br/>2048 MB · 29 s · reserved concurrency 2 (or unreserved)<br/>zip 80 MiB / 215 MiB unzipped"]
         L --> CW[(CloudWatch Logs<br/>metadata only · 7-day retention)]
@@ -350,8 +355,8 @@ It ends with `SMOKE TEST: PASS` only if:
 The Lambda cold-start log line `{"event": "cold_start", "opencv_version": "5.0.0"}` (step 9)
 is independent evidence.
 
-**Record these outputs as deployment evidence.** Until you run them, no AWS execution has
-been demonstrated.
+**Record these outputs as deployment evidence.** For the public deployment, this smoke test
+passed (see [Deployment status](#deployment-status)). Re-run it after every redeploy.
 
 ### 8. Configure Streamlit to use the deployed API 🟢 (UI runs locally; calls are billed per request)
 
@@ -426,9 +431,9 @@ These are estimates, not measurements; use the AWS Pricing Calculator for ap-sou
 | SAM CLI 1.170.0 (run locally with AWS credential variables removed) | `sam validate --lint`: valid. `sam build`: succeeded and passes the zip through (same sha256). The folder-`CodeUri` pitfall was found here and fixed. Exit codes observed: valid template → 0 plus `… is a valid SAM Template` on stdout; unknown `!Ref` or broken YAML → 1. The `To download: …` text is SAM's update notice on stderr (`samcli/lib/utils/version_checker.py`), not a validation result |
 | Preflight script | Syntax OK. Without an AWS CLI it stops with `RESULT: FAIL` and creates nothing. With fake CLIs (tests) it passes; prints account and region; recommends the concurrency mode; stops on invalid identity; shows the `is a valid SAM Template` line (never the update notice) as the result; reports SAM lint failures and "exit 0 without a valid line" as FAIL; fails on a missing zip or a zip with macOS, OpenCV 4 or missing binaries; and only ever issues the read-only calls listed above |
 | Local API stand-in | `python -m loopcheck.client --url http://127.0.0.1:8011 --expect DEFECT` → `SMOKE TEST: PASS` |
-| AWS | **Nothing executed on AWS.** The sandbox credentials are invalid (STS `InvalidClientTokenId`, D4) and were not used or repaired |
+| AWS, from the development sandbox | Nothing was executed on AWS from the sandbox. Its credentials are invalid (STS `InvalidClientTokenId`) and were not used or repaired. The deployment and the deployed smoke test were run by the team from their own machine (see [Deployment status](#deployment-status)) |
 
-## Blockers before you deploy
+## Prerequisites for (re)deploying
 
 1. **Temporary credentials for profile `loopcheck-deployer` on your machine** (step 2). This is
    the IAM user with `LoopCheckDeployerPolicy` (and, for the very first SAM deploy in the
@@ -446,10 +451,13 @@ These are estimates, not measurements; use the AWS Pricing Calculator for ap-sou
   illustrative selections from seed 5000 (the selection rule is in each `meta.json`).
   Aggregate held-out metrics, including the agent's 36% HUMAN_REVIEW rate, are in
   `docs/d3_agent.md`.
-- **Lambda behaviour is unmeasured.** Cold start, memory headroom and latency on AWS have
-  not been observed.
+- **Lambda performance is not benchmarked.** Only a single smoke-test request was timed:
+  about 1.55 s server-side and 4.30 s end-to-end. Whether it included a cold start was not
+  recorded. Cold-start time, memory headroom and latency distributions on AWS have not
+  been measured.
 - **Packaging headroom.** The zip has about 35 MiB of headroom under the 250 MiB limit.
-- **The Streamlit UI is not hosted on AWS.** It runs locally, or on any Streamlit host,
-  and calls the API.
+- **The Streamlit UI is not hosted on AWS.** The public demo runs on Streamlit Community
+  Cloud (<https://loopcheck.streamlit.app>) and calls the API from its Python server. It can
+  also run locally.
 - **The endpoint is public and unauthenticated by decision**, for temporary judging use.
   Add a JWT or IAM authorizer before any longer exposure.

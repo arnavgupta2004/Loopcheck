@@ -231,7 +231,20 @@ def test_docs_match_the_configuration():
     for needle in ("ap-south-1", "loopcheck-demo", "--profile loopcheck", "ConcurrencyMode=reserved", "ConcurrencyMode=unreserved", "2 requests/s", "burst 5",
                    "deploy/preflight.sh", "loopcheck-lambda-x86_64.zip", "sam delete", "not authentication", "cannot guarantee"):
         assert needle in doc, needle
-    assert "NOT deployed" in doc or "not deployed" in doc
+    status = doc.split("## Deployment status", 1)[1].split("\n## ", 1)[0]
+    for needle in ("**Deployed.**", "ap-south-1", "https://loopcheck.streamlit.app", "OpenCV `5.0.0`", "`DEFECT`", "`T1`",
+                   "synthetic-data-only", "not a latency, cold-start or memory benchmark"):
+        assert needle in status, needle
+
+
+STALE = re.compile(r"not deployed|no public url|prepared, not created|no aws execution has", re.I)
+
+
+def test_no_stale_deployment_statements_in_public_docs():
+    files = [ROOT / "README.md", *sorted((ROOT / "docs").glob("*.md")), *sorted((ROOT / "devpost" / "submission").glob("*.md"))]
+    stale = [f"{f.relative_to(ROOT)}:{i}: {ln.strip()}" for f in files for i, ln in enumerate(f.read_text().splitlines(), 1)
+             if STALE.search(ln)]
+    assert not stale, stale
 
 
 # --------------------------------------------------------------------------- logging protections
