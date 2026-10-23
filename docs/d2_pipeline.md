@@ -11,6 +11,7 @@ load + validate (imageio)  ->  downscale to work_max_dim (1024)
                                -> quality gate -> [optional ECC] -> H (ref -> insp)
      gate fails  ->  status = registration_failed, no regions, no verdict
   -> align: warpPerspective(insp, H, WARP_INVERSE_MAP) + valid-overlap mask (eroded 4 px)
+  -> [D2.1] marker exclusion (markers): detected ArUco quads + margin, from both images
   -> compare (compare):  photometric normalisation -> sharpness equalisation
                          -> 4 cues -> weighted fusion -> threshold + morphology
                          -> connected components -> filtered regions + evidence
@@ -159,3 +160,160 @@ on controlled perturbations; they do not predict performance on real photographs
    marker ids would register successfully, and every changed slot would then become a
    candidate region. The synthetic `unrelated_scene` cases have no markers, so they
    don't test this.
+
+---
+
+# D2.1: ArUco marker exclusion
+
+**Motivation (from the D2 test split):** all 3 D2 test false positives were white marker
+quiet zones under gamma changes, and 12 of 14 extra boxes in `missing_hard` were black
+marker interiors. Marker pixels sit at pure black/white, where the linear tone fit is
+least accurate, and they are fixture, not inspected content.
+
+## Method (`loopcheck/markers.py`, `compare(..., exclude=)`)
+
+1. **Detections only.** `register()` already runs ArUco detection on both images. Every
+   marker actually detected in either image is masked, whichever method (ArUco or SIFT)
+   finally registered the pair. No marker positions are inferred or extrapolated.
+2. **Polygon.** Each quad's edges are offset outward by `margin_frac * side + margin_px`
+   (default 0.25 × side + 2 px; 16 px for a 56 px marker). This is exact under
+   perspective because it offsets edges, not corners. A 4×4 marker is 6 modules wide,
+   so a standard 1-module quiet zone is side/6 = 0.167 × side.
+3. **Coordinates.** Reference detections are drawn directly. Inspection detections are
+   drawn in inspection px and brought into the reference frame with
+   `warp_to_reference` (the image's own warp, `WARP_INVERSE_MAP` with H). ArUco corners
+   use the pixel-centre convention: the outer marker edge is at x − 0.5, verified to
+   0.09 px. On a perspective case, inspection corners mapped back with H⁻¹ agree
+   with the reference corners to < 0.2 px; this disagreement is logged per report.
+4. **Exclusion without invented content (`exclude_mode="dilate"`).** Excluded pixels
+   are removed from the photometric fit and from scoring. The exclusion is grown by
+   `exclude_leak_px` = 6 px (about 3 × SSIM sigma) so marker contrast can't reach scored
+   pixels through the blur, SSIM or smoothing windows. Both images are left untouched.
+   The effective exclusion therefore reaches 22 px past the marker edge (12 px past
+   a 10 px quiet zone). On the synthetic 800×600 tray with four 56 px markers that is
+   8.6% of the valid area (median).
+5. **Safety caps.**
+   - A marker whose grown polygon exceeds 3% of the image is not masked
+     (`polygon_exceeds_max_marker_area`).
+   - If the *effective* (dilated) exclusion exceeds 10% of the valid area, masking is
+     skipped entirely (`total_masked_area_exceeds_cap`), falling back to D2 behaviour.
+   - No masking happens on registration failure, so there is never a verdict there.
+6. **Logging.** `report.json["marker_masking"]` lists every marker:
+   - id, source image, side, polygon in reference px, area, masked or not and why;
+   - masked and effective area, the cap-check area, and the corner disagreement.
+
+   The overlay draws masked polygons in grey, and the heatmap darkens excluded pixels.
+
+### Alternatives measured on the dev split and rejected
+
+| Variant (dev split, seed 3100) | FPR on good images | Marker-attrib. FP regions | Why rejected |
+|---|---|---|---|
+| No masking (baseline) | 0.104 | 16 | — |
+| Fill excluded pixels with reference values (first attempt) | 0.083 (margin 0.25) | 16 (counted with an 8 px attribution zone; widened to 20 px after this) | A seam at the mask edge; normalisation turns it into gradient/SSIM responses just outside the mask (non-monotonic in margin, which exposed the bug) |
+| Inpaint both images (`cv2.inpaint`, Telea), margin 0.25 / 0.35 | 0.083 / 0.062 | 1 / 1 | The fill boundary cuts through nearby structure (the tray edge is 4 px outside the quiet zone), which is reconstructed differently in a sharp vs a blurred image |
+| Dilate 6 px, margin 0.17 (inside the quiet zone) | 0.062 | 0 | Extra blur false positive; the margin doesn't cover a full quiet zone |
+| Dilate 4 px, margin 0.25 | 0.062 | 0 | Extra blur false positive |
+| **Dilate 6 px, margin 0.25 (chosen)** | **0.042** | **0** | Same result as margin 0.35 while excluding less area |
+
+`exclude_mode="inpaint"` stays available in the config but is not the default.
+
+## Fresh evaluation (all SYNTHETIC)
+
+New splits with different seeds; the D2 splits (1000, 2000) are not reused:
+- **dev:** seed 3100, 8 per type, 136 cases.
+- **test:** seed 3200, 10 per type, 170 cases.
+
+The case set is the 13 D2 types plus four new ones:
+- `gamma_lighting`: good images with gamma up to ±0.30, colour cast and illumination
+  gradient; markers always present.
+- `missing_near_marker`: the component nearest a marker is removed. With this tray
+  layout these sit 32–53 px from the quiet zone (dev and test), or about 136–140 px when
+  the corner slot is empty. Most are therefore "distant" under the ≤ 40 px rule.
+- `foreign_near_marker`: an object 2–25 px outside a quiet zone.
+- `different_tray`: different contents with the same marker ids and positions.
+
+"Near" is defined geometrically per ground-truth box: a gap of ≤ 40 px to the nearest
+marker quiet zone. A predicted region is *marker-attributable* when it is unmatched
+(IoU < 0.3 to every GT box) and ≥ 25% of it lies within 20 px of a marker zone.
+
+**Protocol.**
+1. All design choices were made on dev only.
+2. The configuration was frozen and committed (`ed43fbd`) before the test split was
+   generated.
+3. The test split was evaluated once per configuration.
+4. Both configurations ran on identical cases.
+
+**Baseline preservation.** With `configs/baseline_no_marker_mask.json`, the pipeline
+reproduces all 130 D2 test cases exactly: status, regions, IoUs and corner errors. The
+D2 splits regenerate byte-identically (`--case-set d2`).
+
+Raw outputs are in `results/d21/{dev,test}_{baseline,masked}/`. Side-by-side tables and
+before/after panels for every changed case are in
+`results/d21/{dev,test}_comparison/` (`scripts/compare_runs.py`).
+
+| Metric | Dev baseline | Dev masked | **Test baseline** | **Test masked** |
+|---|---|---|---|---|
+| Image-level precision | 0.917 | 0.965 | 0.882 | 0.917 |
+| Image-level recall | 0.982 | 0.982 | 0.957 | 0.943 |
+| Image-level F1 | 0.948 | 0.973 | 0.918 | 0.930 |
+| FPR on good (perturbed) images | 0.104 | 0.042 | 0.150 (9/60) | 0.100 (6/60) |
+| Region recall @ IoU ≥ 0.3 | 0.984 | 0.984 | 0.963 | 0.950 |
+| Region precision @ IoU ≥ 0.3 (defect cases) | 0.679 | 0.764 | 0.630 | 0.626 |
+| Marker-attributable FP regions | 16 | 0 | 32 | 2 |
+| Good images with a marker-attributable region | 4 | 0 | 6 | 1 |
+| Unmatched regions in defect cases (all causes) | 26 | 17 | 40 | 40 |
+| Near-marker defects: image recall (n) | 1.000 (14) | 1.000 (14) | 0.960 (25) | 0.920 (25) |
+| Distant defects, markers present: image recall (n) | 1.000 (23) | 1.000 (23) | 0.952 (21) | 0.952 (21) |
+| Defects, no markers in scene: image recall (n) | 0.950 (20) | 0.950 (20) | 0.960 (25) | 0.960 (25) |
+| Registration success (good + defect) | 1.000 | 1.000 | 1.000 | 1.000 |
+| Incorrect alignments (corner error > 2 px) | 0 | 0 | 0 | 0 |
+| Corner error median / max (px) | 0.064 / 0.208 | same | 0.068 / 0.172 | same |
+| Registration-fail cases correctly rejected | 24/24 | 24/24 | 30/30 | 30/30 |
+| Different tray: registered via ArUco, flagged / UNSAFE | 8/8, 8 / 0 | 8/8, 8 / 0 | 10/10, 10 / 0 | 10/10, 10 / 0 |
+| Median time per case | 0.28 s | 0.28 s | 0.28 s | 0.28 s |
+
+### What the test split shows
+
+- **Marker false positives are nearly gone**: 32 → 2 regions, and good images with one
+  went from 6 → 1. Four good images flipped FP → clean (`gamma_lighting_00/02/06/08`).
+  Overall FPR went from 0.150 to 0.100.
+- **The dev split overstated the gain.** Dev had no regressions; test has three:
+  1. `subtle_foreign_02` (detected → missed). A faint object generated *touching* a
+     marker's quiet zone (gap 0 px) lies inside the effective exclusion. This is the
+     inherent cost of masking: **anything inside the excluded band, up to 22 px past
+     a marker edge, is not inspected.** Near-marker recall drops from 0.96 to 0.92
+     (1 of 25 cases).
+  2. `gamma_lighting_04` (clean → 7 regions, none on markers). With gamma 0.707,
+     removing marker pixels from the global tone fit moved the L gain from 1.313 to
+     1.348. The linear model is wrong at that gamma either way; baseline was clean
+     by luck of where the fit landed. The new regions sit on image borders and
+     background.
+  3. `missing_hard_03`: the same fit-shift mechanism (gain 1.268 → 1.330) adds 18
+     secondary regions. The defect itself is still found (IoU 0.85).
+
+  Because of (2) and (3), **unmatched regions in defect cases are unchanged (40 → 40)**,
+  even though marker-attributable ones fell 15 → 1. Region precision is flat
+  (0.630 → 0.626).
+- **Different tray with the same marker ids** registers via ArUco in 10/10 cases.
+  The alignment is geometrically correct for the fixture. All 10 were flagged, with a
+  median of 13 regions, so none would be approved. This is safe only because the
+  contents differ heavily. There is still no content-identity check, so a different
+  tray with *similar* contents would be indistinguishable from a set of defects.
+- **Registration is unaffected**: masking happens after registration, and the corner
+  errors are identical.
+
+### Remaining weaknesses (for D3 and beyond)
+
+- **Global tone model.** A linear L gain/offset can't represent a strong gamma. This is
+  now the main source of false positives on good images (`lighting`, `gamma_lighting`,
+  `combined_nominal`) and of extra regions in hard defect cases. A fix must be
+  evaluated on a new split.
+- **Blind band around markers.** The agent should treat the excluded area as
+  "not inspected". `report.json` exposes the polygons, so it can, for example, request
+  a re-capture or a human check if a slot overlaps the band.
+- **The tiny low-contrast object limit** remains. Test `subtle_foreign` misses: 3 in
+  the baseline and 4 with masking; the extra one is `subtle_foreign_02`, above.
+- **Bit-level float noise.** Identical `compare()` calls differ by about 1e-8 in the
+  float32 anomaly map, even single-threaded; the source wasn't isolated. Thresholded
+  outputs are unaffected (the full D2 regression reproduced exactly), so tests compare
+  maps with a 1e-6 tolerance.

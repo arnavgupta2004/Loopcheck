@@ -1,0 +1,331 @@
+{
+  "n_cases": 170,
+  "image_level": {
+    "confusion": {
+      "tp": 67,
+      "fp": 9,
+      "fn": 3,
+      "tn": 51
+    },
+    "precision": 0.881578947368421,
+    "recall": 0.9571428571428572,
+    "f1": 0.9178082191780822,
+    "abstained_registration_failed": 0
+  },
+  "false_positive_rate_nominal": 0.15,
+  "false_regions_per_nominal_image": 0.8333333333333334,
+  "region_recall_iou30": 0.9625,
+  "region_precision_iou30_defect_cases": 0.6296296296296297,
+  "registration": {
+    "success_rate": 1.0,
+    "corner_error_px": {
+      "n": 130,
+      "median": 0.0679,
+      "p90": 0.1223,
+      "max": 0.1717
+    },
+    "method_counts": {
+      "aruco": 76,
+      "sift": 54
+    },
+    "correct_rejection_rate": 1.0
+  },
+  "seconds_per_case": {
+    "median": 0.281,
+    "max": 0.457
+  },
+  "markers": {
+    "marker_fp_regions_total": 32,
+    "marker_fp_regions_nominal": 17,
+    "marker_fp_regions_defect_cases": 15,
+    "nominal_images_with_marker_fp": 6,
+    "unmatched_regions_defect_cases": 40,
+    "cases_with_masking_applied": 0,
+    "median_masked_fraction_when_applied": null
+  },
+  "defects_near_vs_distant": {
+    "near_marker (gap <= 40 px)": {
+      "gt_boxes": 25,
+      "region_recall_iou30": 0.96,
+      "cases": 25,
+      "image_recall": 0.96
+    },
+    "distant_from_markers (markers present)": {
+      "gt_boxes": 26,
+      "region_recall_iou30": 0.9615384615384616,
+      "cases": 21,
+      "image_recall": 0.9523809523809523
+    },
+    "no_markers_in_scene": {
+      "gt_boxes": 29,
+      "region_recall_iou30": 0.9655172413793104,
+      "cases": 25,
+      "image_recall": 0.96
+    }
+  },
+  "incorrect_alignments": {
+    "threshold_px": 2.0,
+    "count": 0,
+    "cases": []
+  },
+  "different_tray": {
+    "n": 10,
+    "registration_failed": 0,
+    "registered_and_flagged": 10,
+    "registered_no_candidates_UNSAFE": 0,
+    "registered_via": {
+      "aruco": 10,
+      "sift": 0
+    },
+    "median_regions": 13.0
+  },
+  "per_case_type": {
+    "identical": {
+      "n": 10,
+      "category": "nominal",
+      "analyzed": 10,
+      "registration_failed": 0,
+      "flagged": 0,
+      "region_recall_iou30": null,
+      "mean_regions": 0.0,
+      "median_corner_error_px": 0.0
+    },
+    "lighting": {
+      "n": 10,
+      "category": "nominal",
+      "analyzed": 10,
+      "registration_failed": 0,
+      "flagged": 2,
+      "region_recall_iou30": null,
+      "mean_regions": 2.0,
+      "median_corner_error_px": 0.0172
+    },
+    "geometric": {
+      "n": 10,
+      "category": "nominal",
+      "analyzed": 10,
+      "registration_failed": 0,
+      "flagged": 0,
+      "region_recall_iou30": null,
+      "mean_regions": 0.0,
+      "median_corner_error_px": 0.0667
+    },
+    "blur_noise": {
+      "n": 10,
+      "category": "nominal",
+      "analyzed": 10,
+      "registration_failed": 0,
+      "flagged": 0,
+      "region_recall_iou30": null,
+      "mean_regions": 0.0,
+      "median_corner_error_px": 0.1298
+    },
+    "combined_nominal": {
+      "n": 10,
+      "category": "nominal",
+      "analyzed": 10,
+      "registration_failed": 0,
+      "flagged": 1,
+      "region_recall_iou30": null,
+      "mean_regions": 0.2,
+      "median_corner_error_px": 0.0804
+    },
+    "missing": {
+      "n": 10,
+      "category": "defect",
+      "analyzed": 10,
+      "registration_failed": 0,
+      "flagged": 10,
+      "region_recall_iou30": 1.0,
+      "mean_regions": 1.0,
+      "median_corner_error_px": 0.0705
+    },
+    "shifted": {
+      "n": 10,
+      "category": "defect",
+      "analyzed": 10,
+      "registration_failed": 0,
+      "flagged": 10,
+      "region_recall_iou30": 1.0,
+      "mean_regions": 1.1,
+      "median_corner_error_px": 0.0612
+    },
+    "foreign_object": {
+      "n": 10,
+      "category": "defect",
+      "analyzed": 10,
+      "registration_failed": 0,
+      "flagged": 10,
+      "region_recall_iou30": 1.0,
+      "mean_regions": 1.0,
+      "median_corner_error_px": 0.0585
+    },
+    "missing_hard": {
+      "n": 10,
+      "category": "defect",
+      "analyzed": 10,
+      "registration_failed": 0,
+      "flagged": 10,
+      "region_recall_iou30": 1.0,
+      "mean_regions": 4.0,
+      "median_corner_error_px": 0.1097
+    },
+    "subtle_foreign": {
+      "n": 10,
+      "category": "defect",
+      "analyzed": 10,
+      "registration_failed": 0,
+      "flagged": 7,
+      "region_recall_iou30": 0.7,
+      "mean_regions": 0.7,
+      "median_corner_error_px": 0.0702
+    },
+    "unrelated_scene": {
+      "n": 10,
+      "category": "registration_fail",
+      "analyzed": 0,
+      "registration_failed": 10,
+      "flagged": 0,
+      "region_recall_iou30": null,
+      "mean_regions": 0.0,
+      "median_corner_error_px": null
+    },
+    "low_overlap": {
+      "n": 10,
+      "category": "registration_fail",
+      "analyzed": 0,
+      "registration_failed": 10,
+      "flagged": 0,
+      "region_recall_iou30": null,
+      "mean_regions": 0.0,
+      "median_corner_error_px": null
+    },
+    "heavy_blur": {
+      "n": 10,
+      "category": "registration_fail",
+      "analyzed": 0,
+      "registration_failed": 10,
+      "flagged": 0,
+      "region_recall_iou30": null,
+      "mean_regions": 0.0,
+      "median_corner_error_px": null
+    },
+    "gamma_lighting": {
+      "n": 10,
+      "category": "nominal",
+      "analyzed": 10,
+      "registration_failed": 0,
+      "flagged": 6,
+      "region_recall_iou30": null,
+      "mean_regions": 2.8,
+      "median_corner_error_px": 0.093
+    },
+    "missing_near_marker": {
+      "n": 10,
+      "category": "defect",
+      "analyzed": 10,
+      "registration_failed": 0,
+      "flagged": 10,
+      "region_recall_iou30": 1.0,
+      "mean_regions": 1.3,
+      "median_corner_error_px": 0.0592
+    },
+    "foreign_near_marker": {
+      "n": 10,
+      "category": "defect",
+      "analyzed": 10,
+      "registration_failed": 0,
+      "flagged": 10,
+      "region_recall_iou30": 1.0,
+      "mean_regions": 1.7,
+      "median_corner_error_px": 0.0635
+    },
+    "different_tray": {
+      "n": 10,
+      "category": "different_tray",
+      "analyzed": 10,
+      "registration_failed": 0,
+      "flagged": 10,
+      "region_recall_iou30": null,
+      "mean_regions": 13.4,
+      "median_corner_error_px": 0.0601
+    }
+  },
+  "opencv_version": "5.0.0",
+  "data": "data/synthetic/d21_test",
+  "data_seed": 3200,
+  "config": {
+    "work_max_dim": 1024,
+    "registration": {
+      "aruco_dictionary": "DICT_4X4_50",
+      "aruco_min_markers": 3,
+      "aruco_max_reproj_px": 2.0,
+      "sift_nfeatures": 4000,
+      "sift_ratio": 0.75,
+      "usac_threshold_px": 3.0,
+      "min_inliers": 30,
+      "min_inlier_ratio": 0.3,
+      "max_reproj_px": 1.5,
+      "max_scale_change": 2.0,
+      "min_overlap": 0.6,
+      "ecc_enabled": false,
+      "ecc_max_dim": 640,
+      "ecc_iterations": 100,
+      "ecc_eps": 1e-05,
+      "ecc_gauss_size": 5,
+      "ecc_max_corner_shift_px": 4.0,
+      "border_erode_px": 4
+    },
+    "compare": {
+      "blur_sigma": 1.0,
+      "align_tolerance_px": 1,
+      "global_mode": "linear",
+      "histogram_quantile_range": [
+        1.0,
+        99.0
+      ],
+      "histogram_lut_smooth": 6.0,
+      "max_gain": 2.0,
+      "max_ab_offset": 25.0,
+      "normalize_local": true,
+      "local_sigma_frac": 0.08,
+      "local_exclude_diff": 25.0,
+      "local_gain_range": [
+        0.7,
+        1.4
+      ],
+      "equalize_sharpness": true,
+      "sharpness_ratio_trigger": 1.5,
+      "max_equalize_sigma": 3.0,
+      "intensity_scale": 45.0,
+      "gradient_scale": 90.0,
+      "color_scale": 22.0,
+      "chroma_blur_sigma": 2.0,
+      "ssim_sigma": 2.0,
+      "ssim_scale": 0.6,
+      "weights": {
+        "intensity": 0.3,
+        "ssim": 0.2,
+        "gradient": 0.2,
+        "color": 0.3
+      },
+      "map_smooth_sigma": 1.5,
+      "threshold": 0.3,
+      "open_px": 3,
+      "close_px": 9,
+      "min_region_area_frac": 0.0003,
+      "min_region_peak": 0.45,
+      "max_regions": 25,
+      "exclude_mode": "dilate",
+      "exclude_leak_px": 6,
+      "exclude_inpaint_radius": 3.0
+    },
+    "markers": {
+      "enabled": false,
+      "margin_frac": 0.25,
+      "margin_px": 2.0,
+      "max_marker_area_frac": 0.03,
+      "max_total_frac": 0.1
+    }
+  }
+}

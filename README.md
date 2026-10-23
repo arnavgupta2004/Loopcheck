@@ -8,6 +8,7 @@ approve, flag a defect or request human review.
 **Status**
 - D1 (OpenCV 5 environment verification): complete.
 - D2 (deterministic registration and comparison pipeline, CLI, synthetic evaluation): complete.
+- D2.1 (exclude detected ArUco markers from anomaly scoring, validated on fresh synthetic splits): complete.
 - Not built yet: the agent controller, AWS deployment and a UI.
 
 ## Setup
@@ -48,8 +49,14 @@ Output goes to `outputs/demo/`:
 `status` is one of `analyzed` (exit code 0), `input_error` (2) or `registration_failed` (3).
 A failed registration never produces regions or a verdict.
 
+Detected ArUco markers, with their white quiet zone and a small margin, are excluded
+from anomaly scoring by default. They appear as grey outlines on `overlay.png` and as
+`report.json["marker_masking"]`. **Nothing inside that band is inspected**: it reaches
+about 22 px past a 56 px marker's edge.
+
 Options:
 - `--config cfg.json` overrides any field of `loopcheck/config.py`.
+- `--config configs/baseline_no_marker_mask.json` turns marker masking off (D2 behaviour).
 - `--ecc` enables ECC refinement, which is off by default; see the docs for why.
 
 The demo pair's ground truth is in `data/demo/ground_truth.json`.
@@ -57,24 +64,48 @@ The demo pair's ground truth is in `data/demo/ground_truth.json`.
 ## Tests and evaluation
 
 ```bash
-uv run --frozen pytest -q                                                            # unit + integration tests
-
-uv run --frozen python -m loopcheck.synth --out data/synthetic/dev  --seed 1000 --per-type 8
-uv run --frozen python -m loopcheck.synth --out data/synthetic/test --seed 2000 --per-type 10
-uv run --frozen python -m loopcheck.evaluate --data data/synthetic/dev  --out results/eval_dev
-uv run --frozen python -m loopcheck.evaluate --data data/synthetic/test --out results/eval_test
+uv run --frozen pytest -q                                   # unit + integration tests
+uv run --frozen python scripts/check_opencv5.py             # D1 OpenCV 5 verification
 ```
 
-Generated images (`data/synthetic/`) are not committed. They regenerate byte-for-byte
-from the seeds. Evaluation outputs are committed under `results/`.
+**D2.1 evaluation** (current default pipeline vs the no-mask baseline, fresh splits):
+
+```bash
+uv run --frozen python -m loopcheck.synth --out data/synthetic/d21_dev  --seed 3100 --per-type 8
+uv run --frozen python -m loopcheck.synth --out data/synthetic/d21_test --seed 3200 --per-type 10
+for s in dev test; do
+  uv run --frozen python -m loopcheck.evaluate --data data/synthetic/d21_$s --out results/d21/${s}_masked
+  uv run --frozen python -m loopcheck.evaluate --data data/synthetic/d21_$s --out results/d21/${s}_baseline \
+      --config configs/baseline_no_marker_mask.json
+  uv run --frozen python scripts/compare_runs.py --data data/synthetic/d21_$s \
+      --a results/d21/${s}_baseline --b results/d21/${s}_masked \
+      --config-a configs/baseline_no_marker_mask.json --out results/d21/${s}_comparison
+done
+```
+
+**Reproducing the D2 results** (`results/eval_dev`, `results/eval_test`) needs the D2
+case set and the no-mask config:
+
+```bash
+uv run --frozen python -m loopcheck.synth --out data/synthetic/test --seed 2000 --per-type 10 --case-set d2
+uv run --frozen python -m loopcheck.evaluate --data data/synthetic/test --out results/eval_test \
+    --config configs/baseline_no_marker_mask.json
+```
+
+The dev split is the same with `--seed 1000 --per-type 8`.
+
+Generated images (`data/synthetic/`) are not committed; they regenerate byte-for-byte
+from the seeds. Evaluation outputs are committed under `results/`. All reported
+metrics are on **synthetic** data.
 
 ## Layout
 
 ```
-loopcheck/      config, imageio, registration, compare, pipeline, cli, synth, evaluate
+loopcheck/      config, imageio, registration, markers, compare, pipeline, cli, synth, evaluate
 tests/          pytest suite
-scripts/        check_opencv5.py (D1)
-docs/           opencv5_verification.md (D1), d2_pipeline.md (D2 design, results, failure cases)
-results/        opencv5_check.json, eval_dev/, eval_test/
+scripts/        check_opencv5.py (D1), compare_runs.py (D2.1 before/after)
+configs/        baseline_no_marker_mask.json
+docs/           opencv5_verification.md (D1), d2_pipeline.md (D2 + D2.1 design, results, failure cases)
+results/        opencv5_check.json, eval_dev/ + eval_test/ (D2), d21/ (D2.1)
 data/demo/      demo reference/inspection pair + ground truth
 ```
